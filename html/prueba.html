@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Hi-5 Expoescom</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <style>
+      /* Colores personalizados */
+      :root {
+        --hi5-dark: #121212;
+        --hi5-medium-dark: #1b1b1b;
+        --hi5-light-dark: #242424;
+        --hi5-gold: #c19942;
+        --hi5-gold-dark: #a17e2f;
+        --hi5-white: #f1f1f1;
+      }
+
+      /* Estilos generales del cuerpo */
+      body {
+        background-color: var(--hi5-dark);
+        color: var(--hi5-white);
+        padding-top: 4.5rem;
+        font-family: "Segoe UI", sans-serif;
+      }
+
+      /* Utilidades de color */
+      .bg-hi5-dark {
+        background-color: var(--hi5-dark) !important;
+      }
+      .bg-hi5-medium {
+        background-color: var(--hi5-medium-dark) !important;
+      }
+      .bg-hi5-light {
+        background-color: var(--hi5-light-dark) !important;
+      }
+      .text-hi5-gold {
+        color: var(--hi5-gold) !important;
+      }
+
+      /* Botón dorado general */
+      .btn-hi5-gold {
+        background-color: var(--hi5-gold);
+        color: white;
+        border-radius: 50px;
+        border: none;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+      }
+      .btn-hi5-gold:hover {
+        background-color: var(--hi5-gold-dark);
+        transform: scale(1.03);
+      }
+
+      /* Botón de borrar */
+      .btn-outline-danger {
+        border: 1px solid #dc3545;
+        color: #dc3545;
+        border-radius: 50px;
+        transition: all 0.3s ease;
+      }
+      .btn-outline-danger:hover {
+        background-color: #dc3545 !important;
+        color: white !important;
+      }
+
+      /* Barra de navegación */
+      .navbar {
+        background-color: var(--hi5-light-dark);
+      }
+      .navbar-brand,
+      .nav-link {
+        color: var(--hi5-white) !important;
+        transition: color 0.3s ease;
+      }
+      .nav-link:hover {
+        color: var(--hi5-gold) !important;
+      }
+      .navbar-toggler {
+        border: none;
+      }
+      .navbar-toggler-icon {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        background-size: contain;
+      }
+
+      /* Campos de formulario oscuros */
+      .form-control-dark,
+      .form-select.form-control-dark {
+        background-color: #2a2a2a !important;
+        color: #e0e0e0 !important;
+        border: 1px solid #ffffff13;
+        border-radius: 0.5rem;
+        transition: border-color 0.3s ease;
+      }
+      .form-control-dark::placeholder {
+        color: #cfcfcf;
+      }
+      .form-control-dark:focus,
+      .form-select.form-control-dark:focus {
+        background-color: #2a2a2a !important;
+        color: #ffffff !important;
+        border-color: var(--hi5-gold);
+        box-shadow: 0 0 0 0.25rem rgba(193, 153, 66, 0.25);
+      }
+
+      /* Color blanco en etiquetas flotantes */
+      .form-floating > label {
+        color: var(--hi5-white) !important;
+      }
+
+      /* Efecto hover general */
+      .transition-hover {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .transition-hover:hover {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      }
+
+      @media (max-width: 768px) {
+        .item-carrusel {
+          height: 16rem;
+        }
+      }
+      .overlay-carrusel {
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.25);
+        z-index: 0;
+      }
+
+      /* Logos flotantes */
+      .burbuja-logos {
+        z-index: 999;
+        margin-top: 5rem;
+      }
+    </style>
+  </head>
+
+  <body class="bg-hi5-dark text-white pt-5">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-md fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">✋Hi-5</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#menuNav"
+          aria-controls="menuNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-between"
+          id="menuNav"
+        >
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Inicio</a>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="#">Registro</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Admin</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Ganadores</a></li>
+          </ul>
+          <div class="d-flex gap-2">
+            <a class="btn btn-outline-light px-4 rounded-pill" href="#"
+              >Entrar</a
+            >
+            <a class="btn btn-hi5-gold px-4 rounded-pill" href="#"
+              >Registrarse</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- BURBUJAS LOGO -->
+    <div
+      class="burbuja-logos position-fixed top-0 end-0 me-3 bg-white shadow rounded-pill d-flex align-items-center gap-2 p-2"
+    >
+      <a href="https://enlace1.com" target="_blank"
+        ><img
+          src="https://placehold.co/50x50?text=L1"
+          alt="Logo 1"
+          class="rounded-circle border border-3 border-light"
+      /></a>
+      <a href="https://enlace2.com" target="_blank"
+        ><img
+          src="https://placehold.co/50x50?text=L2"
+          alt="Logo 2"
+          class="rounded-circle border border-3 border-light"
+      /></a>
+    </div>
+
+    <!-- HERO -->
+    <main class="text-center px-3 mt-5">
+      <section class="py-5 mt-5">
+        <div class="container">
+          <h1 class="fw-bold mb-3">
+            Bienvenido a Hi-5<br /><span class="text-white-50"
+              >La plataforma de Expoescom ESCOM</span
+            >
+          </h1>
+          <p class="lead mb-4">
+            Explora noticias, eventos y participa en la comunidad tecnológica
+            universitaria.
+          </p>
+          <div class="d-flex justify-content-center gap-3">
+            <a
+              href="#"
+              class="btn btn-outline-light btn-lg px-4 fw-semibold rounded-pill"
+              >Entrar</a
+            >
+            <a
+              href="#"
+              class="btn btn-hi5-gold btn-lg px-4 fw-semibold rounded-pill"
+              >Registrarse</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <!-- CARRUSEL -->
+      <section class="container py-5">
+        <div
+          class="bg-black rounded-4 overflow-hidden shadow-hi5 transition-hover"
+        >
+          <div
+            id="carruselHi5"
+            class="carousel slide"
+            data-bs-ride="carousel"
+            data-bs-interval="3000"
+          >
+            <div class="carousel-indicators">
+              <button
+                type="button"
+                data-bs-target="#carruselHi5"
+                data-bs-slide-to="0"
+                class="active"
+                aria-current="true"
+                aria-label="Slide 1"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carruselHi5"
+                data-bs-slide-to="1"
+                aria-label="Slide 2"
+              ></button>
+            </div>
+            <div class="carousel-inner">
+              <div class="carousel-item active position-relative">
+                <img
+                  src="https://placehold.co/800x300?text=Expositores"
+                  class="d-block w-100"
+                  alt="Expositores destacados"
+                />
+                <div
+                  class="position-absolute bottom-0 start-0 p-4 text-white z-1"
+                >
+                  <h5>Expositores destacados</h5>
+                </div>
+              </div>
+              <div class="carousel-item position-relative">
+                <img
+                  src="https://placehold.co/800x300?text=Talleres"
+                  class="d-block w-100"
+                  alt="Talleres disponibles"
+                />
+                <div
+                  class="position-absolute bottom-0 start-0 p-4 text-white z-1"
+                >
+                  <h5>Prepárate para los talleres</h5>
+                </div>
+              </div>
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carruselHi5"
+              data-bs-slide="prev"
+            >
+              <span class="carousel-control-prev-icon"></span>
+              <span class="visually-hidden">Anterior</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carruselHi5"
+              data-bs-slide="next"
+            >
+              <span class="carousel-control-next-icon"></span>
+              <span class="visually-hidden">Siguiente</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="py-5">
+        <div class="container">
+          <h2 class="text-center mb-5">Noticias recientes</h2>
+          <div class="row g-4 justify-content-center">
+            <div class="col-md-6">
+              <div
+                class="bg-hi5-medium rounded-4 shadow-hi5 p-3 h-100 transition-hover"
+              >
+                <img
+                  src="https://placehold.co/600x300"
+                  class="img-fluid rounded mb-3"
+                  alt="Noticia 1"
+                />
+                <h5 class="text-hi5-gold">Expositores confirmados</h5>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras
+                  luctus ac felis et feugiat.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div
+                class="bg-hi5-medium rounded-4 shadow-hi5 p-3 h-100 transition-hover"
+              >
+                <img
+                  src="https://placehold.co/600x300"
+                  class="img-fluid rounded mb-3"
+                  alt="Noticia 2"
+                />
+                <h5 class="text-hi5-gold">Talleres disponibles</h5>
+                <p>
+                  Phasellus sodales nunc vitae eros placerat, at porta massa
+                  lacinia. Integer vitae magna at eros.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: ¿Qué es la ExpoESCOM? -->
+      <section class="py-5">
+        <div class="container">
+          <div class="row align-items-center g-5">
+            <!-- Imagen a la izquierda -->
+            <div class="col-md-6">
+              <img
+                src="https://placehold.co/600x400?text=ExpoESCOM"
+                class="img-fluid rounded-4 shadow transition-hover"
+                alt="ExpoESCOM"
+              />
+            </div>
+            <!-- Texto a la derecha -->
+            <div class="col-md-6 text-white">
+              <h2 class="fw-bold mb-4 text-hi5-gold">¿Qué es la ExpoESCOM?</h2>
+              <p class="lead">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
+                facilisis, ex nec gravida placerat, erat nisl porttitor neque,
+                nec fermentum nulla metus ut tortor.
+              </p>
+              <p>
+                Suspendisse potenti. Nullam finibus sem a efficitur rhoncus.
+                Vivamus elementum metus eget urna efficitur, nec suscipit mauris
+                pretium.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: ¿En qué consiste este proyecto? -->
+      <section class="py-5">
+        <div class="container">
+          <div class="row align-items-center g-5">
+            <!-- Texto a la izquierda -->
+            <div class="col-md-6 text-white">
+              <h2 class="fw-bold mb-4 text-hi5-gold">
+                ¿En qué consiste este proyecto?
+              </h2>
+              <p class="lead">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a
+                nisl vel sapien facilisis volutpat. Integer in efficitur sapien,
+                vitae volutpat libero.
+              </p>
+              <p>
+                Sed eget dui in sem fermentum consequat. Maecenas blandit velit
+                sed justo dignissim, ut malesuada turpis feugiat.
+              </p>
+            </div>
+            <!-- Imagen a la derecha -->
+            <div class="col-md-6">
+              <img
+                src="https://placehold.co/600x400?text=Proyecto"
+                class="img-fluid rounded-4 shadow transition-hover"
+                alt="Proyecto Hi-5"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PARTICIPANTES DEL PROYECTO -->
+      <section class="py-5">
+        <div class="container">
+          <h2 class="text-center text-white mb-5">
+            Participantes del Proyecto
+          </h2>
+          <div class="row g-4 justify-content-center">
+            <!-- Participante 1 -->
+            <div class="col-md-6 col-lg-3">
+              <div
+                class="card bg-hi5-medium text-white border-0 rounded-4 text-center transition-hover h-100"
+              >
+                <div class="pt-4">
+                  <img
+                    src="https://placehold.co/150x150?text=P1"
+                    class="rounded-circle border border-3 border-light"
+                    alt="Participante 1"
+                    width="120"
+                    height="120"
+                  />
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title text-hi5-gold">Nombre Uno</h5>
+                  <p class="card-text small">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Participante 2 -->
+            <div class="col-md-6 col-lg-3">
+              <div
+                class="card bg-hi5-medium text-white border-0 rounded-4 text-center transition-hover h-100"
+              >
+                <div class="pt-4">
+                  <img
+                    src="https://placehold.co/150x150?text=P2"
+                    class="rounded-circle border border-3 border-light"
+                    alt="Participante 2"
+                    width="120"
+                    height="120"
+                  />
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title text-hi5-gold">Nombre Dos</h5>
+                  <p class="card-text small">
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Participante 3 -->
+            <div class="col-md-6 col-lg-3">
+              <div
+                class="card bg-hi5-medium text-white border-0 rounded-4 text-center transition-hover h-100"
+              >
+                <div class="pt-4">
+                  <img
+                    src="https://placehold.co/150x150?text=P3"
+                    class="rounded-circle border border-3 border-light"
+                    alt="Participante 3"
+                    width="120"
+                    height="120"
+                  />
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title text-hi5-gold">Nombre Tres</h5>
+                  <p class="card-text small">
+                    Duis aute irure dolor in reprehenderit in voluptate velit
+                    esse.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <!-- Participante 4 -->
+            <div class="col-md-6 col-lg-3">
+              <div
+                class="card bg-hi5-medium text-white border-0 rounded-4 text-center transition-hover h-100"
+              >
+                <div class="pt-4">
+                  <img
+                    src="https://placehold.co/150x150?text=P4"
+                    class="rounded-circle border border-3 border-light"
+                    alt="Participante 4"
+                    width="120"
+                    height="120"
+                  />
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title text-hi5-gold">Nombre Cuatro</h5>
+                  <p class="card-text small">
+                    Excepteur sint occaecat cupidatat non proident, sunt in
+                    culpa.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- LOGIN Y REGISTRO -->
+      <section class="py-5">
+        <div class="container">
+          <!-- LOGIN -->
+          <div class="row justify-content-center mb-5">
+            <div class="col-lg-6">
+              <div
+                class="bg-hi5-medium p-4 rounded-4 shadow-hi5 transition-hover"
+              >
+                <div class="text-center mb-4">
+                  <img
+                    src="https://placehold.co/250x75?text=Hi-5 Logo"
+                    alt="Logo Hi-5"
+                    class="img-fluid"
+                  />
+                </div>
+                <form id="formularioLogin">
+                  <h5 class="text-start text-white mb-3">Iniciar sesión</h5>
+                  <div class="form-floating mb-3">
+                    <input
+                      type="email"
+                      class="form-control form-control-dark"
+                      id="loginCorreo"
+                      placeholder="Correo electrónico"
+                      required
+                    />
+                    <label for="loginCorreo">Correo electrónico</label>
+                  </div>
+                  <div class="form-floating mb-4">
+                    <input
+                      type="password"
+                      class="form-control form-control-dark"
+                      id="loginPass"
+                      placeholder="Contraseña"
+                      required
+                    />
+                    <label for="loginPass">Contraseña</label>
+                  </div>
+                  <div class="d-grid">
+                    <button
+                      type="submit"
+                      class="btn btn-hi5-gold btn-lg rounded-pill"
+                    >
+                      Iniciar sesión
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <!-- REGISTRO -->
+          <div class="row justify-content-center">
+            <div class="col-lg-10">
+              <div
+                class="bg-hi5-medium p-4 rounded-4 shadow-hi5 transition-hover"
+              >
+                <div class="text-center mb-4">
+                  <h2 class="fw-bold text-white">Crear cuenta</h2>
+                  <p>Completa tu información para registrarte al evento</p>
+                </div>
+                <form>
+                  <h5 class="text-start text-white mb-3">Datos personales</h5>
+                  <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control form-control-dark"
+                          id="boleta"
+                          placeholder="Número de boleta"
+                          required
+                        />
+                        <label for="boleta">Número de boleta</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control form-control-dark"
+                          id="nombre"
+                          placeholder="Nombre completo"
+                          required
+                        />
+                        <label for="nombre">Nombre completo</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <select
+                          class="form-select form-control-dark"
+                          id="genero"
+                          required
+                        >
+                          <option selected disabled>Selecciona</option>
+                          <option value="Masculino">Masculino</option>
+                          <option value="Femenino">Femenino</option>
+                          <option value="Otro">Otro</option>
+                        </select>
+                        <label for="genero">Género</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control form-control-dark"
+                          id="curp"
+                          placeholder="CURP"
+                          required
+                        />
+                        <label for="curp">CURP</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <select
+                          class="form-select form-control-dark"
+                          id="semestre"
+                          required
+                        >
+                          <option selected disabled>Selecciona</option>
+                          <option value="1">1</option>
+                          <option value="2">2</option>
+                          <option value="3">3</option>
+                          <option value="4">4</option>
+                          <option value="5">5</option>
+                          <option value="6">6</option>
+                          <option value="7">7</option>
+                          <option value="8">8</option>
+                        </select>
+                        <label for="semestre">Semestre</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <select
+                          class="form-select form-control-dark"
+                          id="carrera"
+                          required
+                        >
+                          <option selected disabled>Selecciona</option>
+                          <option value="ISC">ISC</option>
+                          <option value="LCD">LCD</option>
+                          <option value="II">II</option>
+                          <option value="IA">IA</option>
+                        </select>
+                        <label for="carrera">Carrera</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control form-control-dark"
+                          id="telefono"
+                          placeholder="Teléfono"
+                          required
+                        />
+                        <label for="telefono">Teléfono</label>
+                      </div>
+                    </div>
+                  </div>
+                  <h5 class="text-start text-white mb-3">Datos de cuenta</h5>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input
+                          type="email"
+                          class="form-control form-control-dark"
+                          id="correo"
+                          placeholder="Correo institucional"
+                          required
+                        />
+                        <label for="correo">Correo institucional</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input
+                          type="password"
+                          class="form-control form-control-dark"
+                          id="contrasena"
+                          placeholder="Contraseña"
+                          required
+                        />
+                        <label for="contrasena">Contraseña</label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="d-flex gap-2 mt-4">
+                    <button
+                      type="submit"
+                      class="btn btn-hi5-gold px-4 rounded-pill"
+                    >
+                      Registrarse
+                    </button>
+                    <button
+                      type="reset"
+                      class="btn btn-outline-danger px-4 rounded-pill"
+                    >
+                      Borrar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    <!-- FOOTER -->
+    <footer class="py-4 text-center text-md-start bg-hi5-light text-white">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-10">
+            <p class="mb-1 small">
+              © 2025 Hi-5 ESCOM. Todos los derechos reservados.
+            </p>
+            <div
+              class="d-flex flex-wrap justify-content-center justify-content-md-start gap-3 small"
+            >
+              <a href="#" class="text-decoration-none text-white">Privacidad</a>
+              <a href="#" class="text-decoration-none text-white">Términos</a>
+              <a href="#" class="text-decoration-none text-white">Contacto</a>
+            </div>
+          </div>
+          <div
+            class="col-md-2 d-flex justify-content-md-end justify-content-center mt-3 mt-md-0"
+          >
+            <a href="#">
+              <img
+                src="https://placehold.co/100x50?text=L2"
+                alt="Logo Hi-5"
+                class="footer-icono"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
