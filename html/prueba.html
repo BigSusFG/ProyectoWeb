@@ -228,79 +228,106 @@
       </section>
 
       <!-- CARRUSEL -->
-      <section class="container py-5">
-        <div
-          class="bg-black rounded-4 overflow-hidden shadow-hi5 transition-hover"
-        >
-          <div
-            id="carruselHi5"
-            class="carousel slide"
-            data-bs-ride="carousel"
-            data-bs-interval="3000"
-          >
-            <div class="carousel-indicators">
-              <button
-                type="button"
-                data-bs-target="#carruselHi5"
-                data-bs-slide-to="0"
-                class="active"
-                aria-current="true"
-                aria-label="Slide 1"
-              ></button>
-              <button
-                type="button"
-                data-bs-target="#carruselHi5"
-                data-bs-slide-to="1"
-                aria-label="Slide 2"
-              ></button>
-            </div>
-            <div class="carousel-inner">
-              <div class="carousel-item active position-relative">
-                <img
-                  src="https://placehold.co/800x300?text=Expositores"
-                  class="d-block w-100"
-                  alt="Expositores destacados"
-                />
-                <div
-                  class="position-absolute bottom-0 start-0 p-4 text-white z-1"
-                >
-                  <h5>Expositores destacados</h5>
-                </div>
-              </div>
-              <div class="carousel-item position-relative">
-                <img
-                  src="https://placehold.co/800x300?text=Talleres"
-                  class="d-block w-100"
-                  alt="Talleres disponibles"
-                />
-                <div
-                  class="position-absolute bottom-0 start-0 p-4 text-white z-1"
-                >
-                  <h5>Prepárate para los talleres</h5>
-                </div>
-              </div>
-            </div>
-            <button
-              class="carousel-control-prev"
-              type="button"
-              data-bs-target="#carruselHi5"
-              data-bs-slide="prev"
-            >
-              <span class="carousel-control-prev-icon"></span>
-              <span class="visually-hidden">Anterior</span>
-            </button>
-            <button
-              class="carousel-control-next"
-              type="button"
-              data-bs-target="#carruselHi5"
-              data-bs-slide="next"
-            >
-              <span class="carousel-control-next-icon"></span>
-              <span class="visually-hidden">Siguiente</span>
-            </button>
+<section class="container py-5">
+  <div class="bg-black rounded-4 overflow-hidden shadow-hi5 transition-hover">
+    <div
+      id="carruselHi5"
+      class="carousel slide"
+      data-bs-ride="carousel"
+      data-bs-interval="5000"
+    >
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carruselHi5" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carruselHi5" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carruselHi5" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carruselHi5" data-bs-slide-to="3" aria-label="Slide 4"></button>
+        <button type="button" data-bs-target="#carruselHi5" data-bs-slide-to="4" aria-label="Slide 5"></button>
+      </div>
+
+      <div class="carousel-inner">
+        <!-- Noticia 1 -->
+        <div class="carousel-item active position-relative">
+          <img
+            src="imagenes/imagen1.jpg"
+            class="d-block w-100"
+            alt="Inversión en innovación y semiconductores en Puebla"
+          />
+          <!-- Imagen local: /imagenes/imagen1.jpg -->
+          <div class="position-absolute bottom-0 start-0 p-4 text-white z-1" style="background-color: rgba(0,0,0,0.5);">
+            <h5>Impulso a la innovación en Puebla</h5>
+            <p class="mb-0">El IPN invertirá 5 mdp en proyectos de innovación y semiconductores en el CECyT 20.</p>
           </div>
         </div>
-      </section>
+
+        <!-- Noticia 2 -->
+        <div class="carousel-item position-relative">
+          <img
+            src="imagenes/imagen2.jpg"
+            class="d-block w-100"
+            alt="Carrera IPN Once K 2025"
+          />
+          <!-- Imagen local: /imagenes/imagen2.jpg -->
+          <div class="position-absolute bottom-0 start-0 p-4 text-white z-1" style="background-color: rgba(0,0,0,0.5);">
+            <h5>Todo listo para la Once K 2025</h5>
+            <p class="mb-0">Participa en la carrera híbrida del IPN con distancias de 5, 11 y 21 km.</p>
+          </div>
+        </div>
+
+        <!-- Noticia 3 -->
+        <div class="carousel-item position-relative">
+          <img
+            src="imagenes/imagen3.jpg"
+            class="d-block w-100"
+            alt="Expo ISISA 2025"
+          />
+          <!-- Imagen local: /imagenes/imagen3.jpg -->
+          <div class="position-absolute bottom-0 start-0 p-4 text-white z-1" style="background-color: rgba(0,0,0,0.5);">
+            <h5>Rugen los motores en Expo ISISA</h5>
+            <p class="mb-0">Conoce las innovaciones en la industria automotriz presentadas por estudiantes de la ESIME.</p>
+          </div>
+        </div>
+
+        <!-- Noticia 4 -->
+        <div class="carousel-item position-relative">
+          <img
+            src="imagenes/imagen4.jpg"
+            class="d-block w-100"
+            alt="Avances en robótica del IPN"
+          />
+          <!-- Imagen local: /imagenes/imagen4.jpg -->
+          <div class="position-absolute bottom-0 start-0 p-4 text-white z-1" style="background-color: rgba(0,0,0,0.5);">
+            <h5>Avances en robótica del IPN</h5>
+            <p class="mb-0">Nuevos proyectos robotizados para la industria manufacturera presentados en ExpoESCOM.</p>
+          </div>
+        </div>
+
+        <!-- Noticia 5 -->
+        <div class="carousel-item position-relative">
+          <img
+            src="imagenes/imagen5.jpg"
+            class="d-block w-100"
+            alt="Investigación sobre recursos hídricos"
+          />
+          <!-- Imagen local: /imagenes/imagen5.jpg -->
+          <div class="position-absolute bottom-0 start-0 p-4 text-white z-1" style="background-color: rgba(0,0,0,0.5);">
+            <h5>Investigación sobre recursos hídricos</h5>
+            <p class="mb-0">Proyecto interdisciplinario del IPN para mejorar la gestión del agua en zonas urbanas.</p>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-control-prev" type="button" data-bs-target="#carruselHi5" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon"></span>
+        <span class="visually-hidden">Anterior</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carruselHi5" data-bs-slide="next">
+        <span class="carousel-control-next-icon"></span>
+        <span class="visually-hidden">Siguiente</span>
+      </button>
+    </div>
+  </div>
+</section>
+
 
       <section class="py-5">
         <div class="container">
