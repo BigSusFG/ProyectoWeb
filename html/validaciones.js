@@ -94,12 +94,12 @@ document.getElementById("formularioLogin").addEventListener("submit", function (
   const correoLogRegex = /^[a-z0-9]+@alumno\.ipn\.mx$/;
   const contrasenaLogRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
 
-  if (!correoLogRegex.test(correo)) {
+  if (!correoLogRegex.test(correoLog)) {
     alert("Correo institucional inválido");
     return;
   }
 
-  if (!contrasenaLogRegex.test(contrasena)) {
+  if (!contrasenaLogRegex.test(contrasenaLog)) {
     alert("Contraseña inválida. Debe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial.");
     return;
   }
