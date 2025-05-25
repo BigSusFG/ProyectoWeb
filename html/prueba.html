@@ -182,22 +182,26 @@
     </nav>
 
     <!-- BURBUJAS LOGO -->
-    <div
-      class="burbuja-logos position-fixed top-0 end-0 me-3 bg-white shadow rounded-pill d-flex align-items-center gap-2 p-2"
-    >
-      <a href="https://www.ipn.mx/" target="_blank"
-        ><img
-          src="../imgs/ipnlogo.png"
-          alt="Logo 1"
-          class="rounded-circle border border-3 border-light"
-      /></a>
-      <a href="https://www.escom.ipn.mx/" target="_blank"
-        ><img
-          src="../imgs/escomlogo.png"
-          alt="Logo 2"
-          class="rounded-circle border border-3 border-light"
-      /></a>
-    </div>
+<!-- BURBUJA DE LOGOS: redondeada, pero logos sin redondear -->
+<div class="burbuja-logos position-fixed top-0 end-0 me-3 bg-white shadow rounded-pill d-flex align-items-center gap-3 px-3 py-2">
+  <a href="https://www.ipn.mx/" target="_blank">
+    <img
+      src="../imgs/ipnlogo.png"
+      alt="Logo IPN"
+      class="img-fluid"
+      style="height: 50px; width: auto;"
+    />
+  </a>
+  <a href="https://www.escom.ipn.mx/" target="_blank">
+    <img
+      src="../imgs/escudoESCOM.png"
+      alt="Logo ESCOM"
+      class="img-fluid"
+      style="height: 50px; width: auto;"
+    />
+  </a>
+</div>
+
 
     <!-- HERO -->
     <main class="text-center px-3 mt-5">
@@ -246,75 +250,81 @@
 
       <div class="carousel-inner">
         <!-- Noticia 1 -->
-        <div class="carousel-item active position-relative">
-          <img
-            src="../imgs/inversionipn.png"
-            class="d-block w-100"
-            alt="Inversión en innovación y semiconductores en Puebla"
-          />
-          <!-- Imagen local: /imagenes/imagen1.jpg -->
-          <div class="position-absolute bottom-0 start-0 p-4 text-white z-1" style="background-color: rgba(0,0,0,0.5);">
-            <h5>Impulso a la innovación en Puebla</h5>
-            <p class="mb-0">El IPN invertirá 5 mdp en proyectos de innovación y semiconductores en el CECyT 20.</p>
-          </div>
-        </div>
+<div class="carousel-item active position-relative">
+  <img
+    src="https://placehold.co/800x800"
+    class="d-block w-100"
+    style="height: 400px; object-fit: cover;"
+    alt="Inversión en innovación y semiconductores en Puebla"
+  />
+  <div class="position-absolute bottom-0 start-0 w-100 px-4 pt-4 pb-5 text-white text-center"
+       style="background-color: rgba(0, 0, 0, 0.5);">
+    <h5>Impulso a la innovación en Puebla</h5>
+    <p class="mb-0">El IPN invertirá 5 mdp en proyectos de innovación y semiconductores en el CECyT 20.</p>
+  </div>
+</div>
 
         <!-- Noticia 2 -->
         <div class="carousel-item position-relative">
-          <img
-            src="../imgs/carreraipn.png"
-            class="d-block w-100"
-            alt="Carrera IPN Once K 2025"
-          />
-          <!-- Imagen local: /imagenes/imagen2.jpg -->
-          <div class="position-absolute bottom-0 start-0 p-4 text-white z-1" style="background-color: rgba(0,0,0,0.5);">
-            <h5>Todo listo para la Once K 2025</h5>
-            <p class="mb-0">Participa en la carrera híbrida del IPN con distancias de 5, 11 y 21 km.</p>
-          </div>
-        </div>
+  <img
+    src="../imgs/carreraipn.png"
+    class="d-block w-100"
+    style="height: 400px; object-fit: cover;"
+    alt="Carrera IPN Once K 2025"
+  />
+   <div class="position-absolute bottom-0 start-0 w-100 px-4 pt-4 pb-5 text-white text-center"
+       style="background-color: rgba(0, 0, 0, 0.5);">
+    <h5>Todo listo para la Once K 2025</h5>
+    <p class="mb-0">Participa en la carrera híbrida del IPN con distancias de 5, 11 y 21 km.</p>
+  </div>
+</div>
 
         <!-- Noticia 3 -->
-        <div class="carousel-item position-relative">
-          <img
-            src="../imgs/isisaipn.png"
-            class="d-block w-100"
-            alt="Expo ISISA 2025"
-          />
-          <!-- Imagen local: /imagenes/imagen3.jpg -->
-          <div class="position-absolute bottom-0 start-0 p-4 text-white z-1" style="background-color: rgba(0,0,0,0.5);">
-            <h5>Rugen los motores en Expo ISISA</h5>
-            <p class="mb-0">Conoce las innovaciones en la industria automotriz presentadas por estudiantes de la ESIME.</p>
-          </div>
-        </div>
+       <div class="carousel-item position-relative">
+  <img
+    src="../imgs/isisaipn.png"
+    class="d-block w-100"
+    style="height: 400px; object-fit: cover;"
+    alt="Expo ISISA 2025"
+  />
+  <div class="position-absolute bottom-0 start-0 w-100 px-4 pt-4 pb-5 text-white text-center"
+       style="background-color: rgba(0, 0, 0, 0.5);">
+    <h5>Rugen los motores en Expo ISISA</h5>
+    <p class="mb-0">Conoce las innovaciones en la industria automotriz presentadas por estudiantes de la ESIME.</p>
+  </div>
+</div>
+
 
         <!-- Noticia 4 -->
         <div class="carousel-item position-relative">
-          <img
-            src="../imgs/roboticaipn.png"
-            class="d-block w-100"
-            alt="Avances en robótica del IPN"
-          />
-          <!-- Imagen local: /imagenes/imagen4.jpg -->
-          <div class="position-absolute bottom-0 start-0 p-4 text-white z-1" style="background-color: rgba(0,0,0,0.5);">
-            <h5>Avances en robótica del IPN</h5>
-            <p class="mb-0">Nuevos proyectos robotizados para la industria manufacturera presentados en ExpoESCOM.</p>
-          </div>
-        </div>
+  <img
+    src="../imgs/roboticaipn.png"
+    class="d-block w-100"
+    style="height: 400px; object-fit: cover;"
+    alt="Avances en robótica del IPN"
+  />
+  <div class="position-absolute bottom-0 start-0 w-100 px-4 pt-4 pb-5 text-white text-center"
+       style="background-color: rgba(0, 0, 0, 0.5);">
+    <h5>Avances en robótica del IPN</h5>
+    <p class="mb-0">Nuevos proyectos robotizados para la industria manufacturera presentados en ExpoESCOM.</p>
+  </div>
+</div>
+
 
         <!-- Noticia 5 -->
-        <div class="carousel-item position-relative">
-          <img
-            src="../imgs/hidrico.png"
-            class="d-block w-100"
-            alt="Investigación sobre recursos hídricos"
-          />
-          <!-- Imagen local: /imagenes/imagen5.jpg -->
-          <div class="position-absolute bottom-0 start-0 p-4 text-white z-1" style="background-color: rgba(0,0,0,0.5);">
-            <h5>Investigación sobre recursos hídricos</h5>
-            <p class="mb-0">Proyecto interdisciplinario del IPN para mejorar la gestión del agua en zonas urbanas.</p>
-          </div>
-        </div>
-      </div>
+       <div class="carousel-item position-relative">
+  <img
+    src="../imgs/hidrico.png"
+    class="d-block w-100"
+    style="height: 400px; object-fit: cover;"
+    alt="Investigación sobre recursos hídricos"
+  />
+  <div class="position-absolute bottom-0 start-0 w-100 px-4 pt-4 pb-5 text-white text-center"
+       style="background-color: rgba(0, 0, 0, 0.5);">
+    <h5>Investigación sobre recursos hídricos</h5>
+    <p class="mb-0">Proyecto interdisciplinario del IPN para mejorar la gestión del agua en zonas urbanas.</p>
+  </div>
+</div>
 
       <button class="carousel-control-prev" type="button" data-bs-target="#carruselHi5" data-bs-slide="prev">
         <span class="carousel-control-prev-icon"></span>
