@@ -71,6 +71,7 @@ document.getElementById("formRegistro").addEventListener("submit", function (eve
 
   alert("Hola " + nombre + ", verifica que los datos que ingresaste sean correctos:\n" +
   "\nNo de boleta: " + boleta +
+  "\nCURP: " + curp +
   "\nGénero: " + genero +
   "\nTeléfono: " + telefono +
   "\nSemestre: " + semestre +
