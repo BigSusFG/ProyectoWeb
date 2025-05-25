@@ -1,15 +1,15 @@
 document.getElementById("formRegistro").addEventListener("submit", function (evento) {
   evento.preventDefault();
 
-  const boleta = document.getElementById("boleta").value.trim();
-  const nombre = document.getElementById("nombre").value.trim();
+  const boleta = document.getElementById("boleta").value;
+  const nombre = document.getElementById("nombre").value;
   const genero = document.getElementById("genero").value;
-  const curp = document.getElementById("curp").value.trim().toUpperCase();
-  const telefono = document.getElementById("telefono").value.trim();
+  const curp = document.getElementById("curp").value;
+  const telefono = document.getElementById("telefono").value;
   const semestre = document.getElementById("semestre").value;
   const carrera = document.getElementById("carrera").value;
   const concurso = document.getElementById("concurso").value;
-  const correo = document.getElementById("correo").value.trim();
+  const correo = document.getElementById("correo").value;
   const contrasena = document.getElementById("contrasena").value;
 
   const boletaRegex = /(^(PE|PP)\d{8}$)|(^\d{10}$)/;
@@ -73,8 +73,8 @@ document.getElementById("formRegistro").addEventListener("submit", function (eve
   "\nNo de boleta: " + boleta +
   "\nCURP: " + curp +
   "\nGénero: " + genero +
-  "\nCURP :" + curp +
-  "\nTeléfono :" + telefono +
+  "\nCURP: " + curp +
+  "\nTeléfono: " + telefono +
   "\nSemestre: " + semestre +
   "\nCarrera: " + carrera +
   "\nConcurso: " + concurso +
