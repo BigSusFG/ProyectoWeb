@@ -73,7 +73,6 @@ document.getElementById("formRegistro").addEventListener("submit", function (eve
   "\nNo de boleta: " + boleta +
   "\nCURP: " + curp +
   "\nGénero: " + genero +
-  "\nCURP: " + curp +
   "\nTeléfono: " + telefono +
   "\nSemestre: " + semestre +
   "\nCarrera: " + carrera +
