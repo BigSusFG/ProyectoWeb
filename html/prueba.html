@@ -13,149 +13,7 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
       rel="stylesheet"
     />
-<<<<<<< Updated upstream
     <link rel="stylesheet" href="estilos.css" />
-=======
-
-    <style>
-      /* Colores personalizados */
-      :root {
-        --hi5-dark: #121212;
-        --hi5-medium-dark: #1b1b1b;
-        --hi5-light-dark: #242424;
-        --hi5-gold: #c19942;
-        --hi5-gold-dark: #a17e2f;
-        --hi5-white: #f1f1f1;
-      }
-
-      /* Estilos generales del cuerpo */
-      body {
-        background-color: var(--hi5-dark);
-        color: var(--hi5-white);
-        padding-top: 4.5rem;
-        font-family: "Segoe UI", sans-serif;
-      }
-
-      /* Utilidades de color */
-      .bg-hi5-dark {
-        background-color: var(--hi5-dark) !important;
-      }
-      .bg-hi5-medium {
-        background-color: var(--hi5-medium-dark) !important;
-      }
-      .bg-hi5-light {
-        background-color: var(--hi5-light-dark) !important;
-      }
-      .text-hi5-gold {
-        color: var(--hi5-gold) !important;
-      }
-
-      /* Botón dorado general */
-      .btn-hi5-gold {
-        background-color: var(--hi5-gold);
-        color: white;
-        border-radius: 50px;
-        border: none;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-      }
-      .btn-hi5-gold:hover {
-        background-color: var(--hi5-gold-dark);
-        transform: scale(1.03);
-      }
-
-      /* Botón de borrar */
-      .btn-outline-danger {
-        border: 1px solid #dc3545;
-        color: #dc3545;
-        border-radius: 50px;
-        transition: all 0.3s ease;
-      }
-      .btn-outline-danger:hover {
-        background-color: #dc3545 !important;
-        color: white !important;
-      }
-
-      /* Barra de navegación */
-      .navbar {
-        background-color: var(--hi5-light-dark);
-      }
-      .navbar-brand,
-      .nav-link {
-        color: var(--hi5-white) !important;
-        transition: color 0.3s ease;
-      }
-      .nav-link:hover {
-        color: var(--hi5-gold) !important;
-      }
-      .navbar-toggler {
-        border: none;
-      }
-      .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='white' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-        background-size: contain;
-      }
-
-      /* Campos de formulario oscuros */
-      .form-control-dark,
-      .form-select.form-control-dark {
-        background-color: #2a2a2a !important;
-        color: #e0e0e0 !important;
-        border: 1px solid #ffffff13;
-        border-radius: 0.5rem;
-        transition: border-color 0.3s ease;
-      }
-      .form-control-dark::placeholder {
-        color: #cfcfcf;
-      }
-      .form-control-dark:focus,
-      .form-select.form-control-dark:focus {
-        background-color: #2a2a2a !important;
-        color: #ffffff !important;
-        border-color: var(--hi5-gold);
-        box-shadow: 0 0 0 0.25rem rgba(193, 153, 66, 0.25);
-      }
-
-      /* Color blanco en etiquetas flotantes */
-      .form-floating > label {
-        color: var(--hi5-white) !important;
-      }
-
-      /* Efecto hover general */
-      .transition-hover {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-      .transition-hover:hover {
-        transform: translateY(-6px) scale(1.01);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-      }
-
-      @media (max-width: 768px) {
-        .item-carrusel {
-          height: 16rem;
-        }
-      }
-      .overlay-carrusel {
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, 0.25);
-        z-index: 0;
-      }
-
-      /* Logos flotantes */
-      .burbuja-logos {
-        z-index: 999;
-        margin-top: 5rem;
-      }
-
-      /* Tamaño de las imagenes */
-        .noticia-img {
-          height: 250px;
-          object-fit: cover;
-        }
-
-        
-    </style>
->>>>>>> Stashed changes
   </head>
   <body class="bg-hi5-dark text-white pt-5">
     <!-- NAVBAR -->
@@ -251,7 +109,6 @@
       </section>
 
       <!-- CARRUSEL -->
-<<<<<<< Updated upstream
       <section class="container py-5">
         <div
           class="bg-black rounded-4 overflow-hidden shadow-hi5 transition-hover"
@@ -399,122 +256,6 @@
           </div>
         </div>
       </section>
-=======
-<section class="container py-5">
-  <div class="bg-black rounded-4 overflow-hidden shadow-hi5 transition-hover">
-    <div
-      id="carruselHi5"
-      class="carousel slide"
-      data-bs-ride="carousel"
-      data-bs-interval="5000"
-    >
-      <div class="carousel-indicators">
-        <button type="button" data-bs-target="#carruselHi5" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-        <button type="button" data-bs-target="#carruselHi5" data-bs-slide-to="1" aria-label="Slide 2"></button>
-        <button type="button" data-bs-target="#carruselHi5" data-bs-slide-to="2" aria-label="Slide 3"></button>
-        <button type="button" data-bs-target="#carruselHi5" data-bs-slide-to="3" aria-label="Slide 4"></button>
-        <button type="button" data-bs-target="#carruselHi5" data-bs-slide-to="4" aria-label="Slide 5"></button>
-      </div>
-
-      <div class="carousel-inner">
-        <!-- Noticia 1 -->
-<div class="carousel-item active">
-  <div class="ratio ratio-21x9">
-    <img
-      src="../imgs/inversion2.png"
-      class="w-100 h-100 object-fit-cover"
-      alt="Inversión en innovación y semiconductores en Puebla"
-    />
-  </div>
-  <div class="position-absolute bottom-0 start-0 w-100 px-4 pt-4 pb-5 text-white text-center"
-       style="background-color: rgba(0, 0, 0, 0.5);">
-    <h5>Impulso a la innovación en Puebla</h5>
-    <p class="mb-0">El IPN invertirá 5 mdp en proyectos de innovación y semiconductores en el CECyT 20.</p>
-  </div>
-</div>
-
-
-        <!-- Noticia 2 -->
-<div class="carousel-item">
-  <div class="ratio ratio-21x9">
-    <img
-      src="../imgs/carreraipn.jpeg"
-      class="w-100 h-100 object-fit-cover"
-      alt="Carrera IPN Once K 2025"
-    />
-  </div>
-  <div class="position-absolute bottom-0 start-0 w-100 px-4 pt-4 pb-5 text-white text-center"
-       style="background-color: rgba(0, 0, 0, 0.5);">
-    <h5>Todo listo para la Once K 2025</h5>
-    <p class="mb-0">Participa en la carrera híbrida del IPN con distancias de 5, 11 y 21 km.</p>
-  </div>
-</div>
-
-
-        <!-- Noticia 3 -->
-<div class="carousel-item">
-  <div class="ratio ratio-21x9">
-    <img
-      src="../imgs/isisaipn.jpg"
-      class="w-100 h-100 object-fit-cover"
-      alt="Expo ISISA 2025"
-    />
-  </div>
-  <div class="position-absolute bottom-0 start-0 w-100 px-4 pt-4 pb-5 text-white text-center"
-       style="background-color: rgba(0, 0, 0, 0.5);">
-    <h5>Rugen los motores en Expo ISISA</h5>
-    <p class="mb-0">Conoce las innovaciones en la industria automotriz presentadas por estudiantes de la ESIME.</p>
-  </div>
-</div>
-
-
-        <!-- Noticia 4 -->
-<div class="carousel-item">
-  <div class="ratio ratio-21x9">
-    <img
-      src="../imgs/roboticaipn.jpg"
-      class="w-100 h-100 object-fit-cover"
-      alt="Avances en robótica del IPN"
-    />
-  </div>
-  <div class="position-absolute bottom-0 start-0 w-100 px-4 pt-4 pb-5 text-white text-center"
-       style="background-color: rgba(0, 0, 0, 0.5);">
-    <h5>Avances en robótica del IPN</h5>
-    <p class="mb-0">Nuevos proyectos robotizados para la industria manufacturera presentados en ExpoESCOM.</p>
-  </div>
-</div>
-
-
-
-        <!-- Noticia 5 -->
-<div class="carousel-item">
-  <div class="ratio ratio-21x9">
-    <img
-      src="../imgs/hidrico.png"
-      class="w-100 h-100 object-fit-cover"
-      alt="Investigación sobre recursos hídricos"
-    />
-  </div>
-  <div class="position-absolute bottom-0 start-0 w-100 px-4 pt-4 pb-5 text-white text-center"
-       style="background-color: rgba(0, 0, 0, 0.5);">
-    <h5>Investigación sobre recursos hídricos</h5>
-    <p class="mb-0">Proyecto interdisciplinario del IPN para mejorar la gestión del agua en zonas urbanas.</p>
-  </div>
-</div>
-
-      <button class="carousel-control-prev" type="button" data-bs-target="#carruselHi5" data-bs-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-        <span class="visually-hidden">Anterior</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#carruselHi5" data-bs-slide="next">
-        <span class="carousel-control-next-icon"></span>
-        <span class="visually-hidden">Siguiente</span>
-      </button>
-    </div>
-  </div>
-</section>
-
->>>>>>> Stashed changes
 
       <!-- NOTICIAS-->
       <section class="py-5">
@@ -527,13 +268,8 @@
                 aria-label="Noticia sobre Carrera IPN Once K 2025"
               >
                 <img
-<<<<<<< Updated upstream
                   src="../imgs/carreraipn.jpeg"
                   class="img-fluid w-100 rounded mb-3 noticia-img"
-=======
-                  src="../imgs/carreraipn1.jpeg"
-                   class="img-fluid w-100 rounded mb-3 noticia-img"
->>>>>>> Stashed changes
                   alt="Noticia 1"
                 />
                 <h5 class="text-hi5-gold">Carrera IPN Once K 2025</h5>
@@ -552,11 +288,7 @@
               >
                 <img
                   src="../imgs/ntinversion.jpg"
-<<<<<<< Updated upstream
                   class="img-fluid w-100 rounded mb-3 noticia-img"
-=======
-                   class="img-fluid w-100 rounded mb-3 noticia-img"
->>>>>>> Stashed changes
                   alt="Noticia 2"
                 />
                 <h5 class="text-hi5-gold">Impulso a la innovación en Puebla</h5>
@@ -576,13 +308,8 @@
               >
                 <img
                   src="../imgs/nthidrico.jpg"
-<<<<<<< Updated upstream
                   class="img-fluid w-100 rounded mb-3 noticia-img"
                   alt="Noticia 3"
-=======
-                   class="img-fluid w-100 rounded mb-3 noticia-img"
-                  alt="Noticia 2"
->>>>>>> Stashed changes
                 />
                 <h5 class="text-hi5-gold">
                   Investigación sobre recursos hídricos.
@@ -602,13 +329,8 @@
               >
                 <img
                   src="../imgs/ntrobotica.jpg"
-<<<<<<< Updated upstream
                   class="img-fluid w-100 rounded mb-3 noticia-img"
                   alt="Noticia 4"
-=======
-                   class="img-fluid w-100 rounded mb-3 noticia-img"
-                  alt="Noticia 2"
->>>>>>> Stashed changes
                 />
                 <h5 class="text-hi5-gold">Avances en Robotica en el IPN</h5>
                 <p class="lead texto-justificado">
@@ -626,13 +348,8 @@
               >
                 <img
                   src="../imgs/ntautomotriz.jpg"
-<<<<<<< Updated upstream
                   class="img-fluid w-100 rounded mb-3 noticia-img"
                   alt="Noticia 5"
-=======
-                    class="img-fluid w-100 rounded mb-3 noticia-img"
-                  alt="Noticia 2"
->>>>>>> Stashed changes
                 />
                 <h5 class="text-hi5-gold">
                   Expos ISISA 2025 - Hacen despliegue de conocimiento automotriz
