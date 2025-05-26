@@ -9,317 +9,25 @@
       rel="stylesheet"
       crossorigin="anonymous"
     />
-    <style>
-      body {
-        background-color: #121212;
-        color: #f1f1f1;
-        padding-top: 4.5rem;
-        font-family: "Segoe UI", sans-serif;
-      }
-
-      .barra-navegacion {
-        background-color: #242424;
-      }
-
-      .enlace-navegacion,
-      .marca {
-        color: #f1f1f1 !important;
-        transition: color 0.3s ease;
-      }
-
-      .enlace-navegacion:hover {
-        color: #c19942 !important;
-      }
-
-      .navbar-toggler {
-        border: none;
-      }
-
-      .navbar-toggler-icon {
-        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%281, 1, 1, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-        filter: invert(1);
-      }
-
-      .btn-morado,
-      .btn-light,
-      .btn-outline-success,
-      .btn-outline-danger {
-        border-radius: 50px !important;
-      }
-
-      .btn-morado {
-        background-color: #c19942;
-        color: white;
-        border: none;
-        transition: background-color 0.3s ease;
-      }
-
-      .btn-morado:hover {
-        background-color: #a17e2f;
-      }
-
-      .btn-outline-success {
-        border-color: #c19942;
-        color: #c19942;
-      }
-
-      .btn-outline-success:hover {
-        background-color: #c19942;
-        color: #121212;
-      }
-
-      .btn-outline-danger {
-        border-color: #dc3545;
-        color: #dc3545;
-        transition: all 0.3s ease;
-      }
-
-      .btn-outline-danger:hover {
-        background-color: #dc3545;
-        color: #ffffff;
-      }
-
-      .seccion-heroica {
-        padding: 6rem 0 4rem 0;
-      }
-
-      .contenedor-carrusel {
-        background-color: #0f0f11;
-        border-radius: 1.5rem;
-        overflow: hidden;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-      }
-
-      .item-carrusel {
-        height: 32rem;
-        background-size: cover;
-        background-position: center;
-        position: relative;
-      }
-
-      @media (max-width: 768px) {
-        .item-carrusel {
-          height: 16rem;
-        }
-      }
-
-      .overlay-carrusel {
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.25);
-      }
-
-      .carousel-indicators [data-bs-target] {
-        background-color: #c19942;
-      }
-
-      .tarjeta-noticia {
-        background-color: #1b1b1b;
-        border-radius: 1rem;
-        box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-      }
-
-      .tarjeta-noticia:hover {
-        transform: translateY(-5px);
-      }
-
-      .titulo-tarjeta {
-        color: #c19942;
-      }
-
-      .colaboradores-section {
-        padding: 4rem 1rem;
-      }
-
-      .tarjeta-colaborador {
-        background-color: #242424;
-        border-radius: 1rem;
-        padding: 1.5rem;
-        color: #f1f1f1;
-        text-align: center;
-      }
-
-      .tarjeta-colaborador img {
-        width: 100px;
-        border-radius: 50%;
-        margin-bottom: 1rem;
-      }
-
-      .footer-icono {
-        width: 40px;
-        height: 40px;
-
-        transition: transform 0.3s ease;
-      }
-
-      .footer-icono:hover {
-        transform: scale(1.1);
-      }
-
-      @media (max-width: 768px) {
-        .footer-icono-container {
-          justify-content: center !important;
-          margin-top: 1rem;
-        }
-      }
-
-      /* === FORMULARIOS === */
-
-      .seccion-formulario {
-        padding: 4rem 1rem;
-      }
-
-      .formulario-card {
-        background-color: #1b1b1b;
-        border: 1px solid rgba(255, 255, 255, 0.05);
-        border-radius: 2rem;
-        padding: 2rem;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-      }
-
-      @media (min-width: 768px) {
-        .formulario-card {
-          padding: 3rem;
-        }
-      }
-
-      .form-control-morado {
-        background-color: #2a2a2a;
-        color: #ffffff;
-        border: 1px solid #ffffff13;
-        border-radius: 0.5rem;
-        transition: border-color 0.3s ease;
-      }
-
-      .form-control-morado:hover {
-        border: 1px solid #c19942;
-      }
-
-      .form-control-morado:focus {
-        border-color: #c19942;
-        background-color: #2a2a2a;
-        color: #fff;
-        box-shadow: 0 0 0 0.25rem rgba(193, 153, 66, 0.25);
-      }
-
-      /* Placeholder blanco para todos los navegadores */
-      ::placeholder {
-        color: #ffffff !important;
-        opacity: 1;
-      }
-
-      /* Safari específicamente */
-      .form-control-morado::-webkit-input-placeholder {
-        color: #ffffff !important;
-      }
-
-
-
-
-
-
-
-
-
-
-
-
-      
-      .form-control-morado:-ms-input-placeholder {
-        color: #ffffff !important;
-      }
-
-      .login-card label,
-      .registro-card label,
-      .formulario-card label {
-        color: #ffffff;
-      }
-
-      .burbuja-logos {
-        position: fixed;
-        top: 4.5rem;
-        right: 1rem;
-        background: rgb(255, 255, 255);
-        padding: 0.5rem 1rem;
-        border-radius: 999px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
-        z-index: 1050;
-        display: flex;
-        gap: 0.5rem;
-        align-items: center;
-      }
-
-      .burbuja-logos img {
-        width: 32px;
-        height: 32px;
-        object-fit: contain;
-        transition: transform 0.3s ease;
-      }
-
-      .burbuja-logos img:hover {
-        transform: scale(1.1);
-      }
-
-      @media (max-width: 576px) {
-        .burbuja-logos {
-          top: 4rem;
-          right: 0.5rem;
-          padding: 0.4rem 0.8rem;
-        }
-
-        .burbuja-logos img {
-          width: 28px;
-          height: 28px;
-        }
-      }
-
-      /* Animación general para tarjetas */
-      .tarjeta-noticia,
-      .tarjeta-colaborador,
-      .formulario-card,
-      .contenedor-carrusel {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      /* Hover individual */
-      .tarjeta-noticia:hover,
-      .tarjeta-colaborador:hover,
-      .formulario-card:hover,
-      .contenedor-carrusel:hover {
-        transform: translateY(-6px) scale(1.01);
-        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-      }
-
-      /* Extra: botones (refuerza animación suave) */
-      .btn {
-        transition: transform 0.2s ease;
-      }
-      .btn:hover {
-        transform: scale(1.03);
-      }
-
-      /* Input y select flotantes */
-      .form-floating:hover .form-control-morado,
-      .form-floating:hover .form-select {
-        border-color: #c19942;
-        box-shadow: 0 0 5px rgba(193, 153, 66, 0.4);
-        transition: box-shadow 0.3s ease, border-color 0.3s ease;
-      }
-    </style>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="estilos.css" />
   </head>
-  <body>
-    <nav class="navbar navbar-expand-md barra-navegacion fixed-top">
+  <body class="bg-hi5-dark text-white pt-5">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-md fixed-top">
       <div class="container-fluid">
-        <a class="navbar-brand marca" href="#">✋Hi-5</a>
+        <a class="navbar-brand" href="#">✋Hi-5</a>
         <button
           class="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#menuNav"
+          aria-controls="menuNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -329,37 +37,56 @@
         >
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
             <li class="nav-item">
-              <a class="nav-link enlace-navegacion active" href="#">Inicio</a>
+              <a class="nav-link active" href="#">Inicio</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link enlace-navegacion" href="#">Acerca</a>
+              <a class="nav-link" href="registro.html">Registro</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="inicioSesionAdmin.html">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="inicioSesionGanadores.html"
+                >Ganadores</a
+              >
             </li>
           </ul>
           <div class="d-flex gap-2">
-            <a class="btn btn-light px-4" href="#">Entrar</a>
-            <a class="btn btn-morado px-4" href="#">Registro</a>
+            <a class="btn btn-hi5-gold px-4 rounded-pill" href="registro.html"
+              >Registrarse</a
+            >
           </div>
         </div>
       </div>
     </nav>
 
-    <div class="wrapper-logos">
-      <div class="burbuja-logos">
-        <a href="https://enlace1.com" target="_blank">
-          <img src="https://via.placeholder.com/40x40?text=L1" alt="Logo 1" />
-        </a>
-        <a href="https://enlace2.com" target="_blank">
-          <img src="https://via.placeholder.com/40x40?text=L2" alt="Logo 2" />
-        </a>
-      </div>
+    <!-- LOGOS IPN Y ESCOM-->
+    <div
+      class="burbuja-logos position-fixed top-0 end-0 me-3 bg-white shadow rounded-pill d-flex align-items-center gap-3 px-3 py-2"
+    >
+      <a href="https://www.ipn.mx/" target="_blank">
+        <img
+          src="../imgs/ipnlogo.png"
+          alt="Logo IPN"
+          class="img-fluid logo-burbuja"
+        />
+      </a>
+      <a href="https://www.escom.ipn.mx/" target="_blank">
+        <img
+          src="../imgs/escudoESCOM.png"
+          alt="Logo ESCOM"
+          class="img-fluid logo-burbuja"
+        />
+      </a>
     </div>
 
-    <main class="text-center px-3">
-      <section class="seccion-heroica">
+    <!-- INICIO -->
+    <main class="text-center px-3 mt-5">
+      <section class="py-5 mt-5">
         <div class="container">
           <h1 class="fw-bold mb-3">
             Bienvenido a Hi-5<br /><span class="text-white-50"
-              >La plataforma de Expoescom ESCOM</span
+              >La plataforma de EXPO-ESCOM</span
             >
           </h1>
           <p class="lead mb-4">
@@ -367,21 +94,30 @@
             universitaria.
           </p>
           <div class="d-flex justify-content-center gap-3">
-            <a href="#" class="btn btn-light btn-lg px-4 fw-semibold">Entrar</a>
-            <a href="#" class="btn btn-morado btn-lg px-4 fw-semibold"
+            <a
+              href="inicioSesionGanadores.html"
+              class="btn btn-outline-light btn-lg px-4 fw-semibold rounded-pill"
+              >Ir a ganadores</a
+            >
+            <a
+              href="registro.html"
+              class="btn btn-hi5-gold btn-lg px-4 fw-semibold rounded-pill"
               >Registrarse</a
             >
           </div>
         </div>
       </section>
 
-      <section class="container pb-5">
-        <div class="contenedor-carrusel">
+      <!-- CARRUSEL -->
+      <section class="container py-5">
+        <div
+          class="bg-black rounded-4 overflow-hidden shadow-hi5 transition-hover"
+        >
           <div
             id="carruselHi5"
             class="carousel slide"
             data-bs-ride="carousel"
-            data-bs-interval="3000"
+            data-bs-interval="5000"
           >
             <div class="carousel-indicators">
               <button
@@ -398,19 +134,105 @@
                 data-bs-slide-to="1"
                 aria-label="Slide 2"
               ></button>
+              <button
+                type="button"
+                data-bs-target="#carruselHi5"
+                data-bs-slide-to="2"
+                aria-label="Slide 3"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carruselHi5"
+                data-bs-slide-to="3"
+                aria-label="Slide 4"
+              ></button>
+              <button
+                type="button"
+                data-bs-target="#carruselHi5"
+                data-bs-slide-to="4"
+                aria-label="Slide 5"
+              ></button>
             </div>
             <div class="carousel-inner">
-              <div
-                class="carousel-item active item-carrusel"
-                style="background-image: url('https://placehold.co/800x300')"
-              >
-                <div class="overlay-carrusel"></div>
+              <div class="carousel-item active">
+                <div class="carousel-img-container">
+                  <img
+                    src="../imgs/inversion2.png"
+                    class="img-fluid"
+                    alt="Inversión en innovación y semiconductores en Puebla"
+                  />
+                </div>
+                <div class="carrusel-overlay text-white text-center">
+                  <h5>Impulso a la innovación en Puebla</h5>
+                  <p class="mb-0">
+                    El IPN invertirá 5 mdp en proyectos de innovación y
+                    semiconductores en el CECyT 20.
+                  </p>
+                </div>
               </div>
-              <div
-                class="carousel-item item-carrusel"
-                style="background-image: url('https://placehold.co/800x300')"
-              >
-                <div class="overlay-carrusel"></div>
+              <div class="carousel-item">
+                <div class="carousel-img-container">
+                  <img
+                    src="../imgs/carreraipn.jpeg"
+                    class="img-fluid"
+                    alt="Carrera IPN Once K 2025"
+                  />
+                </div>
+                <div class="carrusel-overlay text-white text-center">
+                  <h5>Todo listo para la Once K 2025</h5>
+                  <p class="mb-0">
+                    Participa en la carrera híbrida del IPN con distancias de 5,
+                    11 y 21 km.
+                  </p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-img-container">
+                  <img
+                    src="../imgs/isisaipn.jpg"
+                    class="img-fluid"
+                    alt="Expo ISISA 2025"
+                  />
+                </div>
+                <div class="carrusel-overlay text-white text-center">
+                  <h5>Rugen los motores en Expo ISISA</h5>
+                  <p class="mb-0">
+                    Conoce las innovaciones en la industria automotriz
+                    presentadas por estudiantes de la ESIME.
+                  </p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-img-container">
+                  <img
+                    src="../imgs/roboticaipn.jpg"
+                    class="img-fluid"
+                    alt="Avances en robótica del IPN"
+                  />
+                </div>
+                <div class="carrusel-overlay text-white text-center">
+                  <h5>Avances en robótica del IPN</h5>
+                  <p class="mb-0">
+                    Nuevos proyectos robotizados para la industria manufacturera
+                    presentados en ExpoESCOM.
+                  </p>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <div class="carousel-img-container">
+                  <img
+                    src="../imgs/nthidrico.jpg"
+                    class="img-fluid"
+                    alt="Investigación sobre recursos hídricos"
+                  />
+                </div>
+                <div class="carrusel-overlay text-white text-center">
+                  <h5>Investigación sobre recursos hídricos</h5>
+                  <p class="mb-0">
+                    Proyecto interdisciplinario del IPN para mejorar la gestión
+                    del agua en zonas urbanas.
+                  </p>
+                </div>
               </div>
             </div>
             <button
@@ -435,319 +257,312 @@
         </div>
       </section>
 
-      <section id="noticias" class="py-5">
+      <!-- NOTICIAS-->
+      <section class="py-5">
         <div class="container">
           <h2 class="text-center mb-5">Noticias recientes</h2>
           <div class="row g-4 justify-content-center">
             <div class="col-md-6">
-              <div class="tarjeta-noticia">
+              <article
+                class="noticia-card"
+                aria-label="Noticia sobre Carrera IPN Once K 2025"
+              >
                 <img
-                  src="https://placehold.co/600x300"
-                  class="img-fluid"
+                  src="../imgs/carreraipn.jpeg"
+                  class="img-fluid w-100 rounded mb-3 noticia-img"
                   alt="Noticia 1"
                 />
-                <div class="card-body px-4 pt-4 pb-2">
-                  <h5 class="titulo-tarjeta">Expositores confirmados</h5>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Cras luctus ac felis et feugiat.
-                  </p>
-                </div>
-              </div>
+                <h5 class="text-hi5-gold">Carrera IPN Once K 2025</h5>
+                <p class="lead texto-justificado">
+                  La cuenta regresiva ha comenzado para la Carrera IPN Once K
+                  “Por la Sustentabilidad”. Este fin de semana se corren los 5,
+                  11 y 21 kilómetros; las y los participantes ya están
+                  alistándose para el reto del año.
+                </p>
+              </article>
             </div>
             <div class="col-md-6">
-              <div class="tarjeta-noticia">
+              <article
+                class="noticia-card"
+                aria-label="Noticia sobre Impulso a la innovación en Puebla"
+              >
                 <img
-                  src="https://placehold.co/600x300"
-                  class="img-fluid"
+                  src="../imgs/ntinversion.jpg"
+                  class="img-fluid w-100 rounded mb-3 noticia-img"
                   alt="Noticia 2"
                 />
-                <div class="card-body px-4 pt-4 pb-2">
-                  <h5 class="titulo-tarjeta">Talleres disponibles</h5>
-                  <p>
-                    Phasellus sodales nunc vitae eros placerat, at porta massa
-                    lacinia. Integer vitae magna at eros.
+                <h5 class="text-hi5-gold">Impulso a la innovación en Puebla</h5>
+                <p class="lead texto-justificado">
+                  El IPN invertirá 5 millones de pesos en innovación de
+                  semiconductores en Puebla y celebró el Día del Politécnico
+                  2025 en el Cecyt 20. También cubrirá los costos de publicación
+                  de artículos científicos de sus investigadores en revistas
+                  nacionales e internacionales.
+                </p>
+              </article>
+            </div>
+            <div class="col-md-6">
+              <article
+                class="noticia-card"
+                aria-label="Noticia sobre Investigación sobre recursos hídricos"
+              >
+                <img
+                  src="../imgs/nthidrico.jpg"
+                  class="img-fluid w-100 rounded mb-3 noticia-img"
+                  alt="Noticia 3"
+                />
+                <h5 class="text-hi5-gold">
+                  Investigación sobre recursos hídricos.
+                </h5>
+                <p class="lead texto-justificado">
+                  El Citedi-IPN desarrolló un sistema inteligente que monitorea
+                  el consumo de agua en hogares mediante sensores y tecnología
+                  de telecomunicaciones. Su objetivo es generar estrategias para
+                  un uso más sostenible de los recursos hídricos.
+                </p>
+              </article>
+            </div>
+            <div class="col-md-6">
+              <article
+                class="noticia-card"
+                aria-label="Noticia sobre Avances en robótica en el IPN"
+              >
+                <img
+                  src="../imgs/ntrobotica.jpg"
+                  class="img-fluid w-100 rounded mb-3 noticia-img"
+                  alt="Noticia 4"
+                />
+                <h5 class="text-hi5-gold">Avances en Robotica en el IPN</h5>
+                <p class="lead texto-justificado">
+                  McIntosh I; un robot autónomo desarrollado por estudiantes del
+                  IPN, basado en un bioalgoritmo inspirado en el Physarum
+                  Polycephalum para trazar rutas óptimas. La máquina puede
+                  operar en entornos complejos y ser controlada remotamente.
+                </p>
+              </article>
+            </div>
+            <div class="col-md-6">
+              <article
+                class="noticia-card"
+                aria-label="Noticia sobre Expo ISISA 2025 y conocimiento automotriz"
+              >
+                <img
+                  src="../imgs/ntautomotriz.jpg"
+                  class="img-fluid w-100 rounded mb-3 noticia-img"
+                  alt="Noticia 5"
+                />
+                <h5 class="text-hi5-gold">
+                  Expos ISISA 2025 - Hacen despliegue de conocimiento automotriz
+                </h5>
+                <p class="lead texto-justificado">
+                  ESIME Ticomán organiza la 10ª edición de EXPO ISISA 2025, un
+                  evento con talleres, conferencias y exhibiciones sobre
+                  ingeniería automotriz. Participaron más 40 empresas como
+                  Nissan, General Motors, Ford y Volkswagen.
+                </p>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: ¿Qué es la ExpoESCOM? -->
+      <section class="py-5">
+        <div class="container">
+          <div class="row align-items-center g-5">
+            <div class="col-md-6">
+              <img
+                src="../imgs/expoescom1.jpg"
+                class="img-fluid rounded-4 sombra-hover"
+                alt="ExpoESCOM"
+              />
+            </div>
+            <div class="col-md-6 text-white">
+              <h2 class="fw-bold mb-4 text-hi5-gold">¿Qué es la EXPO-ESCOM?</h2>
+              <p class="lead texto-justificado">
+                La EXPO-ESCOM es una exposición semestral de la Escuela Superior
+                de Cómputo (ESCOM) del Instituto Politécnico Nacional (IPN).<br />
+                Su propósito principal es mostrar los proyectos, trabajos
+                terminales, exposiciones y carteles elaborados por los
+                estudiantes en sus diferentes Unidades de Aprendizaje. Es una
+                oportunidad para que la comunidad ESCOM, otras Unidades
+                Académicas y el público en general puedan apreciar el trabajo de
+                los jóvenes ingenieros y ver cómo consolidan su propio estilo en
+                sus proyectos.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECCIÓN: ¿En qué consiste este proyecto? -->
+      <section class="py-5">
+        <div class="container">
+          <div class="row align-items-center g-5">
+            <div class="col-md-6 text-white">
+              <h2 class="fw-bold mb-4 text-hi5-gold">
+                Características del proyecto
+              </h2>
+              <p class="texto-justificado">
+                Los proyectos presentados en la ExpoESCOM reflejan el esfuerzo y
+                la creatividad de los alumnos en distintas áreas tecnológicas.
+                Cuentan con la participación activa de profesores que actúan
+                como asesores y evaluadores durante todo el proceso. Las
+                categorías abarcan desde software, inteligencia artificial y
+                redes, hasta videojuegos y ciberseguridad, entre otras. Además,
+                los mejores trabajos pueden recibir reconocimientos especiales,
+                y el evento representa una excelente oportunidad para que
+                empresas y egresados conozcan y valoren el talento y la
+                capacidad innovadora de los estudiantes.
+              </p>
+            </div>
+            <div class="col-md-6">
+              <img
+                src="../imgs/expoescom2.jpg"
+                class="img-fluid rounded-4 sombra-hover"
+                alt="Proyecto Hi-5"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PARTICIPANTES DEL PROYECTO -->
+      <section class="py-5">
+        <div class="container">
+          <h2 class="text-center text-white mb-5">
+            Participantes del Proyecto
+          </h2>
+          <div class="row g-4 justify-content-center">
+            <div class="col-md-6 col-lg-3">
+              <div
+                class="card bg-hi5-medium text-white border-0 rounded-4 text-center transition-hover h-100"
+              >
+                <div class="pt-4">
+                  <img
+                    src="../imgs/logoNailea.png"
+                    class="rounded-circle"
+                    alt="Participante 1"
+                    width="120"
+                    height="120"
+                  />
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title text-hi5-gold">
+                    Hernández Castañeda Nailea
+                  </h5>
+                  <p class="card-text small">
+                    Ingeniero en Sistemas Computacionales.
+                  </p>
+                  <p class="d-flex justify-content-center align-items-center">
+                    <a
+                      href="https://www.instagram.com/gtz7250?igsh=Nm9qNjIwY3o5azFv&utm_source=qr"
+                      target="_blank"
+                      class="text-white"
+                    >
+                      <i class="bi bi-instagram fs-4 me-2"></i>
+                    </a>
+                    <span>@gtz7250</span>
                   </p>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="colaboradores-section">
-        <div class="container">
-          <h2 class="text-center mb-5">Colaboradores del Proyecto</h2>
-          <div class="row g-4 justify-content-center">
-            <div class="col-md-4">
-              <div class="tarjeta-colaborador">
-                <img src="https://placehold.co/100x100" alt="Colaborador 1" />
-                <h5>Lorem ipsum</h5>
-                <p>Organización general y logística</p>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="tarjeta-colaborador">
-                <img src="https://placehold.co/100x100" alt="Colaborador 2" />
-                <h5>Lorem ipsum</h5>
-                <p>Diseño gráfico y medios</p>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="tarjeta-colaborador">
-                <img src="https://placehold.co/100x100" alt="Colaborador 3" />
-                <h5>Lorem ipsum</h5>
-                <p>Desarrollo web y soporte técnico</p>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="tarjeta-colaborador">
-                <img src="https://placehold.co/100x100" alt="Colaborador 3" />
-                <h5>Lorem ipsum</h5>
-                <p>Desarrollo web y soporte técnico</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== LOGIN ===== -->
-      <section class="seccion-formulario">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-5">
-              <div class="formulario-card">
-                <div class="text-center mb-4">
+            <div class="col-md-6 col-lg-3">
+              <div
+                class="card bg-hi5-medium text-white border-0 rounded-4 text-center transition-hover h-100"
+              >
+                <div class="pt-4">
                   <img
-                    src="https://via.placeholder.com/120x50?text=LOGO"
-                    alt="Logo Hi-5"
-                    class="img-fluid"
+                    src="../imgs/logoIsaac.png"
+                    class="rounded-circle"
+                    alt="Participante 2"
+                    width="120"
+                    height="120"
                   />
                 </div>
-                <form id="formularioLogin" method="POST">
-                  <div class="form-floating mb-3">
-                    <input
-                      type="email"
-                      class="form-control form-control-morado"
-                      id="loginCorreo"
-                      placeholder=""
-                    />
-                    <label for="loginCorreo">Correo electrónico</label>
-                    <div class="invalid-feedback">
-                      Correo inválido. Debe ser @alumno.ipn.mx.
-                    </div>
-                  </div>
-                  <div class="form-floating mb-4">
-                    <input
-                      type="password"
-                      class="form-control form-control-morado"
-                      id="loginPass"
-                      placeholder=""
-                    />
-                    <label for="loginPass">Contraseña</label>
-                    <div class="invalid-feedback">
-                      Contraseña inválida. Mínimo 6 caracteres, una mayúscula,
-                      un número y un símbolo.
-                    </div>
-                  </div>
-                  <div class="d-grid">
-                    <button type="submit" class="btn btn-morado btn-lg">
-                      Iniciar sesión
-                    </button>
-                  </div>
-                </form>
-
-                <div class="text-center mt-4">
-                  <small
-                    >&copy; 2025 Hi-5. Todos los derechos reservados.</small
-                  >
+                <div class="card-body">
+                  <h5 class="card-title text-hi5-gold">
+                    Montoya Rodriguez Isaac
+                  </h5>
+                  <p class="card-text small">
+                    Ingeniero en Sistemas Computacionales.
+                  </p>
+                  <p class="d-flex justify-content-center align-items-center">
+                    <a
+                      href="https://www.instagram.com/isaacmontoyar/"
+                      target="_blank"
+                      class="text-white"
+                    >
+                      <i class="bi bi-instagram fs-4 me-2"></i>
+                    </a>
+                    <span>@issacmontoyar</span>
+                  </p>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== REGISTRO ===== -->
-      <section class="seccion-formulario">
-        <div class="container">
-          <div class="row justify-content-center">
-            <div class="col-lg-10">
-              <div class="formulario-card">
-                <div class="text-center mb-4">
-                  <h2 class="fw-bold text-white">Crear cuenta</h2>
-                  <p>Completa tu información para registrarte al evento</p>
+            <div class="col-md-6 col-lg-3">
+              <div
+                class="card bg-hi5-medium text-white border-0 rounded-4 text-center transition-hover h-100"
+              >
+                <div class="pt-4">
+                  <img
+                    src="../imgs/logomarco.png"
+                    class="rounded-circle"
+                    alt="Participante 3"
+                    width="120"
+                    height="120"
+                  />
                 </div>
-                <form>
-                  <h5 class="text-start text-white mb-3">Datos personales</h5>
-                  <div class="row g-3 mb-4">
-                    <div class="col-md-6">
-                      <!-- Boleta -->
-                      <div class="form-floating">
-                        <input
-                          type="text"
-                          class="form-control form-control-morado"
-                          id="boleta"
-                          placeholder=""
-                        />
-                        <label for="boleta">Número de boleta</label>
-                        <div class="invalid-feedback">Boleta inválida.</div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <!-- Nombre -->
-                      <div class="form-floating">
-                        <input
-                          type="text"
-                          class="form-control form-control-morado"
-                          id="nombreCompleto"
-                          placeholder=""
-                        />
-                        <label for="nombreCompleto">Nombre completo</label>
-                        <div class="invalid-feedback">
-                          Solo letras y espacios.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-floating">
-                        <select
-                          class="form-select form-control-morado"
-                          id="genero"
-                        >
-                          <option selected>Selecciona</option>
-                          <option value="Masculino">Masculino</option>
-                          <option value="Femenino">Femenino</option>
-                          <option value="Otro">Otro</option>
-                        </select>
-                        <label for="genero">Género</label>
-                        <div class="invalid-feedback">
-                          Selecciona un género válido.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-floating">
-                        <input
-                          type="text"
-                          class="form-control form-control-morado"
-                          id="curp"
-                          placeholder=""
-                        />
-                        <label for="curp">CURP</label>
-                        <div class="invalid-feedback">
-                          CURP inválido (18 caracteres, formato correcto).
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-floating">
-                        <select
-                          class="form-select form-control-morado"
-                          id="semestre"
-                        >
-                          <option selected>Selecciona</option>
-                          <option value="1">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                          <option value="4">4</option>
-                          <option value="5">5</option>
-                          <option value="6">6</option>
-                          <option value="7">7</option>
-                          <option value="8">8</option>
-                        </select>
-                        <label for="semestre">Semestre</label>
-                        <div class="invalid-feedback">
-                          Selecciona un semestre válido.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-floating">
-                        <select
-                          class="form-select form-control-morado"
-                          id="carrera"
-                        >
-                          <option selected>Selecciona</option>
-                          <option value="ISC">ISC</option>
-                          <option value="LCD">LCD</option>
-                          <option value="II">II</option>
-                          <option value="IA">IA</option>
-                        </select>
-                        <label for="carrera">Carrera</label>
-                        <div class="invalid-feedback">
-                          Selecciona una carrera válida.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-floating">
-                        <input
-                          type="text"
-                          class="form-control form-control-morado"
-                          id="telefono"
-                          placeholder=""
-                        />
-                        <label for="telefono">Teléfono</label>
-                        <div class="invalid-feedback">
-                          Ingresa un número de teléfono válido (10 dígitos).
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <h5 class="text-start text-white mb-3">Datos de cuenta</h5>
-                  <div class="row g-3">
-                    <div class="col-md-6">
-                      <div class="form-floating">
-                        <input
-                          type="email"
-                          class="form-control form-control-morado"
-                          id="correoInstitucional"
-                          placeholder=""
-                        />
-                        <label for="correoInstitucional"
-                          >Correo institucional</label
-                        >
-                        <div class="invalid-feedback">
-                          Correo inválido. Debe ser @alumno.ipn.mx.
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-floating">
-                        <input
-                          type="password"
-                          class="form-control form-control-morado"
-                          id="contrasena"
-                          placeholder=""
-                        />
-                        <label for="contrasena">Contraseña</label>
-                        <div class="invalid-feedback">
-                          Debe tener al menos 6 caracteres, una mayúscula, un
-                          número y un símbolo.
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="d-flex gap-2 mt-4">
-                    <button
-                      type="button"
-                      class="btn btn-morado px-4"
-                      id="btnConfirmarRegistro"
+                <div class="card-body">
+                  <h5 class="card-title text-hi5-gold">
+                    Rodríguez Leal Marco César
+                  </h5>
+                  <p class="card-text small">
+                    Ingeniero en Sistemas Computacionales.
+                  </p>
+                  <p class="d-flex justify-content-center align-items-center">
+                    <a
+                      href="https://www.instagram.com/mark_rguezl?utm_source=qr&igsh=NGR4Y21wYWUxejU5"
+                      target="_blank"
+                      class="text-white"
                     >
-                      Registrarse
-                    </button>
-                    <button type="reset" class="btn btn-outline-danger px-4">
-                      Borrar
-                    </button>
-                  </div>
-                </form>
-                <div class="text-center mt-4">
-                  <small
-                    >&copy; 2025 Hi-5. Todos los derechos reservados.</small
-                  >
+                      <i class="bi bi-instagram fs-4 me-2"></i>
+                    </a>
+                    <span>@mark_guezl</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+              <div
+                class="card bg-hi5-medium text-white border-0 rounded-4 text-center transition-hover h-100"
+              >
+                <div class="pt-4">
+                  <img
+                    src="../imgs/logoUriel.png"
+                    class="rounded-circle"
+                    alt="Uriel Suárez"
+                    width="120"
+                    height="120"
+                  />
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title text-hi5-gold">
+                    Suárez Lara Angel Uriel
+                  </h5>
+                  <p class="card-text small">
+                    Ingeniero en Sistemas Computacionales.
+                  </p>
+                  <p class="d-flex justify-content-center align-items-center">
+                    <a
+                      href="https://www.instagram.com/angel_suarez31?igsh=MW4zdTNsbDN5aTdmcg=="
+                      target="_blank"
+                      class="text-white"
+                    >
+                      <i class="bi bi-instagram fs-4 me-2"></i>
+                    </a>
+                    <span>@angel_suarez31</span>
+                  </p>
                 </div>
               </div>
             </div>
@@ -756,7 +571,8 @@
       </section>
     </main>
 
-    <footer class="py-4 text-center text-md-start">
+    <!-- FOOTER -->
+    <footer class="py-4 text-center text-md-start bg-hi5-light text-white">
       <div class="container">
         <div class="row align-items-center">
           <div class="col-md-10">
@@ -766,311 +582,29 @@
             <div
               class="d-flex flex-wrap justify-content-center justify-content-md-start gap-3 small"
             >
-              <a href="#" class="text-decoration-none text-secondary"
-                >Privacidad</a
-              >
-              <a href="#" class="text-decoration-none text-secondary"
-                >Términos</a
-              >
-              <a href="#" class="text-decoration-none text-secondary"
-                >Contacto</a
-              >
+              <a href="#" class="text-decoration-none text-white">Privacidad</a>
+              <a href="#" class="text-decoration-none text-white">Términos</a>
+              <a href="#" class="text-decoration-none text-white">Contacto</a>
             </div>
           </div>
           <div
-            class="col-md-2 d-flex justify-content-md-end justify-content-center footer-icono-container"
+            class="col-md-2 d-flex justify-content-md-end justify-content-center mt-3 mt-md-0"
           >
             <a href="#">
               <img
-                src="https://via.placeholder.com/40x40?text=🧠"
+                src="../imgs/logohifive.png"
                 alt="Logo Hi-5"
-                class="footer-icono"
+                class="logo-footer"
               />
             </a>
           </div>
         </div>
       </div>
     </footer>
-
-    <!--Ventana modal-->
-    <div
-      class="modal fade"
-      id="modalConfirmacion"
-      tabindex="-1"
-      aria-labelledby="modalConfirmacionLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content bg-dark text-white border-0 rounded-4 shadow">
-          <div class="modal-header border-0">
-            <h5 class="modal-title fw-bold" id="modalConfirmacionLabel">
-              Confirmación de datos
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-              aria-label="Cerrar"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <p class="mb-3" id="textoConfirmacion"></p>
-            <hr style="border-color: rgba(255, 255, 255, 0.2)" />
-            <p class="small text-secondary">
-              Por favor revisa los datos antes de continuar. Si todo está
-              correcto, haz clic en <strong>“Sí, están correctos”</strong>.
-            </p>
-          </div>
-          <div class="modal-footer border-0">
-            <button
-              type="button"
-              class="btn btn-morado px-4 py-2 rounded"
-              id="btnEnviarConfirmado"
-            >
-              Sí, están correctos
-            </button>
-            <button
-              type="button"
-              class="btn btn-outline-danger px-4"
-              data-bs-dismiss="modal"
-            >
-              Cancelar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"
     ></script>
-
-    <script>
-      const formulario = document.querySelector(".formulario-card form");
-
-      const campos = [
-        "boleta",
-        "nombreCompleto",
-        "curp",
-        "telefono",
-        "correoInstitucional",
-        "contrasena",
-        "genero",
-        "semestre",
-        "carrera",
-      ];
-
-      const expresiones = {
-        boleta: /^(PE|PP)?\d{8}$|^\d{10}$/,
-        nombreCompleto: /^[A-Za-zÁÉÍÓÚÑáéíóúñ\s]+$/,
-        curp: /^[A-Z]{4}\d{6}[A-Z]{6}[A-Z0-9]{2}$/,
-        telefono: /^\d{10}$/,
-        correoInstitucional: /^[a-z0-9._%+-]+@alumno\.ipn\.mx$/,
-        contrasena: /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{6,}$/,
-      };
-
-      // Vincula eventos de corrección para ocultar errores al escribir
-      campos.forEach((id) => {
-        const input = document.getElementById(id);
-        input.addEventListener("input", () => {
-          input.classList.remove("is-invalid");
-        });
-        if (input.tagName === "SELECT") {
-          input.addEventListener("change", () => {
-            input.classList.remove("is-invalid");
-          });
-        }
-      });
-
-      // Función que muestra el error visual
-      function mostrarError(idCampo, mensaje) {
-        const campo = document.getElementById(idCampo);
-        campo.classList.add("is-invalid");
-        const feedback = campo.parentElement.querySelector(".invalid-feedback");
-        if (feedback) feedback.textContent = mensaje;
-      }
-
-      // Limpia todos los errores visuales previos
-      function limpiarErrores() {
-        campos.forEach((id) => {
-          const campo = document.getElementById(id);
-          campo.classList.remove("is-invalid");
-        });
-      }
-
-      document
-        .getElementById("btnConfirmarRegistro")
-        .addEventListener("click", function () {
-          limpiarErrores();
-
-          // Obtener valores
-          const valores = {
-            boleta: document
-              .getElementById("boleta")
-              .value.trim()
-              .toUpperCase(),
-            nombreCompleto: document
-              .getElementById("nombreCompleto")
-              .value.trim(),
-            curp: document.getElementById("curp").value.trim().toUpperCase(),
-            telefono: document.getElementById("telefono").value.trim(),
-            correoInstitucional: document
-              .getElementById("correoInstitucional")
-              .value.trim()
-              .toLowerCase(),
-            contrasena: document.getElementById("contrasena").value,
-            genero: document.getElementById("genero").value,
-            semestre: document.getElementById("semestre").value,
-            carrera: document.getElementById("carrera").value,
-          };
-
-          let valido = true;
-
-          // Validaciones por campo
-          if (!valores.boleta || !expresiones.boleta.test(valores.boleta)) {
-            mostrarError(
-              "boleta",
-              "Número de boleta inválido. Usa 10 dígitos o PE/PP + 8 dígitos."
-            );
-            valido = false;
-          }
-
-          if (
-            !valores.nombreCompleto ||
-            !expresiones.nombreCompleto.test(valores.nombreCompleto)
-          ) {
-            mostrarError(
-              "nombreCompleto",
-              "Nombre inválido. Solo letras y espacios."
-            );
-            valido = false;
-          }
-
-          if (!valores.curp || !expresiones.curp.test(valores.curp)) {
-            mostrarError(
-              "curp",
-              "CURP inválido. 18 caracteres con formato correcto."
-            );
-            valido = false;
-          }
-
-          if (
-            !valores.telefono ||
-            !expresiones.telefono.test(valores.telefono)
-          ) {
-            mostrarError(
-              "telefono",
-              "Teléfono inválido. Usa exactamente 10 dígitos."
-            );
-            valido = false;
-          }
-
-          if (
-            !valores.correoInstitucional ||
-            !expresiones.correoInstitucional.test(valores.correoInstitucional)
-          ) {
-            mostrarError(
-              "correoInstitucional",
-              "Correo inválido. Debe ser @alumno.ipn.mx."
-            );
-            valido = false;
-          }
-
-          if (
-            !valores.contrasena ||
-            !expresiones.contrasena.test(valores.contrasena)
-          ) {
-            mostrarError(
-              "contrasena",
-              "Debe tener al menos 6 caracteres, una mayúscula, un número y un símbolo."
-            );
-            valido = false;
-          }
-
-          if (valores.genero === "Selecciona") {
-            mostrarError("genero", "Selecciona un género válido.");
-            valido = false;
-          }
-
-          if (valores.semestre === "Selecciona") {
-            mostrarError("semestre", "Selecciona un semestre válido.");
-            valido = false;
-          }
-
-          if (valores.carrera === "Selecciona") {
-            mostrarError("carrera", "Selecciona una carrera válida.");
-            valido = false;
-          }
-
-          // Si algo es inválido, no continuar
-          if (!valido) return;
-
-          // Si todo está bien, mostrar el modal de confirmación
-          const texto = `
-      <strong>Hola "${valores.nombreCompleto}"</strong>, verifica que los datos que ingresaste sean correctos:<br><br>
-      <strong>No de boleta:</strong> ${valores.boleta}<br>
-      <strong>CURP:</strong> ${valores.curp}<br>
-      <strong>Género:</strong> ${valores.genero}<br>
-      <strong>Teléfono:</strong> ${valores.telefono}<br>
-      <strong>Correo:</strong> ${valores.correoInstitucional}
-    `;
-          document.getElementById("textoConfirmacion").innerHTML = texto;
-
-          const modal = new bootstrap.Modal(
-            document.getElementById("modalConfirmacion")
-          );
-          modal.show();
-        });
-
-      // Confirmación desde el modal → envío clásico
-      document
-        .getElementById("btnEnviarConfirmado")
-        .addEventListener("click", function () {
-          formulario.submit();
-        });
-    </script>
-
-    <script>
-      const formularioLogin = document.getElementById("formularioLogin");
-
-      const loginCorreo = document.getElementById("loginCorreo");
-      const loginPass = document.getElementById("loginPass");
-
-      const regexCorreo = /^[a-z0-9._%+-]+@alumno\.ipn\.mx$/;
-      const regexContrasena = /^(?=.*[A-Z])(?=.*\d)(?=.*[^A-Za-z\d]).{6,}$/;
-
-      // Elimina errores al escribir
-      [loginCorreo, loginPass].forEach((input) => {
-        input.addEventListener("input", () => {
-          input.classList.remove("is-invalid");
-        });
-      });
-
-      formularioLogin.addEventListener("submit", function (e) {
-        let valido = true;
-
-        // Limpia errores previos
-        loginCorreo.classList.remove("is-invalid");
-        loginPass.classList.remove("is-invalid");
-
-        const correo = loginCorreo.value.trim().toLowerCase();
-        const pass = loginPass.value;
-
-        if (!correo || !regexCorreo.test(correo)) {
-          loginCorreo.classList.add("is-invalid");
-          valido = false;
-        }
-
-        if (!pass || !regexContrasena.test(pass)) {
-          loginPass.classList.add("is-invalid");
-          valido = false;
-        }
-
-        if (!valido) {
-          e.preventDefault(); // Evita envío si hay errores
-        }
-      });
-    </script>
+    <script src="validaciones.js"></script>
   </body>
 </html>

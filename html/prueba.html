@@ -39,15 +39,20 @@
             <li class="nav-item">
               <a class="nav-link active" href="#">Inicio</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="#">Registro</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Admin</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Ganadores</a></li>
+            <li class="nav-item">
+              <a class="nav-link" href="registro.html">Registro</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="inicioSesionAdmin.html">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="inicioSesionGanadores.html"
+                >Ganadores</a
+              >
+            </li>
           </ul>
           <div class="d-flex gap-2">
-            <a class="btn btn-outline-light px-4 rounded-pill" href="#"
-              >Entrar</a
-            >
-            <a class="btn btn-hi5-gold px-4 rounded-pill" href="#"
+            <a class="btn btn-hi5-gold px-4 rounded-pill" href="registro.html"
               >Registrarse</a
             >
           </div>
@@ -90,12 +95,12 @@
           </p>
           <div class="d-flex justify-content-center gap-3">
             <a
-              href="#"
+              href="inicioSesionGanadores.html"
               class="btn btn-outline-light btn-lg px-4 fw-semibold rounded-pill"
-              >Entrar</a
+              >Ir a ganadores</a
             >
             <a
-              href="#"
+              href="registro.html"
               class="btn btn-hi5-gold btn-lg px-4 fw-semibold rounded-pill"
               >Registrarse</a
             >
@@ -258,7 +263,10 @@
           <h2 class="text-center mb-5">Noticias recientes</h2>
           <div class="row g-4 justify-content-center">
             <div class="col-md-6">
-              <div class="noticia-card">
+              <article
+                class="noticia-card"
+                aria-label="Noticia sobre Carrera IPN Once K 2025"
+              >
                 <img
                   src="../imgs/carreraipn.jpeg"
                   class="img-fluid w-100 rounded mb-3 noticia-img"
@@ -271,10 +279,13 @@
                   11 y 21 kilómetros; las y los participantes ya están
                   alistándose para el reto del año.
                 </p>
-              </div>
+              </article>
             </div>
             <div class="col-md-6">
-              <div class="noticia-card">
+              <article
+                class="noticia-card"
+                aria-label="Noticia sobre Impulso a la innovación en Puebla"
+              >
                 <img
                   src="../imgs/ntinversion.jpg"
                   class="img-fluid w-100 rounded mb-3 noticia-img"
@@ -288,17 +299,20 @@
                   de artículos científicos de sus investigadores en revistas
                   nacionales e internacionales.
                 </p>
-              </div>
+              </article>
             </div>
             <div class="col-md-6">
-              <div class="noticia-card">
+              <article
+                class="noticia-card"
+                aria-label="Noticia sobre Investigación sobre recursos hídricos"
+              >
                 <img
                   src="../imgs/nthidrico.jpg"
                   class="img-fluid w-100 rounded mb-3 noticia-img"
                   alt="Noticia 3"
                 />
                 <h5 class="text-hi5-gold">
-                  Investigación sobre recursos hidrícos.
+                  Investigación sobre recursos hídricos.
                 </h5>
                 <p class="lead texto-justificado">
                   El Citedi-IPN desarrolló un sistema inteligente que monitorea
@@ -306,10 +320,13 @@
                   de telecomunicaciones. Su objetivo es generar estrategias para
                   un uso más sostenible de los recursos hídricos.
                 </p>
-              </div>
+              </article>
             </div>
             <div class="col-md-6">
-              <div class="noticia-card">
+              <article
+                class="noticia-card"
+                aria-label="Noticia sobre Avances en robótica en el IPN"
+              >
                 <img
                   src="../imgs/ntrobotica.jpg"
                   class="img-fluid w-100 rounded mb-3 noticia-img"
@@ -322,10 +339,13 @@
                   Polycephalum para trazar rutas óptimas. La máquina puede
                   operar en entornos complejos y ser controlada remotamente.
                 </p>
-              </div>
+              </article>
             </div>
             <div class="col-md-6">
-              <div class="noticia-card">
+              <article
+                class="noticia-card"
+                aria-label="Noticia sobre Expo ISISA 2025 y conocimiento automotriz"
+              >
                 <img
                   src="../imgs/ntautomotriz.jpg"
                   class="img-fluid w-100 rounded mb-3 noticia-img"
@@ -340,7 +360,7 @@
                   ingeniería automotriz. Participaron más 40 empresas como
                   Nissan, General Motors, Ford y Volkswagen.
                 </p>
-              </div>
+              </article>
             </div>
           </div>
         </div>
@@ -550,7 +570,7 @@
         </div>
       </section>
 
-      <!-- LOGIN -->
+      <!-- INICIO DE SESIÓN -->
       <div class="container mb-5">
         <div class="row justify-content-center">
           <div class="col-lg-6">
