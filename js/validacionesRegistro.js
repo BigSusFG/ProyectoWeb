@@ -3,7 +3,9 @@ document.getElementById("formRegistro").addEventListener("submit", function (eve
 
   const boleta = document.getElementById("boleta").value;
   const nombre = document.getElementById("nombre").value;
-  const genero = document.getElementById("genero").value;
+  const apPat = document.getElementById("apPat").value;
+  const apMat = document.getElementById("apMat").value;
+  const genero = document.querySelector('input[name="genero"]:checked');
   const curp = document.getElementById("curp").value;
   const telefono = document.getElementById("telefono").value;
   const semestre = document.getElementById("semestre").value;
@@ -29,6 +31,21 @@ document.getElementById("formRegistro").addEventListener("submit", function (eve
     return;
   }
 
+  if (!nombreRegex.test(apPat)) {
+    alert("Apellido paterno inválido, sólo letras");
+    return;
+  }
+
+  if (!nombreRegex.test(apMat)) {
+    alert("Apellido materno inválido, sólo letras");
+    return;
+  }
+
+  if (!genero) {
+    alert("Selecciona un género");
+    return;
+  }
+
   if (!curpRegex.test(curp)) {
     alert("CURP inválido");
     return;
@@ -36,11 +53,6 @@ document.getElementById("formRegistro").addEventListener("submit", function (eve
 
   if (!telefonoRegex.test(telefono)) {
     alert("Teléfono inválido, deben ser 10 dígitos");
-    return;
-  }
-
-  if (genero == "Selecciona") {
-    alert("Selecciona un género");
     return;
   }
 
@@ -70,15 +82,14 @@ document.getElementById("formRegistro").addEventListener("submit", function (eve
   }
 
   alert("Hola " + nombre + ", verifica que los datos que ingresaste sean correctos:\n" +
-  "\nNo de boleta: " + boleta +
-  "\nCURP: " + curp +
-  "\nGénero: " + genero +
-  "\nTeléfono: " + telefono +
-  "\nSemestre: " + semestre +
-  "\nCarrera: " + carrera +
-  "\nConcurso: " + concurso +
-  "\nCorreo: " + correo +
-  "\nContraseña: " + contrasena 
-);
-
+    "\nNo de boleta: " + boleta +
+    "\nCURP: " + curp +
+    "\nGénero: " + genero.value +
+    "\nTeléfono: " + telefono +
+    "\nSemestre: " + semestre +
+    "\nCarrera: " + carrera +
+    "\nConcurso: " + concurso +
+    "\nCorreo: " + correo +
+    "\nContraseña: " + contrasena
+  );
 });

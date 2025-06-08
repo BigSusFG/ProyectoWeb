@@ -47,8 +47,8 @@
               <a class="nav-link" href="inicioSesionAdmin.html">Admin</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="inicioSesionGanadores.html"
-                >Ganadores</a
+              <a class="nav-link" href="inicioSesionParticipantes.html"
+                >Participantes</a
               >
             </li>
           </ul>
@@ -118,26 +118,36 @@
                           class="form-control form-control-dark"
                           id="nombre"
                           name="nombre"
-                          placeholder="Nombre completo"
+                          placeholder="Nombre"
                           required
                         />
-                        <label for="nombre">Nombre completo</label>
+                        <label for="nombre">Nombre (s)</label>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-floating">
-                        <select
-                          class="form-select form-control-dark"
-                          id="genero"
-                          name="genero"
+                        <input
+                          type="text"
+                          class="form-control form-control-dark"
+                          id="apPat"
+                          name="apPat"
+                          placeholder="Apellido Paterno"
                           required
-                        >
-                          <option selected disabled>Selecciona</option>
-                          <option value="Masculino">Masculino</option>
-                          <option value="Femenino">Femenino</option>
-                          <option value="Otro">Otro</option>
-                        </select>
-                        <label for="genero">Género</label>
+                        />
+                        <label for="nombre">Apellido Paterno</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control form-control-dark"
+                          id="apMat"
+                          name="apMat"
+                          placeholder="Apellido Materno"
+                          required
+                        />
+                        <label for="nombre">Apellido Materno</label>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -185,7 +195,7 @@
                           <option selected disabled>Selecciona</option>
                           <option value="ISC">ISC</option>
                           <option value="LCD">LCD</option>
-                          <option value="IA">IA</option>
+                          <option value="IA">IIA</option>
                         </select>
                         <label for="carrera">Carrera</label>
                       </div>
@@ -220,6 +230,35 @@
                         <label for="concurso">Concurso</label>
                       </div>
                     </div>
+                    <div class="col-md-6">
+                    <div class="form-control form-control-dark bg-hi5-medium rounded-4 shadow-hi5 py-3">
+                      <label class="form-label text-white d-block mb-2">Género</label>
+                      <div class="form-check form-check-inline">
+                        <input 
+                        class="form-check-input" 
+                        type="radio" 
+                        name="genero" 
+                        id="masculino" 
+                        value="Masculino" required> Masculino                
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input 
+                        class="form-check-input" 
+                        type="radio" 
+                        name="genero" 
+                        id="femenino" 
+                        value="Femenino"> Femenino
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input 
+                        class="form-check-input" 
+                        type="radio" 
+                        name="genero" 
+                        id="otro" 
+                        value="Otro"> Otro                        
+                      </div>
+                    </div>
+                  </div>
                   </div>
                   <h5 class="text-start text-white mb-3 mt-4">
                     Datos de cuenta
