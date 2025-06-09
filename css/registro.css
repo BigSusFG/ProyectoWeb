@@ -1,0 +1,40 @@
+/* Botón de información ⓘ */
+.btn-info-circle {
+  width: 32px;
+  height: 32px;
+  color: white;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contenedor del modal */
+.modal-content-ajustada {
+  height: auto;
+  max-height: 95vh;
+  overflow: visible;
+}
+
+/* Carrusel centrado con ancho adaptado */
+.carrusel-ajustado {
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Imagen del carrusel */
+.img-carrusel {
+  max-height: 80vh;
+  object-fit: contain;
+}
+
+.bg-hi5-light {
+  background-color: #3d4160;
+}
+
+.box-seccion {
+  border-radius: 1rem;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.25rem;
+}

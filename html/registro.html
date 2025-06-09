@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Registrarse</title>
-    <link rel="icon" href="../imgs/logohifivemini.png" type="image/png">
+    <link rel="icon" href="../imgs/logohifivemini.png" type="image/png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -15,6 +15,7 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/estilos.css" />
+    <link rel="stylesheet" href="../css/registro.css" />
   </head>
   <body class="bg-hi5-dark text-white pt-5">
     <!-- NAVBAR -->
@@ -134,7 +135,7 @@
                           placeholder="Apellido Paterno"
                           required
                         />
-                        <label for="nombre">Apellido Paterno</label>
+                        <label for="apPat">Apellido Paterno</label>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -147,7 +148,7 @@
                           placeholder="Apellido Materno"
                           required
                         />
-                        <label for="nombre">Apellido Materno</label>
+                        <label for="apMat">Apellido Materno</label>
                       </div>
                     </div>
                     <div class="col-md-6">
@@ -195,7 +196,7 @@
                           <option selected disabled>Selecciona</option>
                           <option value="ISC">ISC</option>
                           <option value="LCD">LCD</option>
-                          <option value="IA">IIA</option>
+                          <option value="IA">IA</option>
                         </select>
                         <label for="carrera">Carrera</label>
                       </div>
@@ -214,51 +215,45 @@
                       </div>
                     </div>
                     <div class="col-md-6">
-                      <div class="form-floating">
-                        <select
-                          class="form-select form-control-dark"
-                          id="concurso"
-                          name="concurso"
-                          required
+                      <div
+                        class="form-control form-control-dark bg-hi5-medium rounded-4 shadow-hi5 py-3"
+                      >
+                        <label class="form-label text-white d-block mb-2"
+                          >Género</label
                         >
-                          <option selected disabled>Selecciona</option>
-                          <option value="primera">Primera Opción</option>
-                          <option value="segunda">Segunda Opción</option>
-                          <option value="tercera">Tercera Opción</option>
-                          <option value="cuarta">Cuarta Opción</option>
-                        </select>
-                        <label for="concurso">Concurso</label>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="genero"
+                            id="masculino"
+                            value="Masculino"
+                            required
+                          />
+                          Masculino
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="genero"
+                            id="femenino"
+                            value="Femenino"
+                          />
+                          Femenino
+                        </div>
+                        <div class="form-check form-check-inline">
+                          <input
+                            class="form-check-input"
+                            type="radio"
+                            name="genero"
+                            id="otro"
+                            value="Otro"
+                          />
+                          Otro
+                        </div>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                    <div class="form-control form-control-dark bg-hi5-medium rounded-4 shadow-hi5 py-3">
-                      <label class="form-label text-white d-block mb-2">Género</label>
-                      <div class="form-check form-check-inline">
-                        <input 
-                        class="form-check-input" 
-                        type="radio" 
-                        name="genero" 
-                        id="masculino" 
-                        value="Masculino" required> Masculino                
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input 
-                        class="form-check-input" 
-                        type="radio" 
-                        name="genero" 
-                        id="femenino" 
-                        value="Femenino"> Femenino
-                      </div>
-                      <div class="form-check form-check-inline">
-                        <input 
-                        class="form-check-input" 
-                        type="radio" 
-                        name="genero" 
-                        id="otro" 
-                        value="Otro"> Otro                        
-                      </div>
-                    </div>
-                  </div>
                   </div>
                   <h5 class="text-start text-white mb-3 mt-4">
                     Datos de cuenta
@@ -291,6 +286,128 @@
                       </div>
                     </div>
                   </div>
+                  <h5 class="text-start text-white mb-3 mt-4">
+                    Datos del concurso
+                  </h5>
+                  <div class="row g-3 mb-4">
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <select
+                          class="form-select form-control-dark"
+                          id="academia"
+                          name="academia"
+                          required
+                        >
+                          <option disabled selected>Selecciona</option>
+                          <option value="Ciencia de Datos">
+                            Ciencia de Datos
+                          </option>
+                          <option value="Ciencias Básicas">
+                            Ciencias Básicas
+                          </option>
+                          <option value="Ciencias de la Computación">
+                            Ciencias de la Computación
+                          </option>
+                          <option value="Ciencias Sociales">
+                            Ciencias Sociales
+                          </option>
+                          <option value="Fundamentos de Sistemas Electrónicos">
+                            Fundamentos de Sistemas Electrónicos
+                          </option>
+                          <option value="Ingeniería de Software">
+                            Ingeniería de Software
+                          </option>
+                          <option value="Inteligencia Artificial">
+                            Inteligencia Artificial
+                          </option>
+                          <option
+                            value="Proyectos Estratégicos para la Toma de Decisiones"
+                          >
+                            Proyectos Estratégicos para la Toma de Decisiones
+                          </option>
+                          <option value="Sistemas Digitales">
+                            Sistemas Digitales
+                          </option>
+                          <option value="Sistemas Distribuidos">
+                            Sistemas Distribuidos
+                          </option>
+                        </select>
+                        <label for="academia">Academia</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6 d-flex align-items-center">
+                      <div
+                        class="form-floating flex-grow-1 position-relative me-2"
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
+                        title="Primero selecciona una academia"
+                      >
+                        <select
+                          class="form-select form-control-dark"
+                          id="unidadAprendizaje"
+                          name="unidadAprendizaje"
+                          required
+                        >
+                          <option disabled selected>
+                            Selecciona una unidad
+                          </option>
+                        </select>
+                        <label for="unidadAprendizaje"
+                          >Unidad de aprendizaje</label
+                        >
+                      </div>
+                      <button
+                        type="button"
+                        class="btn btn-info-circle btn-white"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalUnidades"
+                      >
+                        ⓘ
+                      </button>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <select
+                          class="form-select form-control-dark"
+                          id="horario"
+                          name="horario"
+                          required
+                        >
+                          <option disabled selected>Selecciona</option>
+                          <option value="matutino">Matutino</option>
+                          <option value="vespertino">Vespertino</option>
+                        </select>
+                        <label for="horario">Horario preferente</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control form-control-dark"
+                          id="nombreProyecto"
+                          name="nombreProyecto"
+                          placeholder="Nombre del proyecto"
+                          required
+                        />
+                        <label for="nombreProyecto">Nombre del proyecto</label>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-floating">
+                        <input
+                          type="text"
+                          class="form-control form-control-dark"
+                          id="nombreEquipo"
+                          name="nombreEquipo"
+                          placeholder="Nombre del equipo"
+                          required
+                        />
+                        <label for="nombreEquipo">Nombre del equipo</label>
+                      </div>
+                    </div>
+                  </div>
+
                   <div class="d-flex gap-2 mt-4">
                     <button
                       type="submit"
@@ -324,7 +441,11 @@
             <div
               class="d-flex flex-wrap justify-content-center justify-content-md-start gap-3 small"
             >
-              <a href="https://www.instagram.com/isaacmontoyar/" class="text-decoration-none text-white">Contacto</a>
+              <a
+                href="https://www.instagram.com/isaacmontoyar/"
+                class="text-decoration-none text-white"
+                >Contacto</a
+              >
             </div>
           </div>
           <div
@@ -342,10 +463,138 @@
         </div>
       </div>
     </footer>
+
+    <!-- Modal de Academias y UA -->
+    <div
+      class="modal fade"
+      id="modalUnidades"
+      tabindex="-1"
+      aria-labelledby="modalUnidadesLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div
+          class="modal-content bg-hi5-medium text-white modal-content-ajustada"
+        >
+          <div class="modal-header border-0">
+            <h5 class="modal-title" id="modalUnidadesLabel">
+              Unidades de Aprendizaje por Academia
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+          <div class="modal-body p-3 d-flex flex-column align-items-center">
+            <p class="text-center mb-3">
+              Para una mejor orientación, consulta las academias y las unidades
+              de aprendizaje disponibles en las siguientes diapositivas.
+            </p>
+            <div
+              id="carruselUA"
+              class="carousel slide carrusel-ajustado"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner rounded-3 shadow">
+                <div class="carousel-item active text-center">
+                  <img
+                    src="../imgs/academias1.jpg"
+                    class="img-fluid d-block mx-auto img-carrusel"
+                    alt="Academias UA 1"
+                  />
+                </div>
+                <div class="carousel-item text-center">
+                  <img
+                    src="../imgs/academias2.jpg"
+                    class="img-fluid d-block mx-auto img-carrusel"
+                    alt="Academias UA 2"
+                  />
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carruselUA"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Anterior</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carruselUA"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Siguiente</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal de Confirmación -->
+    <div
+      class="modal fade"
+      id="modalConfirmacion"
+      tabindex="-1"
+      aria-labelledby="modalConfirmacionLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content bg-hi5-medium text-white">
+          <div class="modal-header border-0">
+            <h5 class="modal-title" id="modalConfirmacionLabel">
+              Verifica tus datos
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+
+          <div class="modal-body">
+            <p id="saludoConfirmacion" class="mb-3 fw-semibold"></p>
+            <div id="listaDatosConfirmacion"></div>
+          </div>
+          <div class="modal-footer border-0 justify-content-end">
+            <button
+              type="button"
+              class="btn btn-outline-light rounded-pill"
+              id="btnModificar"
+              data-bs-dismiss="modal"
+            >
+              Modificar
+            </button>
+            <button
+              type="button"
+              class="btn btn-hi5-gold rounded-pill"
+              id="btnAceptar"
+            >
+              Aceptar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"
     ></script>
     <script src="../js/validacionesRegistro.js"></script>
+    <script src="../js/selectorDeUA.js"></script>
   </body>
 </html>
