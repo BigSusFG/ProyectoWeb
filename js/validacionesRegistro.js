@@ -90,6 +90,52 @@ modal.show();
 // Acción al hacer clic en Aceptar
 document.getElementById("btnAceptar").onclick = function () {
   modal.hide();
-  alert("Tus datos fueron guardados correctamente. (Aquí puedes generar el acuse en PDF y asignar horario/salón.)");
+
+  // Crear un objeto con los datos
+  const datos = {
+    boleta,
+    nombre,
+    apPat,
+    apMat,
+    genero: genero.value,
+    curp,
+    telefono,
+    semestre,
+    carrera,
+    academia,
+    unidadAprendizaje,
+    horario,
+    nombreProyecto,
+    nombreEquipo,
+    correo,
+    contrasena,
+  };
+
+  // Enviar al servidor
+  fetch("participantes/registrarParticipante.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams(datos),
+  })
+    .then((response) => {
+      if (response.redirected) {
+        window.location.href = response.url;
+      } else {
+        return response.text();
+      }
+    })
+    .then((data) => {
+      if (data && data.includes("error:boleta_duplicada")) {
+        alert("⚠️ Ya existe un registro con esta boleta. Verifica tus datos.");
+      } else if (data && !data.startsWith("http")) {
+        alert("Respuesta del servidor:\n" + data);
+      }
+    })
+    .catch((error) => {
+      alert("Ocurrió un error al registrar. Revisa tu conexión o el servidor.");
+      console.error(error);
+    });
 };
 });
