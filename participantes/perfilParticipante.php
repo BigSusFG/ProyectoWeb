@@ -31,7 +31,7 @@ $conexion->close();
 <body style="font-family: sans-serif; background-color: #f4f4f4; padding: 2em;">
   <h1>Perfil del Participante</h1>
   <h3>Datos personales</h3>
-  <p><strong>Boleta:</strong> <?= $usuario["boleta"] ?></p>
+  <p><strong>Boleta:</strong>/p>
   <p><strong>Nombre completo:</strong> <?= $usuario["nombre"] . " " . $usuario["ap_paterno"] . " " . $usuario["ap_materno"] ?></p>
   <p><strong>CURP:</strong> <?= $usuario["curp"] ?></p>
   <p><strong>Género:</strong> <?= $usuario["genero"] ?></p>
@@ -162,6 +162,7 @@ $conexion->close();
                     name="boleta"
                     class="form-control form-control-dark"
                     placeholder="Boleta"
+                    value="<?= $usuario["boleta"] ?>"
                     disabled
                   />
                   <label for="boleta">Número de boleta</label>
