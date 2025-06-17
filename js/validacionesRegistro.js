@@ -87,7 +87,7 @@ lista.innerHTML = `
 const modal = new bootstrap.Modal(document.getElementById("modalConfirmacion"));
 modal.show();
 
-// Acción al hacer clic en Aceptar
+// Al hacer clic en aceptar
 document.getElementById("btnAceptar").onclick = function () {
   modal.hide();
 
@@ -112,7 +112,7 @@ document.getElementById("btnAceptar").onclick = function () {
   };
 
   // Enviar al servidor
-  fetch("participantes/registrarParticipante.php", {
+  fetch("../participantes/registrarParticipante.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
@@ -128,7 +128,9 @@ document.getElementById("btnAceptar").onclick = function () {
     })
     .then((data) => {
       if (data && data.includes("error:boleta_duplicada")) {
-        alert("⚠️ Ya existe un registro con esta boleta. Verifica tus datos.");
+        alert("Ya existe un registro con esta boleta. Verifica tus datos.");
+      } else if (data && data.includes("error:no_hay_espacio")) {
+        alert("Ya no hay espacios disponibles para exponer el 20 de junio.");
       } else if (data && !data.startsWith("http")) {
         alert("Respuesta del servidor:\n" + data);
       }

@@ -2,11 +2,16 @@
 session_start();
 
 if (!isset($_SESSION["boleta"])) {
-    echo "Acceso denegado. Inicia sesión.";
-    exit();
+  echo "Acceso denegado. Inicia sesión.";
+  exit();
 }
 
 $conexion = new mysqli("localhost", "root", "", "expoescom2025");
+
+if ($conexion->connect_error) {
+  die("Error de conexión: " . $conexion->connect_error);
+}
+
 $boleta = $_SESSION["boleta"];
 
 $sql = "SELECT * FROM participantes WHERE boleta = ?";
@@ -15,38 +20,682 @@ $stmt->bind_param("s", $boleta);
 $stmt->execute();
 $resultado = $stmt->get_result();
 $usuario = $resultado->fetch_assoc();
-?>
 
+$stmt->close();
+$conexion->close();
+
+// Enviar los datos como JSON al frontend
+header("Content-Type: application/json");
+echo json_encode($usuario);
+?>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <title>Perfil del Participante</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
-<body class="bg-dark text-white">
-  <div class="container py-5">
-    <h2 class="mb-4">Bienvenido, <?= htmlspecialchars($usuario["nombre"]) ?></h2>
-    
-    <div class="bg-secondary p-4 rounded">
-      <h5>Datos Personales</h5>
-      <p><strong>Boleta:</strong> <?= $usuario["boleta"] ?></p>
-      <p><strong>Nombre:</strong> <?= $usuario["nombre"] . " " . $usuario["ap_paterno"] . " " . $usuario["ap_materno"] ?></p>
-      <p><strong>CURP:</strong> <?= $usuario["curp"] ?></p>
-      <p><strong>Teléfono:</strong> <?= $usuario["telefono"] ?></p>
-      <p><strong>Semestre:</strong> <?= $usuario["semestre"] ?></p>
-      <p><strong>Carrera:</strong> <?= $usuario["carrera"] ?></p>
-      <p><strong>Correo:</strong> <?= $usuario["correo"] ?></p>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Datos de cuenta</title>
+    <link rel="icon" href="../imgs/logohifivemini.png" type="image/png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/estilos.css" />
+    <link rel="stylesheet" href="../css/registro.css" />
+  </head>
+  <body class="bg-hi5-dark text-white pt-5">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-md fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="principal.html">✋Hi-5</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#menuNav"
+          aria-controls="menuNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+          class="collapse navbar-collapse justify-content-between"
+          id="menuNav"
+        >
+          <ul class="navbar-nav me-auto mb-2 mb-md-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="principal.html">Inicio</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="registro.html">Registro</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="inicioSesionAdmin.html">Admin</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="inicioSesionParticipantes.html"
+                >Participantes</a
+              >
+            </li>
+          </ul>
+          <div class="d-flex gap-2">
+            <a class="btn btn-hi5-gold px-4 rounded-pill" href="registro.html"
+              >Registrarse</a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- LOGOS IPN Y ESCOM-->
+    <div
+      class="burbuja-logos position-fixed top-0 end-0 me-3 bg-white shadow rounded-pill d-flex align-items-center gap-3 px-3 py-2"
+    >
+      <a href="https://www.ipn.mx/" target="_blank">
+        <img
+          src="../imgs/ipnlogo.png"
+          alt="Logo IPN"
+          title="IPN"
+          class="img-fluid logo-burbuja"
+        />
+      </a>
+      <a href="https://www.escom.ipn.mx/" target="_blank">
+        <img
+          src="../imgs/escudoESCOM.png"
+          alt="Logo ESCOM"
+          title="ESCOM"
+          class="img-fluid logo-burbuja"
+        />
+      </a>
+    </div>
+    <main>
+      <div class="container my-5">
+        <form action="../participantes/modificarParticipante.php" id="formPerfil" class="row g-4">
+          <!-- DATOS PERSONALES -->
+          <div class="col-12 bg-hi5-medium p-4 rounded-4 shadow">
+            <h5 class="text-hi5-gold mb-4">Datos personales</h5>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    id="boleta"
+                    name="boleta"
+                    class="form-control form-control-dark"
+                    placeholder="Boleta"
+                    disabled
+                  />
+                  <label for="boleta">Número de boleta</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    id="nombre"
+                    name="nombre"
+                    class="form-control form-control-dark"
+                    placeholder="Nombre(s)"
+                    disabled
+                  />
+                  <label for="nombre">Nombre(s)</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    id="apPat"
+                    name="apPat"
+                    class="form-control form-control-dark"
+                    placeholder="Apellido paterno"
+                    disabled
+                  />
+                  <label for="apPat">Apellido paterno</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    id="apMat"
+                    name="apMat"
+                    class="form-control form-control-dark"
+                    placeholder="Apellido materno"
+                    disabled
+                  />
+                  <label for="apMat">Apellido materno</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <fieldset
+                  class="form-control form-control-dark rounded-4 py-3 bg-hi5-medium"
+                >
+                  <legend class="form-label mb-2">Género</legend>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="genero"
+                      id="masculino"
+                      value="Masculino"
+                      disabled
+                    />
+                    <label class="form-check-label" for="masculino"
+                      >Masculino</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="genero"
+                      id="femenino"
+                      value="Femenino"
+                      disabled
+                    />
+                    <label class="form-check-label" for="femenino"
+                      >Femenino</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      class="form-check-input"
+                      type="radio"
+                      name="genero"
+                      id="otro"
+                      value="Otro"
+                      disabled
+                    />
+                    <label class="form-check-label" for="otro">Otro</label>
+                  </div>
+                </fieldset>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    id="curp"
+                    name="curp"
+                    class="form-control form-control-dark"
+                    placeholder="CURP"
+                    disabled
+                  />
+                  <label for="curp">CURP</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    id="telefono"
+                    name="telefono"
+                    class="form-control form-control-dark"
+                    placeholder="Teléfono"
+                    disabled
+                  />
+                  <label for="telefono">Teléfono</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <select
+                    id="semestre"
+                    name="semestre"
+                    class="form-select form-control-dark"
+                    disabled
+                  >
+                    <option disabled selected>Selecciona</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                  </select>
+                  <label for="semestre">Semestre</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <select
+                    id="carrera"
+                    name="carrera"
+                    class="form-select form-control-dark"
+                    disabled
+                  >
+                    <option disabled selected>Selecciona</option>
+                    <option value="ISC">ISC</option>
+                    <option value="LCD">LCD</option>
+                    <option value="IA">IA</option>
+                  </select>
+                  <label for="carrera">Carrera</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DATOS DE CUENTA -->
+          <div class="col-12 bg-hi5-medium p-4 rounded-4 shadow">
+            <h5 class="text-hi5-gold mb-4">Datos de cuenta</h5>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    type="email"
+                    id="correo"
+                    name="correo"
+                    class="form-control form-control-dark"
+                    placeholder="Correo institucional"
+                    disabled
+                  />
+                  <label for="correo">Correo institucional</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    type="password"
+                    id="contrasena"
+                    name="contrasena"
+                    class="form-control form-control-dark"
+                    placeholder="Contraseña"
+                    disabled
+                  />
+                  <label for="contrasena">Contraseña</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DATOS DEL CONCURSO -->
+          <div class="col-12 bg-hi5-medium p-4 rounded-4 shadow">
+            <h5 class="text-hi5-gold mb-4">Datos del concurso</h5>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <select
+                    id="academia"
+                    name="academia"
+                    class="form-select form-control-dark"
+                    disabled
+                  >
+                    <option disabled selected>Selecciona</option>
+                    <option value="Ciencia de Datos">Ciencia de Datos</option>
+                    <option value="Ciencias Básicas">Ciencias Básicas</option>
+                    <option value="Ciencias de la Computación">
+                      Ciencias de la Computación
+                    </option>
+                    <option value="Ciencias Sociales">Ciencias Sociales</option>
+                    <option value="Fundamentos de Sistemas Electrónicos">
+                      Fundamentos de Sistemas Electrónicos
+                    </option>
+                    <option value="Ingeniería de Software">
+                      Ingeniería de Software
+                    </option>
+                    <option value="Inteligencia Artificial">
+                      Inteligencia Artificial
+                    </option>
+                    <option
+                      value="Proyectos Estratégicos para la Toma de Decisiones"
+                    >
+                      Proyectos Estratégicos para la Toma de Decisiones
+                    </option>
+                    <option value="Sistemas Digitales">
+                      Sistemas Digitales
+                    </option>
+                    <option value="Sistemas Distribuidos">
+                      Sistemas Distribuidos
+                    </option>
+                  </select>
+                  <label for="academia">Academia</label>
+                </div>
+              </div>
+              <div class="col-md-6 d-flex align-items-center">
+                <div
+                  class="form-floating flex-grow-1 position-relative me-2"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Primero selecciona una academia para editar"
+                >
+                  <select
+                    class="form-select form-control-dark"
+                    id="unidadAprendizaje"
+                    name="unidadAprendizaje"
+                    required
+                  >
+                    <option disabled selected>Selecciona una unidad</option>
+                  </select>
+                  <label for="unidadAprendizaje">Unidad de aprendizaje</label>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-info-circle btn-white"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalUnidades"
+                >
+                  ⓘ
+                </button>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <select
+                    id="horario"
+                    name="horario"
+                    class="form-select form-control-dark"
+                    disabled
+                  >
+                    <option disabled selected>Selecciona</option>
+                    <option value="matutino">Matutino</option>
+                    <option value="vespertino">Vespertino</option>
+                  </select>
+                  <label for="horario">Horario preferente</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    id="nombreProyecto"
+                    name="nombreProyecto"
+                    class="form-control form-control-dark"
+                    placeholder="Nombre del proyecto"
+                    disabled
+                  />
+                  <label for="nombreProyecto">Nombre del proyecto</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    id="nombreEquipo"
+                    name="nombreEquipo"
+                    class="form-control form-control-dark"
+                    placeholder="Nombre del equipo"
+                    disabled
+                  />
+                  <label for="nombreEquipo">Nombre del equipo</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- DATOS ASIGNADOS AUTOMÁTICAMENTE -->
+          <div class="col-12 bg-hi5-medium p-4 rounded-4 shadow">
+            <h5 class="text-hi5-gold mb-4">Datos asignados</h5>
+            <div class="row g-3">
+              <div class="col-md-4">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    id="salon"
+                    name="salon"
+                    class="form-control form-control-dark"
+                    placeholder="Salón asignado"
+                    disabled
+                  />
+                  <label for="salon">Salón asignado</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-floating">
+                  <input
+                    type="text"
+                    id="hora"
+                    name="hora"
+                    class="form-control form-control-dark"
+                    placeholder="Hora de exposición"
+                    disabled
+                  />
+                  <label for="hora">Hora de exposición</label>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-floating">
+                  <input
+                    type="date"
+                    id="fecha"
+                    name="fecha"
+                    class="form-control form-control-dark"
+                    placeholder="Fecha de exposición"
+                    disabled
+                  />
+                  <label for="fecha">Fecha de exposición</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ESTADO ADMINISTRATIVO -->
+          <div
+            id="seccionEstadoAdmin"
+            class="col-12 bg-hi5-medium p-4 rounded-4 shadow"
+          >
+            <h5 class="text-hi5-gold mb-4">Estado administrativo</h5>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label">¿Puede descargar acuse?</label>
+                <input
+                  type="text"
+                  class="form-control form-control-dark"
+                  id="acuse"
+                  value="Sí"
+                  disabled
+                />
+              </div>
+              <div class="col-md-6">
+                <label class="form-label">¿Es ganador?</label>
+                <input
+                  type="text"
+                  class="form-control form-control-dark"
+                  id="ganador"
+                  value="1"
+                  disabled
+                />
+              </div>
+            </div>
+          </div>
+
+          <!-- BOTÓNES -->
+          <div class="col-12 d-flex justify-content-end gap-3 mt-4">
+            <button
+              type="button"
+              class="btn btn-outline-light rounded-pill px-4"
+              id="btnEditar"
+            >
+              Ajustar cuenta
+            </button>
+            <button
+              type="submit"
+              class="btn btn-hi5-gold rounded-pill px-4 d-none"
+              id="btnGuardar"
+            >
+              Guardar
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger rounded-pill px-4"
+              id="btnEliminar"
+            >
+              Eliminar cuenta
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="py-4 text-center text-md-start bg-hi5-light text-white">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-md-10">
+            <p class="mb-1 small">
+              © 2025 Hi-5 ESCOM. Todos los derechos reservados.
+            </p>
+            <div
+              class="d-flex flex-wrap justify-content-center justify-content-md-start gap-3 small"
+            >
+              <a
+                href="https://www.instagram.com/isaacmontoyar/"
+                class="text-decoration-none text-white"
+                >Contacto</a
+              >
+            </div>
+          </div>
+          <div
+            class="col-md-2 d-flex justify-content-md-end justify-content-center mt-3 mt-md-0"
+          >
+            <a href="#">
+              <img
+                src="../imgs/logohifive.png"
+                alt="Logo Hi-5"
+                title="Logo HI-5"
+                class="logo-footer"
+              />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modal de Academias y UA -->
+    <div
+      class="modal fade"
+      id="modalUnidades"
+      tabindex="-1"
+      aria-labelledby="modalUnidadesLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div
+          class="modal-content bg-hi5-medium text-white modal-content-ajustada"
+        >
+          <div class="modal-header border-0">
+            <h5 class="modal-title" id="modalUnidadesLabel">
+              Unidades de Aprendizaje por Academia
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+          <div class="modal-body p-3 d-flex flex-column align-items-center">
+            <p class="text-center mb-3">
+              Para una mejor orientación, consulta las academias y las unidades
+              de aprendizaje disponibles en las siguientes diapositivas.
+            </p>
+            <div
+              id="carruselUA"
+              class="carousel slide carrusel-ajustado"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner rounded-3 shadow">
+                <div class="carousel-item active text-center">
+                  <img
+                    src="../imgs/academias1.jpg"
+                    class="img-fluid d-block mx-auto img-carrusel"
+                    alt="Academias UA 1"
+                  />
+                </div>
+                <div class="carousel-item text-center">
+                  <img
+                    src="../imgs/academias2.jpg"
+                    class="img-fluid d-block mx-auto img-carrusel"
+                    alt="Academias UA 2"
+                  />
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#carruselUA"
+                data-bs-slide="prev"
+              >
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Anterior</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#carruselUA"
+                data-bs-slide="next"
+              >
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+                <span class="visually-hidden">Siguiente</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <div class="bg-secondary p-4 rounded mt-4">
-      <h5>Datos del Concurso</h5>
-      <p><strong>Academia:</strong> <?= $usuario["academia"] ?></p>
-      <p><strong>Unidad de Aprendizaje:</strong> <?= $usuario["unidad_aprendizaje"] ?></p>
-      <p><strong>Horario:</strong> <?= $usuario["horario"] ?></p>
-      <p><strong>Proyecto:</strong> <?= $usuario["nombre_proyecto"] ?></p>
-      <p><strong>Equipo:</strong> <?= $usuario["nombre_equipo"] ?></p>
+    <!--MODAL DE CONFIRMACIÓN-->
+    <div
+      class="modal fade"
+      id="modalConfirmarEliminar"
+      tabindex="-1"
+      aria-labelledby="modalConfirmarEliminarLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-hi5-dark text-white">
+          <div class="modal-header border-0">
+            <h5 class="modal-title" id="modalConfirmarEliminarLabel">
+              ¿Estás seguro?
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Cerrar"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Esta acción eliminará tu cuenta permanentemente. ¿Deseas continuar?
+          </div>
+          <div class="modal-footer border-0">
+            <button
+              type="button"
+              class="btn btn-outline-light rounded-pill"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger rounded-pill"
+              id="btnConfirmarEliminar"
+            >
+              Sí, eliminar
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</body>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../js/selectorDeUA.js"></script>
+    <script src="../js/editarPerfil.js"></script>
+    <script src="../js/validacionesLogin.js"></script>
+    <script src="../js/rellenarPerfil.js"></script>
+  </body>
 </html>

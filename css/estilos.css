@@ -191,3 +191,10 @@ body {
     height: 16rem;
   }
 }
+
+.campo-bloqueado {
+  background-color: var(--hi5-medium-dark) !important; 
+  color: #aaa !important;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
