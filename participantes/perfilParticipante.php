@@ -2,32 +2,66 @@
 session_start();
 
 if (!isset($_SESSION["boleta"])) {
-  echo "Acceso denegado. Inicia sesión.";
+  echo "<h2>Acceso denegado. Inicia sesión.</h2>";
   exit();
 }
 
 $conexion = new mysqli("localhost", "root", "", "expoescom2025");
-
 if ($conexion->connect_error) {
   die("Error de conexión: " . $conexion->connect_error);
 }
 
 $boleta = $_SESSION["boleta"];
-
 $sql = "SELECT * FROM participantes WHERE boleta = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("s", $boleta);
 $stmt->execute();
 $resultado = $stmt->get_result();
 $usuario = $resultado->fetch_assoc();
-
 $stmt->close();
 $conexion->close();
-
-// Enviar los datos como JSON al frontend
-header("Content-Type: application/json");
-echo json_encode($usuario);
 ?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Perfil del Participante</title>
+</head>
+<body style="font-family: sans-serif; background-color: #f4f4f4; padding: 2em;">
+  <h1>Perfil del Participante</h1>
+  <h3>Datos personales</h3>
+  <p><strong>Boleta:</strong> <?= $usuario["boleta"] ?></p>
+  <p><strong>Nombre completo:</strong> <?= $usuario["nombre"] . " " . $usuario["ap_paterno"] . " " . $usuario["ap_materno"] ?></p>
+  <p><strong>CURP:</strong> <?= $usuario["curp"] ?></p>
+  <p><strong>Género:</strong> <?= $usuario["genero"] ?></p>
+  <p><strong>Teléfono:</strong> <?= $usuario["telefono"] ?></p>
+  <p><strong>Semestre:</strong> <?= $usuario["semestre"] ?></p>
+  <p><strong>Carrera:</strong> <?= $usuario["carrera"] ?></p>
+
+  <h3>Datos de cuenta</h3>
+  <p><strong>Correo institucional:</strong> <?= $usuario["correo"] ?></p>
+  <p><strong>Contraseña (hash):</strong> <?= $usuario["contrasena"] ?></p>
+
+  <h3>Datos del concurso</h3>
+  <p><strong>Academia:</strong> <?= $usuario["academia"] ?></p>
+  <p><strong>Unidad de aprendizaje:</strong> <?= $usuario["unidad_aprendizaje"] ?></p>
+  <p><strong>Horario preferente:</strong> <?= $usuario["horario"] ?></p>
+  <p><strong>Nombre del proyecto:</strong> <?= $usuario["nombre_proyecto"] ?></p>
+  <p><strong>Nombre del equipo:</strong> <?= $usuario["nombre_equipo"] ?></p>
+
+  <h3>Datos asignados</h3>
+  <p><strong>Salón:</strong> <?= $usuario["salon"] ?? "Pendiente" ?></p>
+  <p><strong>Hora de exposición:</strong> <?= $usuario["hora_expo"] ?? "Pendiente" ?></p>
+  <p><strong>Fecha de exposición:</strong> <?= $usuario["fecha_expo"] ?? "Pendiente" ?></p>
+
+  <h3>Estado administrativo</h3>
+  <p><strong>Puede descargar acuse:</strong> <?= isset($usuario["puede_descargar_acuse"]) && $usuario["puede_descargar_acuse"] ? "Sí" : "No" ?></p>
+  <p><strong>Es ganador:</strong> <?= isset($usuario["ganador"]) && $usuario["ganador"] ? "Sí" : "No" ?></p>
+</body>
+</html>
+
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -696,6 +730,5 @@ echo json_encode($usuario);
     <script src="../js/selectorDeUA.js"></script>
     <script src="../js/editarPerfil.js"></script>
     <script src="../js/validacionesLogin.js"></script>
-    <script src="../js/rellenarPerfil.js"></script>
   </body>
 </html>
