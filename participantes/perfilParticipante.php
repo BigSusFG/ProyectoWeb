@@ -24,46 +24,6 @@ $conexion->close();
 
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Perfil del Participante</title>
-</head>
-<body style="font-family: sans-serif; background-color: #f4f4f4; padding: 2em;">
-  <h1>Perfil del Participante</h1>
-  <h3>Datos personales</h3>
-  <p><strong>Boleta:</strong>/p>
-  <p><strong>Nombre completo:</strong> <?= $usuario["nombre"] . " " . $usuario["ap_paterno"] . " " . $usuario["ap_materno"] ?></p>
-  <p><strong>CURP:</strong> <?= $usuario["curp"] ?></p>
-  <p><strong>Género:</strong> <?= $usuario["genero"] ?></p>
-  <p><strong>Teléfono:</strong> <?= $usuario["telefono"] ?></p>
-  <p><strong>Semestre:</strong> <?= $usuario["semestre"] ?></p>
-  <p><strong>Carrera:</strong> <?= $usuario["carrera"] ?></p>
-
-  <h3>Datos de cuenta</h3>
-  <p><strong>Correo institucional:</strong> <?= $usuario["correo"] ?></p>
-  <p><strong>Contraseña (hash):</strong> <?= $usuario["contrasena"] ?></p>
-
-  <h3>Datos del concurso</h3>
-  <p><strong>Academia:</strong> <?= $usuario["academia"] ?></p>
-  <p><strong>Unidad de aprendizaje:</strong> <?= $usuario["unidad_aprendizaje"] ?></p>
-  <p><strong>Horario preferente:</strong> <?= $usuario["horario"] ?></p>
-  <p><strong>Nombre del proyecto:</strong> <?= $usuario["nombre_proyecto"] ?></p>
-  <p><strong>Nombre del equipo:</strong> <?= $usuario["nombre_equipo"] ?></p>
-
-  <h3>Datos asignados</h3>
-  <p><strong>Salón:</strong> <?= $usuario["salon"] ?? "Pendiente" ?></p>
-  <p><strong>Hora de exposición:</strong> <?= $usuario["hora_expo"] ?? "Pendiente" ?></p>
-  <p><strong>Fecha de exposición:</strong> <?= $usuario["fecha_expo"] ?? "Pendiente" ?></p>
-
-  <h3>Estado administrativo</h3>
-  <p><strong>Puede descargar acuse:</strong> <?= isset($usuario["puede_descargar_acuse"]) && $usuario["puede_descargar_acuse"] ? "Sí" : "No" ?></p>
-  <p><strong>Es ganador:</strong> <?= isset($usuario["ganador"]) && $usuario["ganador"] ? "Sí" : "No" ?></p>
-</body>
-</html>
-
-
-<!DOCTYPE html>
-<html lang="es">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -176,6 +136,7 @@ $conexion->close();
                     name="nombre"
                     class="form-control form-control-dark"
                     placeholder="Nombre(s)"
+                    value="<?= $usuario["nombre"] ?>"
                     disabled
                   />
                   <label for="nombre">Nombre(s)</label>
@@ -189,6 +150,7 @@ $conexion->close();
                     name="apPat"
                     class="form-control form-control-dark"
                     placeholder="Apellido paterno"
+                    value="<?= $usuario["ap_paterno"] ?>"
                     disabled
                   />
                   <label for="apPat">Apellido paterno</label>
@@ -202,6 +164,7 @@ $conexion->close();
                     name="apMat"
                     class="form-control form-control-dark"
                     placeholder="Apellido materno"
+                    value="<?= $usuario["ap_materno"] ?>"
                     disabled
                   />
                   <label for="apMat">Apellido materno</label>
@@ -218,7 +181,7 @@ $conexion->close();
                       type="radio"
                       name="genero"
                       id="masculino"
-                      value="Masculino"
+                      value="<?= $usuario["genero"] ?>"
                       disabled
                     />
                     <label class="form-check-label" for="masculino"
@@ -259,6 +222,7 @@ $conexion->close();
                     name="curp"
                     class="form-control form-control-dark"
                     placeholder="CURP"
+                    value="<?= $usuario["curp"] ?>"
                     disabled
                   />
                   <label for="curp">CURP</label>
@@ -272,6 +236,7 @@ $conexion->close();
                     name="telefono"
                     class="form-control form-control-dark"
                     placeholder="Teléfono"
+                    value="<?= $usuario["telefono"] ?>"
                     disabled
                   />
                   <label for="telefono">Teléfono</label>
@@ -283,6 +248,7 @@ $conexion->close();
                     id="semestre"
                     name="semestre"
                     class="form-select form-control-dark"
+                    value="<?= $usuario["semestre"] ?>"
                     disabled
                   >
                     <option disabled selected>Selecciona</option>
@@ -304,6 +270,7 @@ $conexion->close();
                     id="carrera"
                     name="carrera"
                     class="form-select form-control-dark"
+                    value="<?= $usuario["carrera"] ?>"
                     disabled
                   >
                     <option disabled selected>Selecciona</option>
@@ -329,6 +296,7 @@ $conexion->close();
                     name="correo"
                     class="form-control form-control-dark"
                     placeholder="Correo institucional"
+                    value="<?= $usuario["correo"] ?>"
                     disabled
                   />
                   <label for="correo">Correo institucional</label>
@@ -342,6 +310,7 @@ $conexion->close();
                     name="contrasena"
                     class="form-control form-control-dark"
                     placeholder="Contraseña"
+                    value="<?= $usuario["contrasena"] ?>"
                     disabled
                   />
                   <label for="contrasena">Contraseña</label>
@@ -360,6 +329,7 @@ $conexion->close();
                     id="academia"
                     name="academia"
                     class="form-select form-control-dark"
+                    value="<?= $usuario["academia"] ?>"
                     disabled
                   >
                     <option disabled selected>Selecciona</option>
@@ -404,6 +374,7 @@ $conexion->close();
                     class="form-select form-control-dark"
                     id="unidadAprendizaje"
                     name="unidadAprendizaje"
+                    value="<?= $usuario["unidad_aprendizaje"] ?>"
                     required
                   >
                     <option disabled selected>Selecciona una unidad</option>
@@ -425,6 +396,7 @@ $conexion->close();
                     id="horario"
                     name="horario"
                     class="form-select form-control-dark"
+                    value="<?= $usuario["horario"] ?>"
                     disabled
                   >
                     <option disabled selected>Selecciona</option>
@@ -442,6 +414,7 @@ $conexion->close();
                     name="nombreProyecto"
                     class="form-control form-control-dark"
                     placeholder="Nombre del proyecto"
+                    value="<?= $usuario["nombre_proyecto"] ?>"
                     disabled
                   />
                   <label for="nombreProyecto">Nombre del proyecto</label>
@@ -455,6 +428,7 @@ $conexion->close();
                     name="nombreEquipo"
                     class="form-control form-control-dark"
                     placeholder="Nombre del equipo"
+                    value="<?= $usuario["nombre_equipo"] ?>"
                     disabled
                   />
                   <label for="nombreEquipo">Nombre del equipo</label>
@@ -475,6 +449,7 @@ $conexion->close();
                     name="salon"
                     class="form-control form-control-dark"
                     placeholder="Salón asignado"
+                    value="<?= $usuario["salon"] ?? "Pendiente" ?>"
                     disabled
                   />
                   <label for="salon">Salón asignado</label>
@@ -488,6 +463,7 @@ $conexion->close();
                     name="hora"
                     class="form-control form-control-dark"
                     placeholder="Hora de exposición"
+                    value="<?= $usuario["hora_expo"] ?? "Pendiente" ?>"
                     disabled
                   />
                   <label for="hora">Hora de exposición</label>
@@ -501,6 +477,7 @@ $conexion->close();
                     name="fecha"
                     class="form-control form-control-dark"
                     placeholder="Fecha de exposición"
+                    value="<?= $usuario["fecha_expo"] ?? "Pendiente" ?>"
                     disabled
                   />
                   <label for="fecha">Fecha de exposición</label>
@@ -522,7 +499,7 @@ $conexion->close();
                   type="text"
                   class="form-control form-control-dark"
                   id="acuse"
-                  value="Sí"
+                  value="<?= isset($usuario["puede_descargar_acuse"]) && $usuario["puede_descargar_acuse"] ? "Sí" : "No" ?>"
                   disabled
                 />
               </div>
@@ -532,7 +509,7 @@ $conexion->close();
                   type="text"
                   class="form-control form-control-dark"
                   id="ganador"
-                  value="1"
+                  value="<?= isset($usuario["ganador"]) && $usuario["ganador"] ? "Sí" : "No" ?>"
                   disabled
                 />
               </div>
