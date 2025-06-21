@@ -109,177 +109,68 @@ $conexion->close();
     </div>
     <main>
       <div class="container my-5">
-        <form action="../participantes/modificarParticipante.php" id="formPerfil" class="row g-4">
+        <form
+          action="../participantes/modificarParticipante.php"
+          id="formPerfil"
+          class="row g-4"
+        >
           <!-- DATOS PERSONALES -->
           <div class="col-12 bg-hi5-medium p-4 rounded-4 shadow">
             <h5 class="text-hi5-gold mb-4">Datos personales</h5>
             <div class="row g-3">
               <div class="col-md-6">
-                <div class="form-floating">
-                  <input
-                    type="text"
-                    id="boleta"
-                    name="boleta"
-                    class="form-control form-control-dark"
-                    placeholder="Boleta"
-                    value="<?= $usuario["boleta"] ?>"
-                    disabled
-                  />
-                  <label for="boleta">Número de boleta</label>
-                </div>
+                <p>
+                  <strong>No. de Boleta:</strong>
+                  <?= $usuario["boleta"] ?>
+                </p>
               </div>
               <div class="col-md-6">
-                <div class="form-floating">
-                  <input
-                    type="text"
-                    id="nombre"
-                    name="nombre"
-                    class="form-control form-control-dark"
-                    placeholder="Nombre(s)"
-                    value="<?= $usuario["nombre"] ?>"
-                    disabled
-                  />
-                  <label for="nombre">Nombre(s)</label>
-                </div>
+                <p>
+                  <strong>Nombre(s):</strong>
+                  <?= $usuario["nombre"] ?>
+                </p>
               </div>
               <div class="col-md-6">
-                <div class="form-floating">
-                  <input
-                    type="text"
-                    id="apPat"
-                    name="apPat"
-                    class="form-control form-control-dark"
-                    placeholder="Apellido paterno"
-                    value="<?= $usuario["ap_paterno"] ?>"
-                    disabled
-                  />
-                  <label for="apPat">Apellido paterno</label>
-                </div>
+                <p>
+                  <strong>Apellido paterno:</strong>
+                  <?= $usuario["ap_paterno"] ?>
+                </p>
               </div>
               <div class="col-md-6">
-                <div class="form-floating">
-                  <input
-                    type="text"
-                    id="apMat"
-                    name="apMat"
-                    class="form-control form-control-dark"
-                    placeholder="Apellido materno"
-                    value="<?= $usuario["ap_materno"] ?>"
-                    disabled
-                  />
-                  <label for="apMat">Apellido materno</label>
-                </div>
+                <p>
+                  <strong>Apellido materno:</strong>
+                  <?= $usuario["ap_materno"] ?>
+                </p>
               </div>
               <div class="col-md-6">
-                <fieldset
-                  class="form-control form-control-dark rounded-4 py-3 bg-hi5-medium"
-                >
-                  <legend class="form-label mb-2">Género</legend>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="genero"
-                      id="masculino"
-                      value="<?= $usuario["genero"] ?>"
-                      disabled
-                    />
-                    <label class="form-check-label" for="masculino"
-                      >Masculino</label
-                    >
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="genero"
-                      id="femenino"
-                      value="Femenino"
-                      disabled
-                    />
-                    <label class="form-check-label" for="femenino"
-                      >Femenino</label
-                    >
-                  </div>
-                  <div class="form-check form-check-inline">
-                    <input
-                      class="form-check-input"
-                      type="radio"
-                      name="genero"
-                      id="otro"
-                      value="Otro"
-                      disabled
-                    />
-                    <label class="form-check-label" for="otro">Otro</label>
-                  </div>
-                </fieldset>
+                <p>
+                  <strong>Género:</strong>
+                  <?= $usuario["genero"] ?>
+                </p>
               </div>
               <div class="col-md-6">
-                <div class="form-floating">
-                  <input
-                    type="text"
-                    id="curp"
-                    name="curp"
-                    class="form-control form-control-dark"
-                    placeholder="CURP"
-                    value="<?= $usuario["curp"] ?>"
-                    disabled
-                  />
-                  <label for="curp">CURP</label>
-                </div>
+                <p>
+                  <strong>CURP:</strong>
+                  <?= $usuario["curp"] ?>
+                </p>
               </div>
               <div class="col-md-6">
-                <div class="form-floating">
-                  <input
-                    type="text"
-                    id="telefono"
-                    name="telefono"
-                    class="form-control form-control-dark"
-                    placeholder="Teléfono"
-                    value="<?= $usuario["telefono"] ?>"
-                    disabled
-                  />
-                  <label for="telefono">Teléfono</label>
-                </div>
+                <p>
+                  <strong>Teléfono:</strong>
+                  <?= $usuario["telefono"] ?>
+                </p>
               </div>
               <div class="col-md-6">
-                <div class="form-floating">
-                  <select
-                    id="semestre"
-                    name="semestre"
-                    class="form-select form-control-dark"
-                    value="<?= $usuario["semestre"] ?>"
-                    disabled
-                  >
-                    <option disabled selected>Selecciona</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                  </select>
-                  <label for="semestre">Semestre</label>
-                </div>
+                <p>
+                  <strong>Semestre:</strong>
+                  <?= $usuario["semestre"] ?>
+                </p>
               </div>
               <div class="col-md-6">
-                <div class="form-floating">
-                  <select
-                    id="carrera"
-                    name="carrera"
-                    class="form-select form-control-dark"
-                    value="<?= $usuario["carrera"] ?>"
-                    disabled
-                  >
-                    <option disabled selected>Selecciona</option>
-                    <option value="ISC">ISC</option>
-                    <option value="LCD">LCD</option>
-                    <option value="IA">IA</option>
-                  </select>
-                  <label for="carrera">Carrera</label>
-                </div>
+                <p>
+                  <strong>Carrera:</strong>
+                  <?= $usuario["carrera"] ?>
+                </p>
               </div>
             </div>
           </div>
@@ -287,36 +178,10 @@ $conexion->close();
           <!-- DATOS DE CUENTA -->
           <div class="col-12 bg-hi5-medium p-4 rounded-4 shadow">
             <h5 class="text-hi5-gold mb-4">Datos de cuenta</h5>
-            <div class="row g-3">
-              <div class="col-md-6">
-                <div class="form-floating">
-                  <input
-                    type="email"
-                    id="correo"
-                    name="correo"
-                    class="form-control form-control-dark"
-                    placeholder="Correo institucional"
-                    value="<?= $usuario["correo"] ?>"
-                    disabled
-                  />
-                  <label for="correo">Correo institucional</label>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-floating">
-                  <input
-                    type="password"
-                    id="contrasena"
-                    name="contrasena"
-                    class="form-control form-control-dark"
-                    placeholder="Contraseña"
-                    value="<?= $usuario["contrasena"] ?>"
-                    disabled
-                  />
-                  <label for="contrasena">Contraseña</label>
-                </div>
-              </div>
-            </div>
+            <p>
+              <strong>Correo institucional:</strong>
+              <?= $usuario["correo"] ?>
+            </p>
           </div>
 
           <!-- DATOS DEL CONCURSO -->
@@ -324,115 +189,34 @@ $conexion->close();
             <h5 class="text-hi5-gold mb-4">Datos del concurso</h5>
             <div class="row g-3">
               <div class="col-md-6">
-                <div class="form-floating">
-                  <select
-                    id="academia"
-                    name="academia"
-                    class="form-select form-control-dark"
-                    value="<?= $usuario["academia"] ?>"
-                    disabled
-                  >
-                    <option disabled selected>Selecciona</option>
-                    <option value="Ciencia de Datos">Ciencia de Datos</option>
-                    <option value="Ciencias Básicas">Ciencias Básicas</option>
-                    <option value="Ciencias de la Computación">
-                      Ciencias de la Computación
-                    </option>
-                    <option value="Ciencias Sociales">Ciencias Sociales</option>
-                    <option value="Fundamentos de Sistemas Electrónicos">
-                      Fundamentos de Sistemas Electrónicos
-                    </option>
-                    <option value="Ingeniería de Software">
-                      Ingeniería de Software
-                    </option>
-                    <option value="Inteligencia Artificial">
-                      Inteligencia Artificial
-                    </option>
-                    <option
-                      value="Proyectos Estratégicos para la Toma de Decisiones"
-                    >
-                      Proyectos Estratégicos para la Toma de Decisiones
-                    </option>
-                    <option value="Sistemas Digitales">
-                      Sistemas Digitales
-                    </option>
-                    <option value="Sistemas Distribuidos">
-                      Sistemas Distribuidos
-                    </option>
-                  </select>
-                  <label for="academia">Academia</label>
-                </div>
-              </div>
-              <div class="col-md-6 d-flex align-items-center">
-                <div
-                  class="form-floating flex-grow-1 position-relative me-2"
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="top"
-                  title="Primero selecciona una academia para editar"
-                >
-                  <select
-                    class="form-select form-control-dark"
-                    id="unidadAprendizaje"
-                    name="unidadAprendizaje"
-                    value="<?= $usuario["unidad_aprendizaje"] ?>"
-                    required
-                  >
-                    <option disabled selected>Selecciona una unidad</option>
-                  </select>
-                  <label for="unidadAprendizaje">Unidad de aprendizaje</label>
-                </div>
-                <button
-                  type="button"
-                  class="btn btn-info-circle btn-white"
-                  data-bs-toggle="modal"
-                  data-bs-target="#modalUnidades"
-                >
-                  ⓘ
-                </button>
+                <p>
+                  <strong>Academia:</strong>
+                  <?= $usuario["academia"] ?>
+                </p>
               </div>
               <div class="col-md-6">
-                <div class="form-floating">
-                  <select
-                    id="horario"
-                    name="horario"
-                    class="form-select form-control-dark"
-                    value="<?= $usuario["horario"] ?>"
-                    disabled
-                  >
-                    <option disabled selected>Selecciona</option>
-                    <option value="matutino">Matutino</option>
-                    <option value="vespertino">Vespertino</option>
-                  </select>
-                  <label for="horario">Horario preferente</label>
-                </div>
+                <p>
+                  <strong>Unidad de Aprendizaje:</strong>
+                  <?= $usuario["unidad_aprendizaje"] ?>
+                </p>
               </div>
               <div class="col-md-6">
-                <div class="form-floating">
-                  <input
-                    type="text"
-                    id="nombreProyecto"
-                    name="nombreProyecto"
-                    class="form-control form-control-dark"
-                    placeholder="Nombre del proyecto"
-                    value="<?= $usuario["nombre_proyecto"] ?>"
-                    disabled
-                  />
-                  <label for="nombreProyecto">Nombre del proyecto</label>
-                </div>
+                <p>
+                  <strong>Horario preferente:</strong>
+                  <?= $usuario["horario"] ?>
+                </p>
               </div>
               <div class="col-md-6">
-                <div class="form-floating">
-                  <input
-                    type="text"
-                    id="nombreEquipo"
-                    name="nombreEquipo"
-                    class="form-control form-control-dark"
-                    placeholder="Nombre del equipo"
-                    value="<?= $usuario["nombre_equipo"] ?>"
-                    disabled
-                  />
-                  <label for="nombreEquipo">Nombre del equipo</label>
-                </div>
+                <p>
+                  <strong>Nombre del Proyecto:</strong>
+                  <?= $usuario["nombre_proyecto"] ?>
+                </p>
+              </div>
+              <div class="col-md-6">
+                <p>
+                  <strong>Nombre del Equipo:</strong>
+                  <?= $usuario["nombre_equipo"] ?>
+                </p>
               </div>
             </div>
           </div>
@@ -442,46 +226,22 @@ $conexion->close();
             <h5 class="text-hi5-gold mb-4">Datos asignados</h5>
             <div class="row g-3">
               <div class="col-md-4">
-                <div class="form-floating">
-                  <input
-                    type="text"
-                    id="salon"
-                    name="salon"
-                    class="form-control form-control-dark"
-                    placeholder="Salón asignado"
-                    value="<?= $usuario["salon"] ?? "Pendiente" ?>"
-                    disabled
-                  />
-                  <label for="salon">Salón asignado</label>
-                </div>
+                <p>
+                  <strong>Salón:</strong>
+                  <?= $usuario["salon"] ?? "Pendiente" ?>
+                </p>
               </div>
               <div class="col-md-4">
-                <div class="form-floating">
-                  <input
-                    type="text"
-                    id="hora"
-                    name="hora"
-                    class="form-control form-control-dark"
-                    placeholder="Hora de exposición"
-                    value="<?= $usuario["hora_expo"] ?? "Pendiente" ?>"
-                    disabled
-                  />
-                  <label for="hora">Hora de exposición</label>
-                </div>
+                <p>
+                  <strong>Hora de exposición:</strong>
+                  <?= $usuario["hora_expo"] ?? "Pendiente" ?>
+                </p>
               </div>
               <div class="col-md-4">
-                <div class="form-floating">
-                  <input
-                    type="date"
-                    id="fecha"
-                    name="fecha"
-                    class="form-control form-control-dark"
-                    placeholder="Fecha de exposición"
-                    value="<?= $usuario["fecha_expo"] ?? "Pendiente" ?>"
-                    disabled
-                  />
-                  <label for="fecha">Fecha de exposición</label>
-                </div>
+                <p>
+                  <strong>Fecha de exposición:</strong>
+                  <?= $usuario["fecha_expo"] ?? "Pendiente" ?>
+                </p>
               </div>
             </div>
           </div>
@@ -494,24 +254,16 @@ $conexion->close();
             <h5 class="text-hi5-gold mb-4">Estado administrativo</h5>
             <div class="row g-3">
               <div class="col-md-6">
-                <label class="form-label">¿Puede descargar acuse?</label>
-                <input
-                  type="text"
-                  class="form-control form-control-dark"
-                  id="acuse"
-                  value="<?= isset($usuario["puede_descargar_acuse"]) && $usuario["puede_descargar_acuse"] ? "Sí" : "No" ?>"
-                  disabled
-                />
+                <p>
+                  <strong>¿Puede descargar acuse?:</strong>
+                  <?= isset($usuario["puede_descargar_acuse"]) && $usuario["puede_descargar_acuse"] ? "Sí" : "No" ?>
+                </p>
               </div>
               <div class="col-md-6">
-                <label class="form-label">¿Es ganador?</label>
-                <input
-                  type="text"
-                  class="form-control form-control-dark"
-                  id="ganador"
-                  value="<?= isset($usuario["ganador"]) && $usuario["ganador"] ? "Sí" : "No" ?>"
-                  disabled
-                />
+                <p id="valorGanador">
+                  <strong>¿Es ganador?:</strong>
+                  <?= isset($usuario["ganador"]) && $usuario["ganador"] ? "Sí" : "No" ?>
+                </p>
               </div>
             </div>
           </div>
@@ -547,7 +299,6 @@ $conexion->close();
             >
               Descargar Registro
             </a>
-
           </div>
         </form>
       </div>
@@ -586,129 +337,6 @@ $conexion->close();
         </div>
       </div>
     </footer>
-
-    <!-- Modal de Academias y UA -->
-    <div
-      class="modal fade"
-      id="modalUnidades"
-      tabindex="-1"
-      aria-labelledby="modalUnidadesLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div
-          class="modal-content bg-hi5-medium text-white modal-content-ajustada"
-        >
-          <div class="modal-header border-0">
-            <h5 class="modal-title" id="modalUnidadesLabel">
-              Unidades de Aprendizaje por Academia
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-              aria-label="Cerrar"
-            ></button>
-          </div>
-          <div class="modal-body p-3 d-flex flex-column align-items-center">
-            <p class="text-center mb-3">
-              Para una mejor orientación, consulta las academias y las unidades
-              de aprendizaje disponibles en las siguientes diapositivas.
-            </p>
-            <div
-              id="carruselUA"
-              class="carousel slide carrusel-ajustado"
-              data-bs-ride="carousel"
-            >
-              <div class="carousel-inner rounded-3 shadow">
-                <div class="carousel-item active text-center">
-                  <img
-                    src="../imgs/academias1.jpg"
-                    class="img-fluid d-block mx-auto img-carrusel"
-                    alt="Academias UA 1"
-                  />
-                </div>
-                <div class="carousel-item text-center">
-                  <img
-                    src="../imgs/academias2.jpg"
-                    class="img-fluid d-block mx-auto img-carrusel"
-                    alt="Academias UA 2"
-                  />
-                </div>
-              </div>
-              <button
-                class="carousel-control-prev"
-                type="button"
-                data-bs-target="#carruselUA"
-                data-bs-slide="prev"
-              >
-                <span
-                  class="carousel-control-prev-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Anterior</span>
-              </button>
-              <button
-                class="carousel-control-next"
-                type="button"
-                data-bs-target="#carruselUA"
-                data-bs-slide="next"
-              >
-                <span
-                  class="carousel-control-next-icon"
-                  aria-hidden="true"
-                ></span>
-                <span class="visually-hidden">Siguiente</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--MODAL DE CONFIRMACIÓN-->
-    <div
-      class="modal fade"
-      id="modalConfirmarEliminar"
-      tabindex="-1"
-      aria-labelledby="modalConfirmarEliminarLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content bg-hi5-dark text-white">
-          <div class="modal-header border-0">
-            <h5 class="modal-title" id="modalConfirmarEliminarLabel">
-              ¿Estás seguro?
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-              aria-label="Cerrar"
-            ></button>
-          </div>
-          <div class="modal-body">
-            Esta acción eliminará tu cuenta permanentemente. ¿Deseas continuar?
-          </div>
-          <div class="modal-footer border-0">
-            <button
-              type="button"
-              class="btn btn-outline-light rounded-pill"
-              data-bs-dismiss="modal"
-            >
-              Cancelar
-            </button>
-            <button
-              type="button"
-              class="btn btn-danger rounded-pill"
-              id="btnConfirmarEliminar"
-            >
-              Sí, eliminar
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
