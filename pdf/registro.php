@@ -36,7 +36,7 @@ class PDF extends FPDF {
     function Footer() {
         $this->SetY(-20);
         $this->SetFont('helvetica', 'I', 10);
-        $this->Cell(0, 10, 'Página ' . $this->PageNo() . '/{nb}', 0, 0, 'C');
+        $this->Cell(0, 10, utf8_decode('Página ') . $this->PageNo() . '/{nb}', 0, 0, 'C');
     }
 }
 
@@ -45,28 +45,28 @@ $pdf = new PDF();
 $pdf->AliasNBPages();
 $pdf->AddPage();
 $pdf->SetFont('helvetica', 'B', 16);
-$pdf->Cell(0, 10, 'Datos del Participante', 0, 1, 'C');
+$pdf->Cell(0, 10, utf8_decode('Datos del Participante'), 0, 1, 'C');
 $pdf->Ln(10);
 
 // Mostrar datos
 $pdf->SetFont('helvetica', '', 12);
-$pdf->Cell(50, 10, 'Boleta:', 0, 0);
-$pdf->Cell(0, 10, $participante['boleta'], 0, 1);
+$pdf->Cell(50, 10, utf8_decode('Boleta:'), 0, 0);
+$pdf->Cell(0, 10, utf8_decode($participante['boleta']), 0, 1);
 
-$pdf->Cell(50, 10, 'Nombre:', 0, 0);
-$pdf->Cell(0, 10, $participante['nombre'], 0, 1);
+$pdf->Cell(50, 10, utf8_decode('Nombre:'), 0, 0);
+$pdf->Cell(0, 10, utf8_decode($participante['nombre']), 0, 1);
 
-$pdf->Cell(50, 10, 'Apellido Paterno:', 0, 0);
-$pdf->Cell(0, 10, $participante['ap_paterno'], 0, 1);
+$pdf->Cell(50, 10, utf8_decode('Apellido Paterno:'), 0, 0);
+$pdf->Cell(0, 10, utf8_decode($participante['ap_paterno']), 0, 1);
 
-$pdf->Cell(50, 10, 'Apellido Materno:', 0, 0);
-$pdf->Cell(0, 10, $participante['ap_materno'], 0, 1);
+$pdf->Cell(50, 10, utf8_decode('Apellido Materno:'), 0, 0);
+$pdf->Cell(0, 10, utf8_decode($participante['ap_materno']), 0, 1);
 
-$pdf->Cell(50, 10, 'Correo:', 0, 0);
-$pdf->Cell(0, 10, $participante['correo'], 0, 1);
+$pdf->Cell(50, 10, utf8_decode('Correo:'), 0, 0);
+$pdf->Cell(0, 10, utf8_decode($participante['correo']), 0, 1);
 
-$pdf->Cell(50, 10, 'Teléfono:', 0, 0);
-$pdf->Cell(0, 10, $participante['telefono'], 0, 1);
+$pdf->Cell(50, 10, utf8_decode('Teléfono:'), 0, 0);
+$pdf->Cell(0, 10, utf8_decode($participante['telefono']), 0, 1);
 
 $pdf->Output();
 ?>

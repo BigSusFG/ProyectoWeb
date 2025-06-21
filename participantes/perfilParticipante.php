@@ -539,6 +539,15 @@ $conexion->close();
             >
               Eliminar cuenta
             </button>
+            <a
+              href="../pdf/registro.php"
+              class="btn btn-hi5-gold rounded-pill px-4"
+              id="btnDescargar"
+              target="_blank"
+            >
+              Descargar Registro
+            </a>
+
           </div>
         </form>
       </div>
