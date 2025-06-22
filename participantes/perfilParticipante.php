@@ -41,7 +41,7 @@ $conexion->close();
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-md fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="principal.html">✋Hi-5</a>
+      <a class="navbar-brand" href="../html/principal.html">✋Hi-5</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav"
         aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -49,16 +49,16 @@ $conexion->close();
       <div class="collapse navbar-collapse justify-content-between" id="menuNav">
         <ul class="navbar-nav me-auto mb-2 mb-md-0">
           <li class="nav-item">
-            <a class="nav-link active" href="principal.html">Inicio</a>
+            <a class="nav-link active" href="../html/principal.html">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="registro.html">Registro</a>
+            <a class="nav-link" href="../html/registro.html">Registro</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="inicioSesionAdmin.html">Admin</a>
+            <a class="nav-link" href="../html/inicioSesionAdmin.html">Admin</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="inicioSesionParticipantes.html">Participantes</a>
+            <a class="nav-link" href="../html/inicioSesionParticipantes.html">Participantes</a>
           </li>
         </ul>
         <div class="d-flex gap-2">
