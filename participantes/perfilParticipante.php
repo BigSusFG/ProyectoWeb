@@ -62,7 +62,9 @@ $conexion->close();
           </li>
         </ul>
         <div class="d-flex gap-2">
-          <a class="btn btn-hi5-gold px-4 rounded-pill" href="registro.html">Registrarse</a>
+          <a href="../participantes/cerrarSesion.php" class="btn btn-danger rounded-pill px-4">
+            Cerrar sesión
+          </a>
         </div>
       </div>
     </div>
@@ -193,9 +195,6 @@ $conexion->close();
 
         <!-- BOTÓNES -->
         <div class="col-12 d-flex justify-content-end gap-3 mt-4">
-          <a href="../participantes/cerrarSesion.php" class="btn btn-outline-light rounded-pill px-4">
-            Cerrar sesión
-          </a>
           <a href="../pdf/registro.php" class="btn btn-hi5-gold rounded-pill px-4 d-none" id="btnDescargar"
             target="_blank">
             Descargar Registro
