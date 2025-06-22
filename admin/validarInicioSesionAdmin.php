@@ -13,22 +13,24 @@ if (!$conexion) {
 }
 
 // Validar campos del formulario
-if (!empty($_POST["loginUsuario"]) && !empty($_POST["loginPass"])) {
-    $usuario = $_POST["loginUsuario"];
+if (!empty($_POST["logCorreo"]) && !empty($_POST["loginPass"])) {
+    $correo = $_POST["logCorreo"];
     $contrasena = $_POST["loginPass"];
 
-    // Buscar al admin por usuario
+    // Buscar al admin por usuario (correo)
     $sql = "SELECT * FROM admin WHERE usuario = ?";
     $stmt = mysqli_prepare($conexion, $sql);
-    mysqli_stmt_bind_param($stmt, "s", $usuario);
+    mysqli_stmt_bind_param($stmt, "s", $correo);
     mysqli_stmt_execute($stmt);
     $resultado = mysqli_stmt_get_result($stmt);
 
     if ($admin = mysqli_fetch_assoc($resultado)) {
+        // Verificar contraseña con hash
         if (password_verify($contrasena, $admin["contrasena"])) {
+            $_SESSION["admin"] = $admin["usuario"];
             $_SESSION["admin_id"] = $admin["id"];
-            $_SESSION["admin_usuario"] = $admin["usuario"];
-            header("Location: paginaAdmin.php"); // Redirigir al panel de administración
+
+            header("Location: ../admin/paginaAdmin.php");
             exit();
         } else {
             echo '<script>
