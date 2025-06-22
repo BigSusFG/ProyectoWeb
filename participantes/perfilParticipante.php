@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION["boleta"])) {
-  header("Location: principal.html");
+  header("Location: ../html/principal.html"); // Redirige al inicio
   exit();
 }
 
