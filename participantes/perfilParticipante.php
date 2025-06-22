@@ -2,7 +2,7 @@
 session_start();
 
 if (!isset($_SESSION["boleta"])) {
-  echo "<h2>Acceso denegado. Inicia sesión.</h2>";
+  header("Location: principal.html");
   exit();
 }
 
