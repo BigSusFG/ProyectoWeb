@@ -195,7 +195,7 @@ $conexion->close();
 
         <!-- BOTÓNES -->
         <div class="col-12 d-flex justify-content-end gap-3 mt-4">
-          <a href="../pdf/registro.php" class="btn btn-hi5-gold rounded-pill px-4 d-none" id="btnDescargar"
+          <a href="../pdf/registro.php" class="btn btn-hi5-gold rounded-pill px-4" id="btnDescargar"
             target="_blank">
             Descargar Registro
           </a>
