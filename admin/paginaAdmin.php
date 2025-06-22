@@ -3,7 +3,7 @@ session_start();
 
 // Verificar si hay sesión de administrador
 if (!isset($_SESSION["admin"])) {
-  header("Location: ../html/principal.html"); // Redirige si no hay sesión
+  header("Location: ../html/principal.html");
   exit();
 }
 
@@ -23,59 +23,83 @@ $resultadoAdmin = $stmtAdmin->get_result();
 $admin = $resultadoAdmin->fetch_assoc();
 $stmtAdmin->close();
 
+// Definir los campos de la tabla (también usados para actualizar)
+$camposTabla = [
+  'boleta',
+  'nombre',
+  'ap_paterno',
+  'ap_materno',
+  'genero',
+  'curp',
+  'telefono',
+  'semestre',
+  'carrera',
+  'correo',
+  'contrasena',
+  'academia',
+  'unidad_aprendizaje',
+  'horario',
+  'nombre_proyecto',
+  'nombre_equipo',
+  'fecha_registro',
+  'salon',
+  'fecha_expo',
+  'hora_expo',
+  'puede_descargar_acuse',
+  'ganador'
+];
+
 // Operaciones POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Insertar
-  if (isset($_POST['insertar'])) {
-    $campos = [
-      'boleta',
-      'nombre',
-      'ap_paterno',
-      'ap_materno',
-      'genero',
-      'curp',
-      'telefono',
-      'semestre',
-      'carrera',
-      'correo',
-      'contrasena',
-      'academia',
-      'unidad_aprendizaje',
-      'horario',
-      'nombre_proyecto',
-      'nombre_equipo',
-      'fecha_registro',
-      'salon',
-      'fecha_expo',
-      'hora_expo',
-      'puede_descargar_acuse'
-    ];
 
+  // Insertar nuevo participante
+  if (isset($_POST['insertar'])) {
     $valores = [];
-    foreach ($campos as $campo) {
-      $valores[$campo] = mysqli_real_escape_string($conexion, $_POST[$campo]);
+    foreach ($camposTabla as $campo) {
+      if ($campo !== 'ganador') {
+        $valores[$campo] = mysqli_real_escape_string($conexion, $_POST[$campo] ?? '');
+      }
     }
 
     $sqlInsert = "INSERT INTO participantes (
-            boleta, nombre, ap_paterno, ap_materno, genero, curp, telefono,
-            semestre, carrera, correo, contrasena, academia, unidad_aprendizaje,
-            horario, nombre_proyecto, nombre_equipo, fecha_registro, salon,
-            fecha_expo, hora_expo, puede_descargar_acuse, ganador
-        ) VALUES (
-            '{$valores['boleta']}', '{$valores['nombre']}', '{$valores['ap_paterno']}',
-            '{$valores['ap_materno']}', '{$valores['genero']}', '{$valores['curp']}',
-            '{$valores['telefono']}', '{$valores['semestre']}', '{$valores['carrera']}',
-            '{$valores['correo']}', '{$valores['contrasena']}', '{$valores['academia']}',
-            '{$valores['unidad_aprendizaje']}', '{$valores['horario']}',
-            '{$valores['nombre_proyecto']}', '{$valores['nombre_equipo']}',
-            '{$valores['fecha_registro']}', '{$valores['salon']}',
-            '{$valores['fecha_expo']}', '{$valores['hora_expo']}',
-            '{$valores['puede_descargar_acuse']}', 0
-        )";
+      boleta, nombre, ap_paterno, ap_materno, genero, curp, telefono,
+      semestre, carrera, correo, contrasena, academia, unidad_aprendizaje,
+      horario, nombre_proyecto, nombre_equipo, fecha_registro, salon,
+      fecha_expo, hora_expo, puede_descargar_acuse, ganador
+    ) VALUES (
+      '{$valores['boleta']}', '{$valores['nombre']}', '{$valores['ap_paterno']}',
+      '{$valores['ap_materno']}', '{$valores['genero']}', '{$valores['curp']}',
+      '{$valores['telefono']}', '{$valores['semestre']}', '{$valores['carrera']}',
+      '{$valores['correo']}', '{$valores['contrasena']}', '{$valores['academia']}',
+      '{$valores['unidad_aprendizaje']}', '{$valores['horario']}',
+      '{$valores['nombre_proyecto']}', '{$valores['nombre_equipo']}',
+      '{$valores['fecha_registro']}', '{$valores['salon']}',
+      '{$valores['fecha_expo']}', '{$valores['hora_expo']}',
+      '{$valores['puede_descargar_acuse']}', 0
+    )";
+
     mysqli_query($conexion, $sqlInsert);
   }
 
-  // Marcar ganadores
+  // Actualizar participante individual
+  if (isset($_POST['actualizar']) && isset($_POST['boleta'])) {
+    $boleta = mysqli_real_escape_string($conexion, $_POST['boleta']);
+    $camposActualizar = array_diff($camposTabla, ['boleta', 'ganador']);
+    $updates = [];
+
+    foreach ($camposActualizar as $campo) {
+      $valor = mysqli_real_escape_string($conexion, $_POST[$campo] ?? '');
+      $updates[] = "$campo = '$valor'";
+    }
+
+    $ganador = isset($_POST['ganador']) ? 1 : 0;
+    $updates[] = "ganador = $ganador";
+
+    $sqlUpdate = "UPDATE participantes SET " . implode(", ", $updates) . " WHERE boleta = '$boleta'";
+    mysqli_query($conexion, $sqlUpdate);
+  }
+
+  // Marcar ganadores múltiples (modo tabla general)
   if (isset($_POST['guardar_ganadores'])) {
     mysqli_query($conexion, "UPDATE participantes SET ganador = 0");
     if (!empty($_POST['ganadores'])) {
@@ -86,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
   }
 
-  // Eliminar
+  // Eliminar participante
   if (isset($_POST['eliminar'])) {
     $boleta = mysqli_real_escape_string($conexion, $_POST['eliminar']);
     mysqli_query($conexion, "DELETE FROM participantes WHERE boleta = '$boleta'");
@@ -208,27 +232,32 @@ $resultado = mysqli_query($conexion, $sql);
                     </tr>
                   </thead>
                   <tbody>
-                    <?php while ($fila = mysqli_fetch_assoc($resultado)): ?>
-                      <tr>
-                        <?php foreach ($camposTabla as $campo): ?>
-                          <td><?= htmlspecialchars($fila[$campo]) ?></td>
-                        <?php endforeach; ?>
-                        <td>
-                          <div class="d-flex gap-2">
-                            <div class="form-check form-switch">
-                              <input class="form-check-input" type="checkbox" name="ganadores[]"
-                                value="<?= $fila['boleta'] ?>" <?= $fila['ganador'] == 1 ? 'checked' : '' ?>>
-                            </div>
-                            <form method="POST" style="display:inline;"
-                              onsubmit="return confirm('¿Eliminar participante?');">
-                              <input type="hidden" name="eliminar" value="<?= $fila['boleta'] ?>">
-                              <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
-                            </form>
-                          </div>
-                        </td>
-                      </tr>
-                    <?php endwhile; ?>
-                  </tbody>
+  <?php while ($fila = mysqli_fetch_assoc($resultado)): ?>
+    <tr>
+      <form method="POST" class="align-middle">
+        <input type="hidden" name="boleta" value="<?= htmlspecialchars($fila['boleta']) ?>">
+        <?php foreach ($camposTabla as $campo): ?>
+          <?php if ($campo === 'boleta'): ?>
+            <td><input type="text" class="form-control-plaintext text-white" readonly value="<?= htmlspecialchars($fila[$campo]) ?>"></td>
+          <?php elseif ($campo === 'ganador'): ?>
+            <td class="text-center">
+              <input type="checkbox" name="ganador" value="1" <?= $fila['ganador'] ? 'checked' : '' ?>>
+            </td>
+          <?php else: ?>
+            <td><input type="text" name="<?= $campo ?>" class="form-control form-control-sm bg-dark text-white" value="<?= htmlspecialchars($fila[$campo]) ?>"></td>
+          <?php endif; ?>
+        <?php endforeach; ?>
+        <td>
+          <div class="d-flex gap-2">
+            <button type="submit" name="actualizar" class="btn btn-sm btn-success">Guardar</button>
+            <button type="submit" name="eliminar" value="<?= $fila['boleta'] ?>" class="btn btn-sm btn-danger" onclick="return confirm('¿Eliminar participante?');">Eliminar</button>
+          </div>
+        </td>
+      </form>
+    </tr>
+  <?php endwhile; ?>
+</tbody>
+
               </table>
             </div>
             <div class="d-flex justify-content-end gap-2 mt-3">

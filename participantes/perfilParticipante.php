@@ -174,12 +174,8 @@ $conexion->close();
 
         <!-- ESTADO ADMINISTRATIVO -->
         <div id="seccionEstadoAdmin" class="col-12 bg-hi5-medium p-4 rounded-4 shadow">
-          <h5 class="text-hi5-gold mb-4">Estado administrativo</h5>
+          <h5 class="text-hi5-gold mb-4">¡Felicidades, es un ganador!, puede descargar su diploma</h5>
           <div class="row g-3">
-            <div class="col-md-6">
-              <div class="form-control form-control-dark"><strong>¿Puede descargar acuse?:</strong>
-                <?= isset($usuario["puede_descargar_acuse"]) && $usuario["puede_descargar_acuse"] ? "Sí" : "No" ?></div>
-            </div>
             <div class="col-md-6">
               <div id="valorGanador" class="form-control form-control-dark"><strong>¿Es ganador?:</strong>
                 <?= isset($usuario["ganador"]) && $usuario["ganador"] ? "Sí" : "No" ?></div>
