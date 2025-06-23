@@ -104,7 +104,8 @@ $stmt->bind_param(
 // Guardar en la base de datos
 if ($stmt->execute()) {
     if ($isAdmin) {
-        echo "ok:registro_admin";
+        header("Location: ../admin/paginaAdmin.php"); // o la ruta relativa correcta
+        exit();
     } else {
         $_SESSION["boleta"] = $boleta;
         header("Location: perfilParticipante.php");
