@@ -562,6 +562,7 @@ $resultado = mysqli_query($conexion, $sql);
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"></script>
   <script src="../js/selectorDeUA.js"></script>
+  <script src="../js/validacionesRegistro.js"></script>
 </body>
 
 </html>

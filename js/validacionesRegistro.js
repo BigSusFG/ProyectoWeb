@@ -25,119 +25,96 @@ document.getElementById("formRegistro").addEventListener("submit", function (eve
   const correoRegex = /^[a-z0-9]+@alumno\.ipn\.mx$/;
   const contrasenaRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
 
-   // Validaciones
   if (!boletaRegex.test(boleta)) return alert("Número de boleta inválido");
-  if (!nombreRegex.test(nombre)) return alert("Nombre inválido, sólo letras");
-  if (!nombreRegex.test(apPat)) return alert("Apellido paterno inválido, sólo letras");
-  if (!nombreRegex.test(apMat)) return alert("Apellido materno inválido, sólo letras");
+  if (!nombreRegex.test(nombre)) return alert("Nombre inválido");
+  if (!nombreRegex.test(apPat)) return alert("Apellido paterno inválido");
+  if (!nombreRegex.test(apMat)) return alert("Apellido materno inválido");
   if (!genero) return alert("Selecciona un género");
   if (!curpRegex.test(curp)) return alert("CURP inválido");
-  if (!telefonoRegex.test(telefono)) return alert("Teléfono inválido, deben ser 10 dígitos");
+  if (!telefonoRegex.test(telefono)) return alert("Teléfono inválido");
   if (semestre === "Selecciona") return alert("Selecciona un semestre");
   if (carrera === "Selecciona") return alert("Selecciona una carrera");
   if (academia === "Selecciona") return alert("Selecciona una academia");
-  if (unidadAprendizaje === "Selecciona una unidad") return alert("Selecciona una unidad de aprendizaje");
+  if (unidadAprendizaje === "Selecciona una unidad") return alert("Selecciona una unidad");
   if (horario === "Selecciona") return alert("Selecciona un horario");
-  if (nombreProyecto === "") return alert("Ingresa el nombre del proyecto");
-  if (nombreEquipo === "") return alert("Ingresa el nombre del equipo");
+  if (!nombreProyecto) return alert("Ingresa el nombre del proyecto");
+  if (!nombreEquipo) return alert("Ingresa el nombre del equipo");
   if (!correoRegex.test(correo)) return alert("Correo institucional inválido");
-  if (!contrasenaRegex.test(contrasena)) {
-    return alert("Contraseña inválida. Debe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial.");
-  }
+  if (!contrasenaRegex.test(contrasena)) return alert("Contraseña insegura");
 
-// Saludo
-document.getElementById("saludoConfirmacion").textContent =
-  `Hola ${nombre}, verifica que los datos que ingresaste sean correctos:`;
+  // Mostrar resumen
+  document.getElementById("saludoConfirmacion").textContent = `Hola ${nombre}, verifica que los datos que ingresaste sean correctos:`;
+  const lista = document.getElementById("listaDatosConfirmacion");
+  lista.innerHTML = `
+    <li class="bg-hi5-light box-seccion">
+      <strong class="d-block mb-2">Datos personales</strong>
+      <ul class="mb-0 list-unstyled">
+        <li><strong>No. de Boleta:</strong> ${boleta}</li>
+        <li><strong>CURP:</strong> ${curp}</li>
+        <li><strong>Género:</strong> ${genero.value}</li>
+        <li><strong>Teléfono:</strong> ${telefono}</li>
+        <li><strong>Semestre:</strong> ${semestre}</li>
+        <li><strong>Carrera:</strong> ${carrera}</li>
+      </ul>
+    </li>
+    <li class="bg-hi5-light box-seccion">
+      <strong class="d-block mb-2">Datos de cuenta</strong>
+      <ul class="mb-0 list-unstyled">
+        <li><strong>Correo:</strong> ${correo}</li>
+      </ul>
+    </li>
+    <li class="bg-hi5-light box-seccion">
+      <strong class="d-block mb-2">Datos del concurso</strong>
+      <ul class="mb-0 list-unstyled">
+        <li><strong>Academia:</strong> ${academia}</li>
+        <li><strong>Unidad de Aprendizaje:</strong> ${unidadAprendizaje}</li>
+        <li><strong>Horario:</strong> ${horario}</li>
+        <li><strong>Nombre del Proyecto:</strong> ${nombreProyecto}</li>
+        <li><strong>Nombre del Equipo:</strong> ${nombreEquipo}</li>
+      </ul>
+    </li>`;
 
-// Crear la lista de datos
-const lista = document.getElementById("listaDatosConfirmacion");
-lista.innerHTML = `
-  <li class="bg-hi5-light box-seccion">
-    <strong class="d-block mb-2">Datos personales</strong>
-    <ul class="mb-0 list-unstyled">
-      <li><strong>No. de Boleta:</strong> ${boleta}</li>
-      <li><strong>CURP:</strong> ${curp}</li>
-      <li><strong>Género:</strong> ${genero.value}</li>
-      <li><strong>Teléfono:</strong> ${telefono}</li>
-      <li><strong>Semestre:</strong> ${semestre}</li>
-      <li><strong>Carrera:</strong> ${carrera}</li>
-    </ul>
-  </li>
+  const modal = new bootstrap.Modal(document.getElementById("modalConfirmacion"));
+  modal.show();
 
-  <li class="bg-hi5-light box-seccion">
-    <strong class="d-block mb-2">Datos de cuenta</strong>
-    <ul class="mb-0 list-unstyled">
-      <li><strong>Correo:</strong> ${correo}</li>
-    </ul>
-  </li>
+  document.getElementById("btnAceptar").onclick = function () {
+    modal.hide();
 
-  <li class="bg-hi5-light box-seccion">
-    <strong class="d-block mb-2">Datos del concurso</strong>
-    <ul class="mb-0 list-unstyled">
-      <li><strong>Academia:</strong> ${academia}</li>
-      <li><strong>Unidad de Aprendizaje:</strong> ${unidadAprendizaje}</li>
-      <li><strong>Horario:</strong> ${horario}</li>
-      <li><strong>Nombre del Proyecto:</strong> ${nombreProyecto}</li>
-      <li><strong>Nombre del Equipo:</strong> ${nombreEquipo}</li>
-    </ul>
-  </li>
-`;
+    const datos = {
+      boleta, nombre, apPat, apMat, genero: genero.value, curp, telefono,
+      semestre, carrera, academia, unidadAprendizaje, horario,
+      nombreProyecto, nombreEquipo, correo, contrasena
+    };
 
-// Mostrar el modal
-const modal = new bootstrap.Modal(document.getElementById("modalConfirmacion"));
-modal.show();
+    fetch("../participantes/registrarParticipante.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(datos),
+    })
+      .then((response) => {
+        if (response.redirected) {
+          window.location.href = response.url;
+        } else {
+          return response.text();
+        }
+      })
+      .then((data) => {
+        if (!data) return;
 
-// Al hacer clic en aceptar
-document.getElementById("btnAceptar").onclick = function () {
-  modal.hide();
-
-  // Crear un objeto con los datos
-  const datos = {
-    boleta,
-    nombre,
-    apPat,
-    apMat,
-    genero: genero.value,
-    curp,
-    telefono,
-    semestre,
-    carrera,
-    academia,
-    unidadAprendizaje,
-    horario,
-    nombreProyecto,
-    nombreEquipo,
-    correo,
-    contrasena,
+        if (data.includes("error:boleta_duplicada")) {
+          alert("Ya existe un registro con esta boleta.");
+        } else if (data.includes("error:no_hay_espacio")) {
+          alert("Ya no hay espacios disponibles.");
+        } else if (data.includes("ok:registro_admin")) {
+          alert("Participante registrado correctamente.");
+          document.getElementById("formRegistro").reset();
+        } else if (!data.startsWith("http")) {
+          alert("Respuesta del servidor:\n" + data);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        alert("Error de conexión o del servidor.");
+      });
   };
-
-  // Enviar al servidor
-  fetch("../participantes/registrarParticipante.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: new URLSearchParams(datos),
-  })
-    .then((response) => {
-      if (response.redirected) {
-        window.location.href = response.url;
-      } else {
-        return response.text();
-      }
-    })
-    .then((data) => {
-      if (data && data.includes("error:boleta_duplicada")) {
-        alert("Ya existe un registro con esta boleta. Verifica tus datos.");
-      } else if (data && data.includes("error:no_hay_espacio")) {
-        alert("Ya no hay espacios disponibles para exponer el 20 de junio.");
-      } else if (data && !data.startsWith("http")) {
-        alert("Respuesta del servidor:\n" + data);
-      }
-    })
-    .catch((error) => {
-      alert("Ocurrió un error al registrar. Revisa tu conexión o el servidor.");
-      console.error(error);
-    });
-};
 });

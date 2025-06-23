@@ -101,11 +101,13 @@ $stmt->bind_param(
 
 // Guardar en la base de datos
 if ($stmt->execute()) {
-    $_SESSION["boleta"] = $boleta;
-    header("Location: perfilParticipante.php");
-    exit();
-} else {
-    echo "Error al registrar: " . $stmt->error;
+    if (isset($_SESSION["admin"])) {
+        echo "ok:registro_admin";
+    } else {
+        $_SESSION["boleta"] = $boleta;
+        header("Location: perfilParticipante.php");
+        exit();
+    }
 }
 
 $stmt->close();
