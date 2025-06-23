@@ -45,79 +45,99 @@ document.getElementById("formRegistro").addEventListener("submit", function (eve
     return alert("Contraseña inválida. Debe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial.");
   }
 
-  // Mostrar resumen
-  document.getElementById("saludoConfirmacion").textContent = `Hola ${nombre}, verifica que los datos que ingresaste sean correctos:`;
-  const lista = document.getElementById("listaDatosConfirmacion");
-  lista.innerHTML = `
-    <li class="bg-hi5-light box-seccion">
-      <strong class="d-block mb-2">Datos personales</strong>
-      <ul class="mb-0 list-unstyled">
-        <li><strong>No. de Boleta:</strong> ${boleta}</li>
-        <li><strong>CURP:</strong> ${curp}</li>
-        <li><strong>Género:</strong> ${genero.value}</li>
-        <li><strong>Teléfono:</strong> ${telefono}</li>
-        <li><strong>Semestre:</strong> ${semestre}</li>
-        <li><strong>Carrera:</strong> ${carrera}</li>
-      </ul>
-    </li>
-    <li class="bg-hi5-light box-seccion">
-      <strong class="d-block mb-2">Datos de cuenta</strong>
-      <ul class="mb-0 list-unstyled">
-        <li><strong>Correo:</strong> ${correo}</li>
-      </ul>
-    </li>
-    <li class="bg-hi5-light box-seccion">
-      <strong class="d-block mb-2">Datos del concurso</strong>
-      <ul class="mb-0 list-unstyled">
-        <li><strong>Academia:</strong> ${academia}</li>
-        <li><strong>Unidad de Aprendizaje:</strong> ${unidadAprendizaje}</li>
-        <li><strong>Horario:</strong> ${horario}</li>
-        <li><strong>Nombre del Proyecto:</strong> ${nombreProyecto}</li>
-        <li><strong>Nombre del Equipo:</strong> ${nombreEquipo}</li>
-      </ul>
-    </li>`;
+// Saludo
+document.getElementById("saludoConfirmacion").textContent =
+  `Hola ${nombre}, verifica que los datos que ingresaste sean correctos:`;
 
-  const modal = new bootstrap.Modal(document.getElementById("modalConfirmacion"));
-  modal.show();
+// Crear la lista de datos
+const lista = document.getElementById("listaDatosConfirmacion");
+lista.innerHTML = `
+  <li class="bg-hi5-light box-seccion">
+    <strong class="d-block mb-2">Datos personales</strong>
+    <ul class="mb-0 list-unstyled">
+      <li><strong>No. de Boleta:</strong> ${boleta}</li>
+      <li><strong>CURP:</strong> ${curp}</li>
+      <li><strong>Género:</strong> ${genero.value}</li>
+      <li><strong>Teléfono:</strong> ${telefono}</li>
+      <li><strong>Semestre:</strong> ${semestre}</li>
+      <li><strong>Carrera:</strong> ${carrera}</li>
+    </ul>
+  </li>
 
-  document.getElementById("btnAceptar").onclick = function () {
-    modal.hide();
+  <li class="bg-hi5-light box-seccion">
+    <strong class="d-block mb-2">Datos de cuenta</strong>
+    <ul class="mb-0 list-unstyled">
+      <li><strong>Correo:</strong> ${correo}</li>
+    </ul>
+  </li>
 
-    const datos = {
-      boleta, nombre, apPat, apMat, genero: genero.value, curp, telefono,
-      semestre, carrera, academia, unidadAprendizaje, horario,
-      nombreProyecto, nombreEquipo, correo, contrasena
-    };
+  <li class="bg-hi5-light box-seccion">
+    <strong class="d-block mb-2">Datos del concurso</strong>
+    <ul class="mb-0 list-unstyled">
+      <li><strong>Academia:</strong> ${academia}</li>
+      <li><strong>Unidad de Aprendizaje:</strong> ${unidadAprendizaje}</li>
+      <li><strong>Horario:</strong> ${horario}</li>
+      <li><strong>Nombre del Proyecto:</strong> ${nombreProyecto}</li>
+      <li><strong>Nombre del Equipo:</strong> ${nombreEquipo}</li>
+    </ul>
+  </li>
+`;
 
-    fetch("../participantes/registrarParticipante.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(datos),
-    })
-      .then((response) => {
-        if (response.redirected) {
-          window.location.href = response.url;
-        } else {
-          return response.text();
-        }
-      })
-      .then((data) => {
-        if (!data) return;
+// Mostrar el modal
+const modal = new bootstrap.Modal(document.getElementById("modalConfirmacion"));
+modal.show();
 
-        if (data.includes("error:boleta_duplicada")) {
-          alert("Ya existe un registro con esta boleta.");
-        } else if (data.includes("error:no_hay_espacio")) {
-          alert("Ya no hay espacios disponibles.");
-        } else if (data.includes("ok:registro_admin")) {
-          alert("Participante registrado correctamente.");
-          document.getElementById("formRegistro").reset();
-        } else if (!data.startsWith("http")) {
-          alert("Respuesta del servidor:\n" + data);
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-        alert("Error de conexión o del servidor.");
-      });
+// Al hacer clic en aceptar
+document.getElementById("btnAceptar").onclick = function () {
+  modal.hide();
+
+  // Crear un objeto con los datos
+  const datos = {
+    boleta,
+    nombre,
+    apPat,
+    apMat,
+    genero: genero.value,
+    curp,
+    telefono,
+    semestre,
+    carrera,
+    academia,
+    unidadAprendizaje,
+    horario,
+    nombreProyecto,
+    nombreEquipo,
+    correo,
+    contrasena,
   };
+
+  // Enviar al servidor
+  fetch("../participantes/registrarParticipante.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: new URLSearchParams(datos),
+  })
+    .then((response) => {
+      if (response.redirected) {
+        window.location.href = response.url;
+      } else {
+        return response.text();
+      }
+    })
+    .then((data) => {
+      if (data && data.includes("error:boleta_duplicada")) {
+        alert("Ya existe un registro con esta boleta. Verifica tus datos.");
+      } else if (data && data.includes("error:no_hay_espacio")) {
+        alert("Ya no hay espacios disponibles para exponer el 20 de junio.");
+      } else if (data && !data.startsWith("http")) {
+        alert("Respuesta del servidor:\n" + data);
+      }
+    })
+    .catch((error) => {
+      alert("Ocurrió un error al registrar. Revisa tu conexión o el servidor.");
+      console.error(error);
+    });
+};
 });

@@ -7,6 +7,8 @@ if ($conexion->connect_error) {
     die("Error de conexión: " . $conexion->connect_error);
 }
 
+$isAdmin = isset($_SESSION["admin"]) && strpos($_SERVER['HTTP_REFERER'] ?? '', 'paginaAdmin.php') !== false;
+
 // Captura y escapa de datos del formulario
 $boleta = $_POST["boleta"];
 $nombre = $_POST["nombre"];
@@ -101,7 +103,7 @@ $stmt->bind_param(
 
 // Guardar en la base de datos
 if ($stmt->execute()) {
-    if (isset($_SESSION["admin"])) {
+    if ($isAdmin) {
         echo "ok:registro_admin";
     } else {
         $_SESSION["boleta"] = $boleta;
@@ -109,6 +111,7 @@ if ($stmt->execute()) {
         exit();
     }
 }
+
 
 $stmt->close();
 $conexion->close();
