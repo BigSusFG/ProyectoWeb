@@ -189,7 +189,7 @@ $resultado = mysqli_query($conexion, $sql);
           <?php if (mysqli_num_rows($resultado) > 0): ?>
             <div class="table-responsive rounded-4 border border-hi5-gold">
               <table class="table table-hover tabla-hi5 text-white m-0">
-                
+
                 <!-- TABLA DE PARTICIPANTES -->
                 <form method="POST">
                   <thead class="table table-hover tabla-hi5 text-white m-0">
@@ -246,7 +246,8 @@ $resultado = mysqli_query($conexion, $sql);
                           <?php endforeach; ?>
                           <td>
                             <div class="d-flex gap-2">
-                              <button type="submit" name="actualizar" class="btn btn-sm btn-success rounded-pill">Guardar</button>
+                              <button type="submit" name="actualizar"
+                                class="btn btn-sm btn-success rounded-pill">Guardar</button>
                               <button type="submit" name="eliminar" value="<?= $fila['boleta'] ?>"
                                 class="btn btn-sm btn-danger rounded-pill"
                                 onclick="return confirm('¿Eliminar participante?');">Eliminar</button>
@@ -561,51 +562,32 @@ $resultado = mysqli_query($conexion, $sql);
 
 
   <!-- Modal de Confirmación -->
-    <div
-      class="modal fade"
-      id="modalConfirmacion"
-      tabindex="-1"
-      aria-labelledby="modalConfirmacionLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content bg-hi5-medium text-white">
-          <div class="modal-header border-0">
-            <h5 class="modal-title" id="modalConfirmacionLabel">
-              Verifica tus datos
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-              aria-label="Cerrar"
-            ></button>
-          </div>
+  <div class="modal fade" id="modalConfirmacion" tabindex="-1" aria-labelledby="modalConfirmacionLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content bg-hi5-medium text-white">
+        <div class="modal-header border-0">
+          <h5 class="modal-title" id="modalConfirmacionLabel">
+            Verifica tus datos
+          </h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+        </div>
 
-          <div class="modal-body">
-            <p id="saludoConfirmacion" class="mb-3 fw-semibold"></p>
-            <div id="listaDatosConfirmacion"></div>
-          </div>
-          <div class="modal-footer border-0 justify-content-end">
-            <button
-              type="button"
-              class="btn btn-outline-light rounded-pill"
-              id="btnModificar"
-              data-bs-dismiss="modal"
-            >
-              Modificar
-            </button>
-            <button
-              type="button"
-              class="btn btn-hi5-gold rounded-pill"
-              id="btnAceptar"
-            >
-              Aceptar
-            </button>
-          </div>
+        <div class="modal-body">
+          <p id="saludoConfirmacion" class="mb-3 fw-semibold"></p>
+          <div id="listaDatosConfirmacion"></div>
+        </div>
+        <div class="modal-footer border-0 justify-content-end">
+          <button type="button" class="btn btn-outline-light rounded-pill" id="btnModificar" data-bs-dismiss="modal">
+            Modificar
+          </button>
+          <button type="button" class="btn btn-hi5-gold rounded-pill" id="btnAceptar">
+            Aceptar
+          </button>
         </div>
       </div>
     </div>
+  </div>
 
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"

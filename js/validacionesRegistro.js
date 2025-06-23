@@ -1,3 +1,5 @@
+
+document.addEventListener("DOMContentLoaded", function () {
 document.getElementById("formRegistro").addEventListener("submit", function (evento) {
   evento.preventDefault();
 
@@ -140,4 +142,5 @@ document.getElementById("btnAceptar").onclick = function () {
       console.error(error);
     });
 };
+});
 });
