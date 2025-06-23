@@ -125,7 +125,6 @@ $sql = "SELECT * FROM participantes ORDER BY fecha_registro DESC";
 $resultado = mysqli_query($conexion, $sql);
 ?>
 
-
 <!DOCTYPE html>
 <html lang="es">
 
@@ -143,6 +142,7 @@ $resultado = mysqli_query($conexion, $sql);
 </head>
 
 <body class="bg-hi5-dark text-white pt-5">
+
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-md fixed-top">
     <div class="container-fluid">
@@ -179,25 +179,19 @@ $resultado = mysqli_query($conexion, $sql);
       <img src="../imgs/escudoESCOM.png" alt="Logo ESCOM" title="ESCOM" class="img-fluid logo-burbuja" />
     </a>
   </div>
-
   <main>
     <div class="container my-5">
+
       <!-- PARTICIPANTES -->
       <div class="card bg-hi5-medium p-4 rounded-4 shadow mb-5">
         <div class="card-body">
           <h2 class="text-hi5-gold mb-4">Participantes Registrados</h2>
-
           <?php if (mysqli_num_rows($resultado) > 0): ?>
-
             <div class="table-responsive rounded-4 border border-hi5-gold">
               <table class="table table-hover tabla-hi5 text-white m-0">
-
+                
                 <!-- TABLA DE PARTICIPANTES -->
-
-
                 <form method="POST">
-
-
                   <thead class="table table-hover tabla-hi5 text-white m-0">
                     <tr>
                       <?php
@@ -252,9 +246,9 @@ $resultado = mysqli_query($conexion, $sql);
                           <?php endforeach; ?>
                           <td>
                             <div class="d-flex gap-2">
-                              <button type="submit" name="actualizar" class="btn btn-sm btn-success">Guardar</button>
+                              <button type="submit" name="actualizar" class="btn btn-sm btn-success rounded-pill">Guardar</button>
                               <button type="submit" name="eliminar" value="<?= $fila['boleta'] ?>"
-                                class="btn btn-sm btn-danger"
+                                class="btn btn-sm btn-danger rounded-pill"
                                 onclick="return confirm('¿Eliminar participante?');">Eliminar</button>
                             </div>
                           </td>
@@ -262,18 +256,14 @@ $resultado = mysqli_query($conexion, $sql);
                       </tr>
                     <?php endwhile; ?>
                   </tbody>
-
               </table>
             </div>
             <div class="d-flex justify-content-end gap-2 mt-3">
-              <button type="submit" name="guardar_ganadores" class="btn btn-hi5-gold">Guardar
-                Ganadores</button>
               <button type="button" class="btn btn-outline-light rounded-pill" data-bs-toggle="modal"
                 data-bs-target="#modalAgregarParticipante">
                 Agregar Participante
               </button>
             </div>
-
             </form>
           </div>
         </div>
@@ -318,230 +308,218 @@ $resultado = mysqli_query($conexion, $sql);
         <div class="modal-body">
 
           <!-- FORMULARIO NUEVO PARTICIPANTE -->
-          <section class="py-5">
-            <div class="container">
-              <div class="row justify-content-center">
-                <div class="col-lg-10">
-                  <div class="bg-hi5-medium p-4 rounded-4 shadow-hi5 transition-hover">
-                    <div class="text-center mb-4">
-                      <h2 class="fw-bold text-white">Crear cuenta</h2>
-                      <p>Completa tu información para registrarte al evento</p>
-                    </div>
-                    <form id="formRegistro">
-                      <h5 class="text-start text-white mb-3">Datos personales</h5>
-                      <div class="row g-3 mb-4">
-                        <div class="col-md-6">
-                          <div class="form-floating">
-                            <input type="text" class="form-control form-control-dark" id="boleta" name="boleta"
-                              placeholder="Número de boleta" required />
-                            <label for="boleta">Número de boleta</label>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-floating">
-                            <input type="text" class="form-control form-control-dark" id="nombre" name="nombre"
-                              placeholder="Nombre" required />
-                            <label for="nombre">Nombre (s)</label>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-floating">
-                            <input type="text" class="form-control form-control-dark" id="apPat" name="apPat"
-                              placeholder="Apellido Paterno" required />
-                            <label for="apPat">Apellido Paterno</label>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-floating">
-                            <input type="text" class="form-control form-control-dark" id="apMat" name="apMat"
-                              placeholder="Apellido Materno" required />
-                            <label for="apMat">Apellido Materno</label>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-floating">
-                            <input type="text" class="form-control form-control-dark" id="curp" name="curp"
-                              placeholder="CURP" required />
-                            <label for="curp">CURP</label>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-floating">
-                            <select class="form-select form-control-dark" id="semestre" name="semestre" required>
-                              <option selected disabled>Selecciona</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                            </select>
-                            <label for="semestre">Semestre</label>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-floating">
-                            <select class="form-select form-control-dark" id="carrera" name="carrera" required>
-                              <option selected disabled>Selecciona</option>
-                              <option value="ISC">ISC</option>
-                              <option value="LCD">LCD</option>
-                              <option value="IA">IA</option>
-                            </select>
-                            <label for="carrera">Carrera</label>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-floating">
-                            <input type="text" class="form-control form-control-dark" id="telefono" name="telefono"
-                              placeholder="Teléfono" required />
-                            <label for="telefono">Teléfono</label>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-control form-control-dark bg-hi5-medium rounded-4 shadow-hi5 py-3">
-                            <label class="form-label text-white d-block mb-2">Género</label>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="genero" id="masculino"
-                                value="Masculino" required />
-                              Masculino
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="genero" id="femenino"
-                                value="Femenino" />
-                              Femenino
-                            </div>
-                            <div class="form-check form-check-inline">
-                              <input class="form-check-input" type="radio" name="genero" id="otro" value="Otro" />
-                              Otro
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <h5 class="text-start text-white mb-3 mt-4">
-                        Datos de cuenta
-                      </h5>
-                      <div class="row g-3">
-                        <div class="col-md-6">
-                          <div class="form-floating">
-                            <input type="email" class="form-control form-control-dark" id="correo" name="correo"
-                              placeholder="Correo institucional" required />
-                            <label for="correo">Correo institucional</label>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-floating">
-                            <input type="password" class="form-control form-control-dark" id="contrasena"
-                              name="contrasena" placeholder="Contraseña" required />
-                            <label for="contrasena">Contraseña</label>
-                          </div>
-                        </div>
-                      </div>
-                      <h5 class="text-start text-white mb-3 mt-4">
-                        Datos del concurso
-                      </h5>
-                      <div class="row g-3 mb-4">
-                        <div class="col-md-6">
-                          <div class="form-floating">
-                            <select class="form-select form-control-dark" id="academia" name="academia" required>
-                              <option disabled selected>Selecciona</option>
-                              <option value="Ciencia de Datos">
-                                Ciencia de Datos
-                              </option>
-                              <option value="Ciencias Básicas">
-                                Ciencias Básicas
-                              </option>
-                              <option value="Ciencias de la Computación">
-                                Ciencias de la Computación
-                              </option>
-                              <option value="Ciencias Sociales">
-                                Ciencias Sociales
-                              </option>
-                              <option value="Fundamentos de Sistemas Electrónicos">
-                                Fundamentos de Sistemas Electrónicos
-                              </option>
-                              <option value="Ingeniería de Software">
-                                Ingeniería de Software
-                              </option>
-                              <option value="Inteligencia Artificial">
-                                Inteligencia Artificial
-                              </option>
-                              <option value="Proyectos Estratégicos para la Toma de Decisiones">
-                                Proyectos Estratégicos para la Toma de Decisiones
-                              </option>
-                              <option value="Sistemas Digitales">
-                                Sistemas Digitales
-                              </option>
-                              <option value="Sistemas Distribuidos">
-                                Sistemas Distribuidos
-                              </option>
-                            </select>
-                            <label for="academia">Academia</label>
-                          </div>
-                        </div>
-                        <div class="col-md-6 d-flex align-items-center">
-                          <div class="form-floating flex-grow-1 position-relative me-2" data-bs-toggle="tooltip"
-                            data-bs-placement="top" title="Primero selecciona una academia">
-                            <select class="form-select form-control-dark" id="unidadAprendizaje"
-                              name="unidadAprendizaje" required>
-                              <option disabled selected>
-                                Selecciona una unidad
-                              </option>
-                            </select>
-                            <label for="unidadAprendizaje">Unidad de aprendizaje</label>
-                          </div>
-                          <button type="button" class="btn btn-info-circle btn-white" data-bs-toggle="modal"
-                            data-bs-target="#modalUnidades">
-                            ⓘ
-                          </button>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-floating">
-                            <select class="form-select form-control-dark" id="horario" name="horario" required>
-                              <option disabled selected>Selecciona</option>
-                              <option value="matutino">Matutino</option>
-                              <option value="vespertino">Vespertino</option>
-                            </select>
-                            <label for="horario">Horario preferente</label>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-floating">
-                            <input type="text" class="form-control form-control-dark" id="nombreProyecto"
-                              name="nombreProyecto" placeholder="Nombre del proyecto" required />
-                            <label for="nombreProyecto">Nombre del proyecto</label>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-floating">
-                            <input type="text" class="form-control form-control-dark" id="nombreEquipo"
-                              name="nombreEquipo" placeholder="Nombre del equipo" required />
-                            <label for="nombreEquipo">Nombre del equipo</label>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="d-flex gap-2 mt-4">
-                        <button type="submit" class="btn btn-hi5-gold px-4 rounded-pill">
-                          Registrarse
-                        </button>
-                        <button type="reset" class="btn btn-outline-danger px-4 rounded-pill">
-                          Borrar
-                        </button>
-                      </div>
-                    </form>
+          <div class="mb-4 text-hi5-gold">
+            <p>Completa la información para registrar un participante al evento, <b>recuerde que el horario se asigna
+                automáticamente.</b> </p>
+          </div>
+          <form id="formRegistro">
+            <h5 class="text-start text-white mb-3">Datos personales</h5>
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control form-control-dark" id="boleta" name="boleta"
+                    placeholder="Número de boleta" required />
+                  <label for="boleta">Número de boleta</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control form-control-dark" id="nombre" name="nombre"
+                    placeholder="Nombre" required />
+                  <label for="nombre">Nombre (s)</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control form-control-dark" id="apPat" name="apPat"
+                    placeholder="Apellido Paterno" required />
+                  <label for="apPat">Apellido Paterno</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control form-control-dark" id="apMat" name="apMat"
+                    placeholder="Apellido Materno" required />
+                  <label for="apMat">Apellido Materno</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control form-control-dark" id="curp" name="curp" placeholder="CURP"
+                    required />
+                  <label for="curp">CURP</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <select class="form-select form-control-dark" id="semestre" name="semestre" required>
+                    <option selected disabled>Selecciona</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                  </select>
+                  <label for="semestre">Semestre</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <select class="form-select form-control-dark" id="carrera" name="carrera" required>
+                    <option selected disabled>Selecciona</option>
+                    <option value="ISC">ISC</option>
+                    <option value="LCD">LCD</option>
+                    <option value="IA">IA</option>
+                  </select>
+                  <label for="carrera">Carrera</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control form-control-dark" id="telefono" name="telefono"
+                    placeholder="Teléfono" required />
+                  <label for="telefono">Teléfono</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-control form-control-dark bg-hi5-medium rounded-4 shadow-hi5 py-3">
+                  <label class="form-label text-white d-block mb-2">Género</label>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="genero" id="masculino" value="Masculino"
+                      required />
+                    Masculino
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="genero" id="femenino" value="Femenino" />
+                    Femenino
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="genero" id="otro" value="Otro" />
+                    Otro
                   </div>
                 </div>
               </div>
             </div>
-          </section>
+            <h5 class="text-start text-white mb-3 mt-4">
+              Datos de cuenta
+            </h5>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="email" class="form-control form-control-dark" id="correo" name="correo"
+                    placeholder="Correo institucional" required />
+                  <label for="correo">Correo institucional</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="password" class="form-control form-control-dark" id="contrasena" name="contrasena"
+                    placeholder="Contraseña" required />
+                  <label for="contrasena">Contraseña</label>
+                </div>
+              </div>
+            </div>
+            <h5 class="text-start text-white mb-3 mt-4">
+              Datos del concurso
+            </h5>
+            <div class="row g-3 mb-4">
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <select class="form-select form-control-dark" id="academia" name="academia" required>
+                    <option disabled selected>Selecciona</option>
+                    <option value="Ciencia de Datos">
+                      Ciencia de Datos
+                    </option>
+                    <option value="Ciencias Básicas">
+                      Ciencias Básicas
+                    </option>
+                    <option value="Ciencias de la Computación">
+                      Ciencias de la Computación
+                    </option>
+                    <option value="Ciencias Sociales">
+                      Ciencias Sociales
+                    </option>
+                    <option value="Fundamentos de Sistemas Electrónicos">
+                      Fundamentos de Sistemas Electrónicos
+                    </option>
+                    <option value="Ingeniería de Software">
+                      Ingeniería de Software
+                    </option>
+                    <option value="Inteligencia Artificial">
+                      Inteligencia Artificial
+                    </option>
+                    <option value="Proyectos Estratégicos para la Toma de Decisiones">
+                      Proyectos Estratégicos para la Toma de Decisiones
+                    </option>
+                    <option value="Sistemas Digitales">
+                      Sistemas Digitales
+                    </option>
+                    <option value="Sistemas Distribuidos">
+                      Sistemas Distribuidos
+                    </option>
+                  </select>
+                  <label for="academia">Academia</label>
+                </div>
+              </div>
+              <div class="col-md-6 d-flex align-items-center">
+                <div class="form-floating flex-grow-1 position-relative me-2" data-bs-toggle="tooltip"
+                  data-bs-placement="top" title="Primero selecciona una academia">
+                  <select class="form-select form-control-dark" id="unidadAprendizaje" name="unidadAprendizaje"
+                    required>
+                    <option disabled selected>
+                      Selecciona una unidad
+                    </option>
+                  </select>
+                  <label for="unidadAprendizaje">Unidad de aprendizaje</label>
+                </div>
+                <button type="button" class="btn btn-info-circle btn-white" data-bs-toggle="modal"
+                  data-bs-target="#modalUnidades">
+                  ⓘ
+                </button>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <select class="form-select form-control-dark" id="horario" name="horario" required>
+                    <option disabled selected>Selecciona</option>
+                    <option value="matutino">Matutino</option>
+                    <option value="vespertino">Vespertino</option>
+                  </select>
+                  <label for="horario">Horario preferente</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control form-control-dark" id="nombreProyecto" name="nombreProyecto"
+                    placeholder="Nombre del proyecto" required />
+                  <label for="nombreProyecto">Nombre del proyecto</label>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-floating">
+                  <input type="text" class="form-control form-control-dark" id="nombreEquipo" name="nombreEquipo"
+                    placeholder="Nombre del equipo" required />
+                  <label for="nombreEquipo">Nombre del equipo</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="d-flex gap-2 mt-4">
+              <button type="submit" class="btn btn-hi5-gold px-4 rounded-pill">
+                Registrar
+              </button>
+              <button type="reset" class="btn btn-outline-danger px-4 rounded-pill">
+                Borrar
+              </button>
+            </div>
+          </form>
 
         </div>
       </div>
     </div>
   </div>
-
 
   <!-- Modal de Academias y UA -->
   <div class="modal fade" id="modalUnidades" tabindex="-1" aria-labelledby="modalUnidadesLabel" aria-hidden="true">
