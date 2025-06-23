@@ -25,22 +25,25 @@ document.getElementById("formRegistro").addEventListener("submit", function (eve
   const correoRegex = /^[a-z0-9]+@alumno\.ipn\.mx$/;
   const contrasenaRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{6,}$/;
 
+   // Validaciones
   if (!boletaRegex.test(boleta)) return alert("Número de boleta inválido");
-  if (!nombreRegex.test(nombre)) return alert("Nombre inválido");
-  if (!nombreRegex.test(apPat)) return alert("Apellido paterno inválido");
-  if (!nombreRegex.test(apMat)) return alert("Apellido materno inválido");
+  if (!nombreRegex.test(nombre)) return alert("Nombre inválido, sólo letras");
+  if (!nombreRegex.test(apPat)) return alert("Apellido paterno inválido, sólo letras");
+  if (!nombreRegex.test(apMat)) return alert("Apellido materno inválido, sólo letras");
   if (!genero) return alert("Selecciona un género");
   if (!curpRegex.test(curp)) return alert("CURP inválido");
-  if (!telefonoRegex.test(telefono)) return alert("Teléfono inválido");
+  if (!telefonoRegex.test(telefono)) return alert("Teléfono inválido, deben ser 10 dígitos");
   if (semestre === "Selecciona") return alert("Selecciona un semestre");
   if (carrera === "Selecciona") return alert("Selecciona una carrera");
   if (academia === "Selecciona") return alert("Selecciona una academia");
-  if (unidadAprendizaje === "Selecciona una unidad") return alert("Selecciona una unidad");
+  if (unidadAprendizaje === "Selecciona una unidad") return alert("Selecciona una unidad de aprendizaje");
   if (horario === "Selecciona") return alert("Selecciona un horario");
-  if (!nombreProyecto) return alert("Ingresa el nombre del proyecto");
-  if (!nombreEquipo) return alert("Ingresa el nombre del equipo");
+  if (nombreProyecto === "") return alert("Ingresa el nombre del proyecto");
+  if (nombreEquipo === "") return alert("Ingresa el nombre del equipo");
   if (!correoRegex.test(correo)) return alert("Correo institucional inválido");
-  if (!contrasenaRegex.test(contrasena)) return alert("Contraseña insegura");
+  if (!contrasenaRegex.test(contrasena)) {
+    return alert("Contraseña inválida. Debe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial.");
+  }
 
   // Mostrar resumen
   document.getElementById("saludoConfirmacion").textContent = `Hola ${nombre}, verifica que los datos que ingresaste sean correctos:`;
