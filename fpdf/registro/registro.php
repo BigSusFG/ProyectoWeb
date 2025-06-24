@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('../fpdf/fpdf.php');
+require('../fpdf/fpdf186/fpdf.php');
 
 if (!isset($_SESSION["boleta"])) {
     die("Acceso denegado. Debes iniciar sesión.");
