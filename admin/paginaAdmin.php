@@ -60,7 +60,7 @@ $camposNoEditables = [
 // Operaciones POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  // Insertar nuevo participante
+  // 1. Alta de participante  ────────────────
   if (isset($_POST['insertar'])) {
     $valores = [];
     foreach ($camposTabla as $campo) {
@@ -69,25 +69,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
     }
 
-    $sqlInsert = "INSERT INTO participantes (
-      boleta, nombre, ap_paterno, ap_materno, genero, curp, telefono,
-      semestre, carrera, correo, contrasena, academia, unidad_aprendizaje,
-      horario, nombre_proyecto, nombre_equipo, fecha_registro, salon,
-      fecha_expo, hora_expo, puede_descargar_acuse, ganador
-    ) VALUES (
-      '{$valores['boleta']}', '{$valores['nombre']}', '{$valores['ap_paterno']}',
-      '{$valores['ap_materno']}', '{$valores['genero']}', '{$valores['curp']}',
-      '{$valores['telefono']}', '{$valores['semestre']}', '{$valores['carrera']}',
-      '{$valores['correo']}', '{$valores['contrasena']}', '{$valores['academia']}',
-      '{$valores['unidad_aprendizaje']}', '{$valores['horario']}',
-      '{$valores['nombre_proyecto']}', '{$valores['nombre_equipo']}',
-      '{$valores['fecha_registro']}', '{$valores['salon']}',
-      '{$valores['fecha_expo']}', '{$valores['hora_expo']}',
-      '{$valores['puede_descargar_acuse']}', 0
-    )";
+    //NUEVO: hash de contraseña
+    $valores['contrasena'] = password_hash($valores['contrasena'], PASSWORD_DEFAULT);
 
+    $sqlInsert = "INSERT INTO participantes (
+        boleta, nombre, ap_paterno, ap_materno, genero, curp, telefono,
+        semestre, carrera, correo, contrasena, academia, unidad_aprendizaje,
+        horario, nombre_proyecto, nombre_equipo, fecha_registro, salon,
+        fecha_expo, hora_expo, puede_descargar_acuse, ganador
+    ) VALUES (
+        '{$valores['boleta']}', '{$valores['nombre']}', '{$valores['ap_paterno']}',
+        '{$valores['ap_materno']}', '{$valores['genero']}', '{$valores['curp']}',
+        '{$valores['telefono']}', '{$valores['semestre']}', '{$valores['carrera']}',
+        '{$valores['correo']}', '{$valores['contrasena']}', '{$valores['academia']}',
+        '{$valores['unidad_aprendizaje']}', '{$valores['horario']}',
+        '{$valores['nombre_proyecto']}', '{$valores['nombre_equipo']}',
+        '{$valores['fecha_registro']}', '{$valores['salon']}',
+        '{$valores['fecha_expo']}', '{$valores['hora_expo']}',
+        '{$valores['puede_descargar_acuse']}', 0
+    )";
     mysqli_query($conexion, $sqlInsert);
   }
+
 
   // Actualizar participante individual
   if (isset($_POST['actualizar']) && isset($_POST['boleta'])) {
@@ -98,7 +101,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $updates = [];
     foreach ($camposPermitidos as $campo) {
-      // ganador y puede_descargar_acuse llegan como checkbox
+
+      /* ───── contraseña: solo si admin escribió algo ───── */
+      if ($campo === 'contrasena') {
+        if (!empty($_POST['contrasena'])) {            // viene algo nuevo
+          // Opcional: aplica hash; si no, quita esta línea y usa tal cual
+          $hash = password_hash($_POST['contrasena'], PASSWORD_DEFAULT);
+          $updates[] = "contrasena = '$hash'";
+        }
+        continue;   // saltar al siguiente campo
+      }
+
+      /* ───── resto de campos ───── */
       if (in_array($campo, ['ganador', 'puede_descargar_acuse'])) {
         $valor = isset($_POST[$campo]) ? 1 : 0;
       } else {
@@ -106,6 +120,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
       $updates[] = "$campo = '$valor'";
     }
+
 
     /* Ejecutar update */
     $sqlUpdate = "UPDATE participantes SET " . implode(", ", $updates) .
@@ -342,9 +357,9 @@ $resultado = mysqli_query($conexion, $sql);
                             <?php /* ---------- texto / password / lo demás ---------- */ ?>
                           <?php else: ?>
                             <td>
-                              <input type="<?= $campo === 'contrasena' ? 'password' : 'text' ?>" name="<?= $campo ?>"
-                                class="form-control form-control-sm bg-dark text-white"
-                                value="<?= htmlspecialchars($fila[$campo]) ?>">
+                              <input type="password" name="contrasena" class="form-control form-control-sm bg-dark text-white"
+                                value="<?= htmlspecialchars($fila['contrasena']) ?>">
+
                             </td>
                           <?php endif; ?>
 
@@ -359,7 +374,7 @@ $resultado = mysqli_query($conexion, $sql);
                               onclick="return confirm('¿Eliminar participante?');">Eliminar</button>
                           </div>
                         </td>
-                     </form>
+                      </form>
                     </tr>
                   <?php endwhile; ?>
                 </tbody>
