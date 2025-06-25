@@ -49,6 +49,14 @@ $camposTabla = [
   'ganador'
 ];
 
+$camposNoEditables = [
+  'boleta',          // clave primaria
+  'salon',           // asignado automáticamente
+  'fecha_expo',      // asignado automáticamente
+  'hora_expo',       // asignado automáticamente
+  'fecha_registro'   // timestamp creado en el alta
+];
+
 // Operaciones POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -84,18 +92,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   // Actualizar participante individual
   if (isset($_POST['actualizar']) && isset($_POST['boleta'])) {
     $boleta = mysqli_real_escape_string($conexion, $_POST['boleta']);
-    $camposActualizar = array_diff($camposTabla, ['boleta', 'ganador']);
-    $updates = [];
 
-    foreach ($camposActualizar as $campo) {
-      $valor = mysqli_real_escape_string($conexion, $_POST[$campo] ?? '');
+    /* Solo campos de la pantalla de registro + bool admins */
+    $camposPermitidos = array_diff($camposTabla, $camposNoEditables);
+
+    $updates = [];
+    foreach ($camposPermitidos as $campo) {
+      // ganador y puede_descargar_acuse llegan como checkbox
+      if (in_array($campo, ['ganador', 'puede_descargar_acuse'])) {
+        $valor = isset($_POST[$campo]) ? 1 : 0;
+      } else {
+        $valor = mysqli_real_escape_string($conexion, $_POST[$campo] ?? '');
+      }
       $updates[] = "$campo = '$valor'";
     }
 
-    $ganador = isset($_POST['ganador']) ? 1 : 0;
-    $updates[] = "ganador = $ganador";
-
-    $sqlUpdate = "UPDATE participantes SET " . implode(", ", $updates) . " WHERE boleta = '$boleta'";
+    /* Ejecutar update */
+    $sqlUpdate = "UPDATE participantes SET " . implode(", ", $updates) .
+      " WHERE boleta = '$boleta'";
     mysqli_query($conexion, $sqlUpdate);
   }
 
@@ -226,36 +240,110 @@ $resultado = mysqli_query($conexion, $sql);
                     </tr>
                   </thead>
                   <tbody>
-                    <?php while ($fila = mysqli_fetch_assoc($resultado)): ?>
-                      <tr>
-                        <form method="POST" class="align-middle">
-                          <input type="hidden" name="boleta" value="<?= htmlspecialchars($fila['boleta']) ?>">
-                          <?php foreach ($camposTabla as $campo): ?>
-                            <?php if ($campo === 'boleta'): ?>
-                              <td><input type="text" class="form-control-plaintext text-white" readonly
-                                  value="<?= htmlspecialchars($fila[$campo]) ?>"></td>
-                            <?php elseif ($campo === 'ganador'): ?>
-                              <td class="text-center">
-                                <input type="checkbox" name="ganador" value="1" <?= $fila['ganador'] ? 'checked' : '' ?>>
-                              </td>
-                            <?php else: ?>
-                              <td><input type="text" name="<?= $campo ?>"
-                                  class="form-control form-control-sm bg-dark text-white"
-                                  value="<?= htmlspecialchars($fila[$campo]) ?>"></td>
-                            <?php endif; ?>
-                          <?php endforeach; ?>
-                          <td>
-                            <div class="d-flex gap-2">
-                              <button type="submit" name="actualizar"
-                                class="btn btn-sm btn-success rounded-pill">Guardar</button>
-                              <button type="submit" name="eliminar" value="<?= $fila['boleta'] ?>"
-                                class="btn btn-sm btn-danger rounded-pill"
-                                onclick="return confirm('¿Eliminar participante?');">Eliminar</button>
-                            </div>
-                          </td>
-                        </form>
-                      </tr>
-                    <?php endwhile; ?>
+                    <?php foreach ($camposTabla as $campo): ?>
+
+                      <?php /* ---------- campos nunca editables ---------- */ ?>
+                      <?php if (in_array($campo, $camposNoEditables)): ?>
+                        <td>
+                          <input type="text" class="form-control-plaintext text-white"
+                            value="<?= htmlspecialchars($fila[$campo]) ?>" readonly>
+                        </td>
+
+                        <?php /* ---------- casillas tipo checkbox ---------- */ ?>
+                      <?php elseif ($campo === 'ganador' || $campo === 'puede_descargar_acuse'): ?>
+                        <td class="text-center">
+                          <input type="checkbox" name="<?= $campo ?>" value="1" <?= $fila[$campo] ? 'checked' : '' ?>>
+                        </td>
+
+                        <?php /* ---------- radio de género ---------- */ ?>
+                      <?php elseif ($campo === 'genero'): ?>
+                        <td>
+                          <div class="d-flex gap-1">
+                            <?php
+                            $opcionesGenero = ['Masculino', 'Femenino', 'Otro'];
+                            foreach ($opcionesGenero as $op):
+                              ?>
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="genero"
+                                  id="g-<?= strtolower($op) ?>-<?= $fila['boleta'] ?>" value="<?= $op ?>"
+                                  <?= $fila['genero'] === $op ? 'checked' : '' ?>>
+                                <label class="form-check-label small" for="g-<?= strtolower($op) ?>-<?= $fila['boleta'] ?>">
+                                  <?= $op ?>
+                                </label>
+                              </div>
+                            <?php endforeach; ?>
+                          </div>
+                        </td>
+
+                        <?php /* ---------- selects que existen en el registro ---------- */ ?>
+                      <?php elseif ($campo === 'semestre'): ?>
+                        <td>
+                          <select name="semestre" class="form-select form-select-sm bg-dark text-white">
+                            <option disabled>Selecciona</option>
+                            <?php for ($i = 1; $i <= 8; $i++): ?>
+                              <option value="<?= $i ?>" <?= $fila['semestre'] == $i ? 'selected' : '' ?>><?= $i ?></option>
+                            <?php endfor; ?>
+                          </select>
+                        </td>
+
+                      <?php elseif ($campo === 'carrera'): ?>
+                        <?php $opts = ['ISC', 'LCD', 'IA']; ?>
+                        <td>
+                          <select name="carrera" class="form-select form-select-sm bg-dark text-white">
+                            <option disabled>Selecciona</option>
+                            <?php foreach ($opts as $opt): ?>
+                              <option value="<?= $opt ?>" <?= $fila['carrera'] === $opt ? 'selected' : '' ?>><?= $opt ?></option>
+                            <?php endforeach; ?>
+                          </select>
+                        </td>
+
+                      <?php elseif ($campo === 'academia'): ?>
+                        <?php
+                        $opts = [
+                          'Ciencia de Datos',
+                          'Ciencias Básicas',
+                          'Ciencias de la Computación',
+                          'Ciencias Sociales',
+                          'Fundamentos de Sistemas Electrónicos',
+                          'Ingeniería de Software',
+                          'Inteligencia Artificial',
+                          'Proyectos Estratégicos para la Toma de Decisiones',
+                          'Sistemas Digitales',
+                          'Sistemas Distribuidos'
+                        ];
+                        ?>
+                        <td>
+                          <select name="academia" class="form-select form-select-sm bg-dark text-white">
+                            <option disabled>Selecciona</option>
+                            <?php foreach ($opts as $opt): ?>
+                              <option value="<?= $opt ?>" <?= $fila['academia'] === $opt ? 'selected' : '' ?>>
+                                <?= $opt ?>
+                              </option>
+                            <?php endforeach; ?>
+                          </select>
+                        </td>
+
+                      <?php elseif ($campo === 'horario'): ?>
+                        <td>
+                          <select name="horario" class="form-select form-select-sm bg-dark text-white">
+                            <option disabled>Selecciona</option>
+                            <option value="matutino" <?= $fila['horario'] === 'matutino' ? 'selected' : '' ?>>Matutino</option>
+                            <option value="vespertino" <?= $fila['horario'] === 'vespertino' ? 'selected' : '' ?>>Vespertino
+                            </option>
+                          </select>
+                        </td>
+
+                        <?php /* ---------- texto / password / lo demás ---------- */ ?>
+                      <?php else: ?>
+                        <td>
+                          <input type="<?= $campo === 'contrasena' ? 'password' : 'text' ?>" name="<?= $campo ?>"
+                            class="form-control form-control-sm bg-dark text-white"
+                            value="<?= htmlspecialchars($fila[$campo]) ?>">
+                        </td>
+                      <?php endif; ?>
+
+                    <?php endforeach; ?>
+
                   </tbody>
               </table>
             </div>
