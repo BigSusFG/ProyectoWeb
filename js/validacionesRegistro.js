@@ -129,12 +129,25 @@ document.getElementById("btnAceptar").onclick = function () {
       }
     })
     .then((data) => {
-      if (data && data.includes("error:boleta_duplicada")) {
-        alert("Ya existe un registro con esta boleta. Verifica tus datos.");
-      } else if (data && data.includes("error:no_hay_espacio")) {
-        alert("Ya no hay espacios disponibles para exponer el 20 de junio.");
+      if (data?.includes("error:boleta_duplicada")) {
+          alert("Ya existe un registro con esta boleta.");
+      } else if (data?.includes("error:curp_duplicada")) {
+          alert("Ya existe un registro con esta CURP.");
+      } else if (data?.includes("error:correo_duplicado")) {
+          alert("Ya existe un registro con este correo institucional.");
+      } else if (data?.includes("error:no_hay_espacio")) {
+          alert("Ya no hay espacios disponibles para exponer el 20 de junio.");
+      } else if (data?.includes("error:sql_generico")) {
+          alert("Se produjo un error interno. Intenta más tarde.");
       } else if (data && !data.startsWith("http")) {
-        alert("Respuesta del servidor:\n" + data);
+          alert("Respuesta del servidor:\n" + data);
+      } else if (data?.includes("error:duplicado_desconocido")) {
+          alert("Se detectó un dato duplicado. Revisa tu registro.");
+      } else if (data?.includes("error:sql_generico")) {
+          alert("Ocurrió un error interno. Intenta de nuevo más tarde.");    
+      } else if (data === "") {
+          /*  En registros de usuario se hace redirect.
+              En admin se recarga la página porque el PHP redirige. */
       }
     })
     .catch((error) => {

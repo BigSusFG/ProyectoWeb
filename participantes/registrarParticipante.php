@@ -113,7 +113,21 @@ if ($stmt->execute()) {
     }
 }
 
-
+/* ── SOLO llega aquí si execute() falló ─────────── */
+if ($stmt->errno == 1062) {                       // clave duplicada
+    if (str_contains($stmt->error, 'boleta')) {
+        echo 'error:boleta_duplicada';
+    } elseif (str_contains($stmt->error, 'curp')) {
+        echo 'error:curp_duplicada';
+    } elseif (str_contains($stmt->error, 'correo')) {
+        echo 'error:correo_duplicado';
+    } else {
+        echo 'error:duplicado_desconocido';
+    }
+} else {                                          // otro error SQL
+    echo 'error:sql_generico';
+}
 $stmt->close();
 $conexion->close();
+exit();
 ?>
