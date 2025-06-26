@@ -138,5 +138,5 @@ $pdf->Cell(50, 8, utf8_decode('Hora de Exposición:'), 0, 0);
 $pdf->SetFont('Times', '', 12);
 $pdf->MultiCell(0, 8, utf8_decode($participante['hora_expo']), 0, 'J');
 
-$pdf->Output('diploma.pdf', 'D');
+$pdf->Output('registro.pdf', 'D');
 ?>
