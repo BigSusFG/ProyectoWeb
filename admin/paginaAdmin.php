@@ -207,25 +207,11 @@ $resultado = mysqli_query($conexion, $sql);
 </head>
 
 <body class="bg-hi5-dark text-white pt-5">
-  <?php if (isset($_GET['error'])): ?>
-    <?php
-    $mensajes = [
-      'boleta_duplicada' => 'Ya existe un registro con esta boleta.',
-      'curp_duplicada' => 'Ya existe un registro con esta CURP.',
-      'correo_duplicado' => 'Ya existe un registro con este correo institucional.',
-      'formato_invalido:telefono' => 'El teléfono debe tener 10 dígitos.',
-      'formato_invalido:curp' => 'La CURP no cumple con el formato oficial.',
-      'formato_invalido:correo' => 'El correo debe terminar en @alumno.ipn.mx.'
-    ];
-    $msg = $mensajes[$_GET['error']] ?? 'Se produjo un error interno.';
-    ?>
-    <div class="alert alert-danger text-center rounded-0 mb-0"><?= $msg ?></div>
-  <?php endif; ?>
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-md fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="principal.html">✋Hi-5</a>
+    <div class="container-fluid"> 
+      <a class="navbar-brand" href="../html/principal.html">✋Hi-5</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav"
         aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
