@@ -171,11 +171,10 @@ $resultado = mysqli_query($conexion, $sql);
 </head>
 
 <body class="bg-hi5-dark text-white pt-5">
-
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-md fixed-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="principal.html">✋Hi-5</a>
+    <div class="container-fluid"> 
+      <a class="navbar-brand" href="../html/principal.html">✋Hi-5</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuNav"
         aria-controls="menuNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

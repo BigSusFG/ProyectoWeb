@@ -49,8 +49,8 @@ $horariosMatutinos = ["10:30:00", "12:00:00"];
 $horariosVespertinos = ["15:00:00", "16:30:00"];
 $preferencia = $horario;
 
-$horarios = $preferencia === "Matutino" ? $horariosMatutinos : $horariosVespertinos;
-$alternativa = $preferencia === "Matutino" ? $horariosVespertinos : $horariosMatutinos;
+$horarios = $preferencia === "matutino" ? $horariosMatutinos : $horariosVespertinos;
+$alternativa = $preferencia === "matutino" ? $horariosVespertinos : $horariosMatutinos;
 
 $salonAsignado = null;
 $horaAsignada = null;
