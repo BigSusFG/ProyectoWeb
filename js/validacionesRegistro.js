@@ -47,11 +47,9 @@ document.getElementById("formRegistro").addEventListener("submit", function (eve
     return alert("Contraseña inválida. Debe tener al menos 6 caracteres, una mayúscula, un número y un carácter especial.");
   }
 
-// Saludo
 document.getElementById("saludoConfirmacion").textContent =
   `Hola ${nombre}, verifica que los datos que ingresaste sean correctos:`;
 
-// Crear la lista de datos
 const lista = document.getElementById("listaDatosConfirmacion");
 lista.innerHTML = `
   <li class="bg-hi5-light box-seccion">
@@ -85,15 +83,12 @@ lista.innerHTML = `
   </li>
 `;
 
-// Mostrar el modal
 const modal = new bootstrap.Modal(document.getElementById("modalConfirmacion"));
 modal.show();
 
-// Al hacer clic en aceptar
 document.getElementById("btnAceptar").onclick = function () {
   modal.hide();
 
-  // Crear un objeto con los datos
   const datos = {
     boleta,
     nombre,
@@ -113,7 +108,6 @@ document.getElementById("btnAceptar").onclick = function () {
     contrasena,
   };
 
-  // Enviar al servidor
   fetch("../participantes/registrarParticipante.php", {
     method: "POST",
     headers: {
@@ -146,8 +140,6 @@ document.getElementById("btnAceptar").onclick = function () {
       } else if (data?.includes("error:sql_generico")) {
           alert("Ocurrió un error interno. Intenta de nuevo más tarde.");    
       } else if (data === "") {
-          /*  En registros de usuario se hace redirect.
-              En admin se recarga la página porque el PHP redirige. */
       }
     })
     .catch((error) => {

@@ -13,7 +13,7 @@ if ($conexion->connect_error) {
   die("Error de conexión: " . $conexion->connect_error);
 }
 
-// Obtener datos del administrador desde la tabla `admin`
+// Obtener datos del administrador desde la tabla admin
 $usuarioAdmin = $_SESSION["admin"];
 $sqlAdmin = "SELECT * FROM admin WHERE usuario = ?";
 $stmtAdmin = $conexion->prepare($sqlAdmin);
@@ -23,7 +23,7 @@ $resultadoAdmin = $stmtAdmin->get_result();
 $admin = $resultadoAdmin->fetch_assoc();
 $stmtAdmin->close();
 
-// Definir los campos de la tabla (también usados para actualizar)
+// Definir los campos de la tabla
 $camposTabla = [
   'boleta',
   'nombre',
@@ -50,11 +50,11 @@ $camposTabla = [
 ];
 
 $camposNoEditables = [
-  'boleta',          // clave primaria
-  'salon',           // asignado automáticamente
-  'fecha_expo',      // asignado automáticamente
-  'hora_expo',       // asignado automáticamente
-  'fecha_registro'   // timestamp creado en el alta
+  'boleta',   
+  'salon',         
+  'fecha_expo',     
+  'hora_expo',   
+  'fecha_registro' 
 ];
 
 $camposUnicos = ['boleta', 'curp', 'correo'];
@@ -65,12 +65,8 @@ $mensajes = [
   'correo_duplicado' => 'El correo institucional ya está registrado.'
 ];
 
-/* ------------------------------------------------------------------
- * 2) FUNCIÓN utilitaria: true = existe duplicado
- * -----------------------------------------------------------------*/
 function existeDuplicado(mysqli $cx, string $col, string $valor, string $fueraDeBoleta = ''): bool
 {
-  // boleta<>...? → excluye el registro que se está editando
   $sql = "SELECT 1 FROM participantes WHERE $col = ?"
     . ($fueraDeBoleta ? " AND boleta <> ?" : "");
   $st = $cx->prepare($sql);
@@ -85,7 +81,6 @@ function existeDuplicado(mysqli $cx, string $col, string $valor, string $fueraDe
 // Operaciones POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-  // 1. Alta de participante  ────────────────
   if (isset($_POST['insertar'])) {
     $valores = [];
     foreach ($camposUnicos as $c) {
@@ -101,7 +96,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       }
     }
 
-    //NUEVO: hash de contraseña
     $valores['contrasena'] = password_hash($valores['contrasena'], PASSWORD_DEFAULT);
 
     $sqlInsert = "INSERT INTO participantes (
@@ -130,7 +124,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     foreach ($camposUnicos as $c) {
-      // si el admin no cambió ese campo, sáltalo
       if (!isset($_POST[$c]))
         continue;
 
@@ -140,7 +133,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit();
       }
     }
-    /* Solo campos de la pantalla de registro + bool admins */
     $camposPermitidos = array_diff($camposTabla, $camposNoEditables);
 
     $updates = [];
@@ -148,18 +140,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $updates[] = "ganador = '$isGanador'";
     $updates[] = "puede_descargar_acuse = '$isGanador'";
     foreach ($camposPermitidos as $campo) {
-      if ($campo === 'ganador') {          // ya lo asignamos antes
+      if ($campo === 'ganador') {  
         continue;
       }
 
-      /* ───── contraseña: solo si admin escribió algo ───── */
+
       if ($campo === 'contrasena') {
-        if (!empty($_POST['contrasena'])) {            // viene algo nuevo
-          // Opcional: aplica hash; si no, quita esta línea y usa tal cual
+        if (!empty($_POST['contrasena'])) {          
           $hash = password_hash($_POST['contrasena'], PASSWORD_DEFAULT);
           $updates[] = "contrasena = '$hash'";
         }
-        continue;   // saltar al siguiente campo
+        continue;  
       }
       $valor = mysqli_real_escape_string($conexion, $_POST[$campo] ?? '');
       $updates[] = "$campo = '$valor'";
@@ -172,7 +163,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_query($conexion, $sqlUpdate);
   }
 
-  // Marcar ganadores múltiples (modo tabla general)
+  // Marcar ganadores múltiples
   if (isset($_POST['guardar_ganadores'])) {
     mysqli_query($conexion, "UPDATE participantes SET ganador = 0");
     if (!empty($_POST['ganadores'])) {
@@ -304,25 +295,19 @@ $resultado = mysqli_query($conexion, $sql);
 
                         <?php foreach ($camposTabla as $campo): ?>
 
-                          <?php /* ---------- campos nunca editables ---------- */ ?>
                           <?php if (in_array($campo, $camposNoEditables)): ?>
                             <td>
                               <input type="text" class="form-control-plaintext text-white"
                                 value="<?= htmlspecialchars($fila[$campo]) ?>" readonly>
                             </td>
 
-                            <?php /* ---------- casillas tipo checkbox ---------- */ ?>
-                            <?php /* ---------- casilla único “Ganador” ---------- */ ?>
                           <?php elseif ($campo === 'ganador'): ?>
                             <td class="text-center">
                               <input type="checkbox" name="ganador" value="1" <?= $fila['ganador'] ? 'checked' : '' ?>>
-                              <!-- Campo oculto para que siempre viaje en el POST -->
                               <input type="hidden" name="puede_descargar_acuse" value="">
                             </td>
 
 
-
-                            <?php /* ---------- radio de género ---------- */ ?>
                           <?php elseif ($campo === 'genero'): ?>
                             <td>
                               <div class="d-flex gap-1">
@@ -342,7 +327,6 @@ $resultado = mysqli_query($conexion, $sql);
                               </div>
                             </td>
 
-                            <?php /* ---------- selects que existen en el registro ---------- */ ?>
                           <?php elseif ($campo === 'semestre'): ?>
                             <td>
                               <select name="semestre" class="form-select form-select-sm bg-dark text-white">
@@ -391,11 +375,9 @@ $resultado = mysqli_query($conexion, $sql);
                               </select>
                             </td>
 
-                          <?php /* ---------- select de UNIDAD DE APRENDIZAJE ---------- */
+                          <?php 
                           elseif ($campo === 'unidad_aprendizaje'): ?>
                             <td>
-                              <!-- El JS rellenará las opciones según la academia; aquí sólo
-             mostramos la que ya está guardada para que se vea -->
                               <select name="unidad_aprendizaje" class="form-select form-select-sm bg-dark text-white ua-select">
                                 <option value="<?= htmlspecialchars($fila['unidad_aprendizaje']) ?>" selected>
                                   <?= htmlspecialchars($fila['unidad_aprendizaje']) ?>
@@ -416,13 +398,11 @@ $resultado = mysqli_query($conexion, $sql);
 
 
 
-                            <?php /* ---------- texto / password / lo demás ---------- */ ?>
                           <?php elseif ($campo === 'contrasena'): ?>
                             <td>
                               <input type="password" name="contrasena" class="form-control form-control-sm bg-dark text-white"
                                 placeholder="(Sin cambios)">
                             </td>
-                            <?php /* ←--------------------------- AÑADE ESTA RAMA */ ?>
                           <?php else: ?>
                             <td>
                               <input type="text" name="<?= $campo ?>" class="form-control form-control-sm bg-dark text-white"
@@ -789,7 +769,7 @@ $resultado = mysqli_query($conexion, $sql);
       if (boton && boton.name === "actualizar") {
         return confirm("¿Estás seguro de realizar los cambios?");
       }
-      return true; // Para otros botones como eliminar
+      return true;
     }
   </script>
 

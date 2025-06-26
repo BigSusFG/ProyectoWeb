@@ -1,9 +1,3 @@
-/* selectorDeUA_tabla.js
- * Rellena el <select name="unidad_aprendizaje"> de cada fila
- * según la academia elegida.
- */
-
-/* ---------- catálogo ---------- */
 const UA_POR_ACADEMIA = {
   "Ciencia de Datos": [
     "Minería de Datos", "Visualización de Datos", "Big Data", "Analítica Predictiva"
@@ -37,24 +31,21 @@ const UA_POR_ACADEMIA = {
   ]
 };
 
-/* ---------- helpers ---------- */
 function poblarSelect(selectEl, opciones, valorActual = "") {
-  selectEl.innerHTML = "";                          // limpia anteriores
-  // añade placeholder
+  selectEl.innerHTML = "";                        
   const ph = document.createElement("option");
   ph.disabled = true;
-  ph.selected = !valorActual;                       // si no hay valor, placeholder selected
+  ph.selected = !valorActual;                   
   ph.textContent = "Selecciona";
   selectEl.appendChild(ph);
 
   opciones.forEach(op => {
     const option = document.createElement("option");
     option.value = option.textContent = op;
-    if (op === valorActual) option.selected = true; // marca la que ya estaba guardada
+    if (op === valorActual) option.selected = true; 
     selectEl.appendChild(option);
   });
 
-  // si valor guardado no está en catálogo → déjalo como primera opción
   if (valorActual && !opciones.includes(valorActual)) {
     const extra = document.createElement("option");
     extra.value = extra.textContent = valorActual;
@@ -63,7 +54,6 @@ function poblarSelect(selectEl, opciones, valorActual = "") {
   }
 }
 
-/* ---------- lógica por fila ---------- */
 function sincronizarFila(selectAcademia) {
   const fila       = selectAcademia.closest("tr");
   const selectUA   = fila.querySelector('select[name="unidad_aprendizaje"]');
@@ -73,14 +63,13 @@ function sincronizarFila(selectAcademia) {
   poblarSelect(selectUA, UA_POR_ACADEMIA[academia] || [], selectUA.value);
 }
 
-/* ---------- al cargar ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   const selectsAcademia = document.querySelectorAll(
     'table.tabla-hi5 select[name="academia"]'
   );
 
   selectsAcademia.forEach(sel => {
-    sincronizarFila(sel);                 // inicial
+    sincronizarFila(sel);                 
     sel.addEventListener("change", () => sincronizarFila(sel));
   });
 });

@@ -1,4 +1,3 @@
-/* Botón de información ⓘ */
 .btn-info-circle {
   width: 32px;
   height: 32px;
@@ -9,21 +8,18 @@
   justify-content: center;
 }
 
-/* Contenedor del modal */
 .modal-content-ajustada {
   height: auto;
   max-height: 95vh;
   overflow: visible;
 }
 
-/* Carrusel centrado con ancho adaptado */
 .carrusel-ajustado {
   width: fit-content;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Imagen del carrusel */
 .img-carrusel {
   max-height: 80vh;
   object-fit: contain;

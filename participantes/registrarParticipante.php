@@ -9,7 +9,6 @@ if ($conexion->connect_error) {
 
 $isAdmin = isset($_SESSION["admin"]) && strpos($_SERVER['HTTP_REFERER'] ?? '', 'paginaAdmin.php') !== false;
 
-// Captura y escapa de datos del formulario
 $boleta = $_POST["boleta"];
 $nombre = $_POST["nombre"];
 $apPat = $_POST["apPat"];
@@ -23,7 +22,7 @@ $correo = $_POST["correo"];
 $contrasena = password_hash($_POST["contrasena"], PASSWORD_DEFAULT);
 $academia = $_POST["academia"];
 $unidad = $_POST["unidadAprendizaje"];
-$horario = $_POST["horario"]; // Preferencia: Matutino o Vespertino
+$horario = $_POST["horario"];
 $nombreProyecto = $_POST["nombreProyecto"];
 $nombreEquipo = $_POST["nombreEquipo"];
 
@@ -41,9 +40,9 @@ if ($verificar->num_rows > 0) {
 }
 $verificar->close();
 
-// === LÓGICA DE ASIGNACIÓN DE SALÓN Y HORARIO ===
+// LÓGICA DE ASIGNACIÓN DE SALÓN Y HORARIO
 $salones = ["2103", "2104", "2105", "2106", "2107"];
-$fechaAsignada = "2025-06-20"; // Fecha única de exposición
+$fechaAsignada = "2025-06-20";
 
 $horariosMatutinos = ["10:30:00", "12:00:00"];
 $horariosVespertinos = ["15:00:00", "16:30:00"];
@@ -86,7 +85,7 @@ if (!buscarDisponible($conexion, $salones, $horarios, $fechaAsignada, $salonAsig
     }
 }
 
-// Insertar el participante con los datos + asignaciones
+// Insertar el participante con los datos
 $sql = "INSERT INTO participantes (
     boleta, nombre, ap_paterno, ap_materno, genero, curp, telefono, semestre, carrera,
     correo, contrasena, academia, unidad_aprendizaje, horario,
@@ -104,7 +103,7 @@ $stmt->bind_param(
 // Guardar en la base de datos
 if ($stmt->execute()) {
     if ($isAdmin) {
-        header("Location: ../admin/paginaAdmin.php"); // o la ruta relativa correcta
+        header("Location: ../admin/paginaAdmin.php"); 
         exit();
     } else {
         $_SESSION["boleta"] = $boleta;
@@ -113,8 +112,7 @@ if ($stmt->execute()) {
     }
 }
 
-/* ── SOLO llega aquí si execute() falló ─────────── */
-if ($stmt->errno == 1062) {                       // clave duplicada
+if ($stmt->errno == 1062) {                      
     if (str_contains($stmt->error, 'boleta')) {
         echo 'error:boleta_duplicada';
     } elseif (str_contains($stmt->error, 'curp')) {
@@ -124,7 +122,7 @@ if ($stmt->errno == 1062) {                       // clave duplicada
     } else {
         echo 'error:duplicado_desconocido';
     }
-} else {                                          // otro error SQL
+} else {                                        
     echo 'error:sql_generico';
 }
 $stmt->close();
