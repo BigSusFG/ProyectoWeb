@@ -75,5 +75,6 @@ $pdf->Ln(8);
 $pdf->SetFont('Times', '', 12);
 $pdf->Cell(0, 10, iconv('UTF-8', 'windows-1252', 'Fecha de entrega: ') . date("d/m/Y"), 0, 1, 'C');
 
-$pdf->Output();
+$pdf->Output('diploma.pdf', 'D');
+
 ob_end_flush();
