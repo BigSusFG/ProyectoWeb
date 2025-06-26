@@ -255,7 +255,7 @@ $resultado = mysqli_query($conexion, $sql);
                 <tbody>
                   <?php while ($fila = mysqli_fetch_assoc($resultado)): ?>
                     <tr>
-                      <form method="POST" class="align-middle">
+                      <form method="POST" class="align-middle" onsubmit="return confirmarActualizacion(this);">
                         <input type="hidden" name="boleta" value="<?= htmlspecialchars($fila['boleta']) ?>">
 
                         <?php foreach ($camposTabla as $campo): ?>
@@ -382,7 +382,7 @@ $resultado = mysqli_query($conexion, $sql);
                           <?php else: ?>
                             <td>
                               <input type="text" name="<?= $campo ?>" class="form-control form-control-sm bg-dark text-white"
-                                value="<?= htmlspecialchars($fila[$campo]) ?>">
+                                value="<?= htmlspecialchars($fila[$campo]) ?>">  
                             </td>
                           <?php endif; ?>
 
@@ -739,6 +739,16 @@ $resultado = mysqli_query($conexion, $sql);
   <script src="../js/selectorDeUA.js"></script>
   <script src="../js/validacionesRegistro.js"></script>
   <script src="../js/selectorDeUA_tabla.js"></script>
+  <script>
+    function confirmarActualizacion(formulario) {
+      const boton = document.activeElement;
+      if (boton && boton.name === "actualizar") {
+        return confirm("¿Estás seguro de realizar los cambios?");
+      }
+      return true; // Para otros botones como eliminar
+    }
+</script>
+
 </body>
 
 </html>
