@@ -57,12 +57,44 @@ $camposNoEditables = [
   'fecha_registro'   // timestamp creado en el alta
 ];
 
+$camposUnicos = ['boleta', 'curp', 'correo'];
+
+$mensajes = [
+  'boleta_duplicado' => 'Ya existe esa boleta.',
+  'curp_duplicado'   => 'La CURP ya está registrada.',
+  'correo_duplicado' => 'El correo institucional ya está registrado.'
+];
+
+/* ------------------------------------------------------------------
+ * 2) FUNCIÓN utilitaria: true = existe duplicado
+ * -----------------------------------------------------------------*/
+function existeDuplicado(mysqli $cx, string $col, string $valor, string $fueraDeBoleta = ''): bool
+{
+  // boleta<>...? → excluye el registro que se está editando
+  $sql = "SELECT 1 FROM participantes WHERE $col = ?"
+    . ($fueraDeBoleta ? " AND boleta <> ?" : "");
+  $st = $cx->prepare($sql);
+  $fueraDeBoleta ? $st->bind_param("ss", $valor, $fueraDeBoleta)
+    : $st->bind_param("s", $valor);
+  $st->execute();
+  $dup = $st->get_result()->num_rows > 0;
+  $st->close();
+  return $dup;
+}
+
 // Operaciones POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
   // 1. Alta de participante  ────────────────
   if (isset($_POST['insertar'])) {
     $valores = [];
+    foreach ($camposUnicos as $c) {
+      if (existeDuplicado($conexion, $c, $valores[$c])) {
+        header("Location: {$_SERVER['PHP_SELF']}?error={$c}_duplicado");
+        exit();
+      }
+    }
+
     foreach ($camposTabla as $campo) {
       if ($campo !== 'ganador') {
         $valores[$campo] = mysqli_real_escape_string($conexion, $_POST[$campo] ?? '');
@@ -96,6 +128,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if (isset($_POST['actualizar']) && isset($_POST['boleta'])) {
     $boleta = mysqli_real_escape_string($conexion, $_POST['boleta']);
 
+
+    foreach ($camposUnicos as $c) {
+      // si el admin no cambió ese campo, sáltalo
+      if (!isset($_POST[$c]))
+        continue;
+
+      $nuevoValor = mysqli_real_escape_string($conexion, $_POST[$c]);
+      if (existeDuplicado($conexion, $c, $nuevoValor, $boleta)) {
+        header("Location: {$_SERVER['PHP_SELF']}?error={$c}_duplicado");
+        exit();
+      }
+    }
     /* Solo campos de la pantalla de registro + bool admins */
     $camposPermitidos = array_diff($camposTabla, $camposNoEditables);
 
@@ -382,7 +426,7 @@ $resultado = mysqli_query($conexion, $sql);
                           <?php else: ?>
                             <td>
                               <input type="text" name="<?= $campo ?>" class="form-control form-control-sm bg-dark text-white"
-                                value="<?= htmlspecialchars($fila[$campo]) ?>">  
+                                value="<?= htmlspecialchars($fila[$campo]) ?>">
                             </td>
                           <?php endif; ?>
 
@@ -747,7 +791,7 @@ $resultado = mysqli_query($conexion, $sql);
       }
       return true; // Para otros botones como eliminar
     }
-</script>
+  </script>
 
 </body>
 
