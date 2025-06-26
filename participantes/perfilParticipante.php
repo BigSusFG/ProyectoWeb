@@ -181,7 +181,7 @@ $conexion->close();
                 <?= isset($usuario["ganador"]) && $usuario["ganador"] ? "Sí" : "No" ?></div>
             </div>
             <div class="col-12 mt-3">
-              <a href="../pdf/diploma.php" target="_blank" class="btn btn-hi5-gold rounded-pill px-4"
+              <a href="../fpdf/diploma/diploma.php" target="_blank" class="btn btn-hi5-gold rounded-pill px-4"
                 id="btnDescargarDiploma">
                 Descargar diploma de participación
               </a>
@@ -191,7 +191,7 @@ $conexion->close();
 
         <!-- BOTÓNES -->
         <div class="col-12 d-flex justify-content-end gap-3 mt-4">
-          <a href="../pdf/registro.php" class="btn btn-hi5-gold rounded-pill px-4" id="btnDescargar"
+          <a href="../fpdf/registro/registro.php" class="btn btn-hi5-gold rounded-pill px-4" id="btnDescargar"
             target="_blank">
             Descargar Registro
           </a>

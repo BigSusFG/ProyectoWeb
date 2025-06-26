@@ -1,6 +1,6 @@
 <?php
 session_start();
-require('../fpdf/fpdf186/fpdf.php');
+require('../fpdf186/fpdf.php');
 
 if (!isset($_SESSION["boleta"])) {
     die("Acceso denegado. Debes iniciar sesión.");
@@ -25,7 +25,7 @@ if (!$participante) {
 
 class PDF extends FPDF {
     function Header() {
-        $this->Image('logo.png', 10, 8, 190);
+        $this->Image('../../imgs/logo.png', 10, 8, 190);
         $this->Ln(30);
     }
 
@@ -138,5 +138,5 @@ $pdf->Cell(50, 8, utf8_decode('Hora de Exposición:'), 0, 0);
 $pdf->SetFont('Times', '', 12);
 $pdf->MultiCell(0, 8, utf8_decode($participante['hora_expo']), 0, 'J');
 
-$pdf->Output();
+$pdf->Output('registro.pdf', 'D');
 ?>
