@@ -99,6 +99,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     /* Solo campos de la pantalla de registro + bool admins */
     $camposPermitidos = array_diff($camposTabla, $camposNoEditables);
 
+    /* ───────────────────── VALIDACIONES DE MODIFICACIÓN ───────────────────── */
+    /* 1. Expresiones regulares (las mismas que en el registro) */
+    $regex = [
+      'telefono' => '/^\d{10}$/',
+      'curp' => '/^[A-Z]{4}\d{6}[A-Z]{6}[A-Z0-9]{2}$/',
+      'correo' => '/^[a-z0-9]+@alumno\.ipn\.mx$/',
+    ];
+
+    /* Recorre solo los campos editables que vienen en el POST */
+    foreach ($regex as $campo => $patron) {
+      if (isset($_POST[$campo]) && !preg_match($patron, $_POST[$campo])) {
+        header("Location: " . $_SERVER['PHP_SELF'] . "?error=formato_invalido:$campo");
+        exit();
+      }
+    }
+
+    /* 2. Comprobar duplicados (boleta, curp, correo)  */
+    $dupChecks = [
+      ['campo' => 'boleta', 'valor' => $_POST['boleta'], 'codigo' => 'boleta_duplicada'],
+      ['campo' => 'curp', 'valor' => $_POST['curp'], 'codigo' => 'curp_duplicada'],
+      ['campo' => 'correo', 'valor' => $_POST['correo'], 'codigo' => 'correo_duplicado'],
+    ];
+
+    foreach ($dupChecks as $chk) {
+      $sql = "SELECT 1 FROM participantes WHERE {$chk['campo']}=? AND boleta<>?";
+      $st = $conexion->prepare($sql);
+      $st->bind_param("ss", $chk['valor'], $boleta);
+      $st->execute();
+      if ($st->get_result()->num_rows) {
+        header("Location: " . $_SERVER['PHP_SELF'] . "?error=" . $chk['codigo']);
+        exit();
+      }
+      $st->close();
+    }
+    /* ───────────────────────────────────────────────────────────────────────── */
+
     $updates = [];
     $isGanador = isset($_POST['ganador']) ? 1 : 0;
     $updates[] = "ganador = '$isGanador'";
@@ -171,6 +207,20 @@ $resultado = mysqli_query($conexion, $sql);
 </head>
 
 <body class="bg-hi5-dark text-white pt-5">
+  <?php if (isset($_GET['error'])): ?>
+    <?php
+    $mensajes = [
+      'boleta_duplicada' => 'Ya existe un registro con esta boleta.',
+      'curp_duplicada' => 'Ya existe un registro con esta CURP.',
+      'correo_duplicado' => 'Ya existe un registro con este correo institucional.',
+      'formato_invalido:telefono' => 'El teléfono debe tener 10 dígitos.',
+      'formato_invalido:curp' => 'La CURP no cumple con el formato oficial.',
+      'formato_invalido:correo' => 'El correo debe terminar en @alumno.ipn.mx.'
+    ];
+    $msg = $mensajes[$_GET['error']] ?? 'Se produjo un error interno.';
+    ?>
+    <div class="alert alert-danger text-center rounded-0 mb-0"><?= $msg ?></div>
+  <?php endif; ?>
 
   <!-- NAVBAR -->
   <nav class="navbar navbar-expand-md fixed-top">
@@ -255,7 +305,7 @@ $resultado = mysqli_query($conexion, $sql);
                 <tbody>
                   <?php while ($fila = mysqli_fetch_assoc($resultado)): ?>
                     <tr>
-                      <form method="POST" class="align-middle" onsubmit="return confirmarActualizacion(this);">
+                      <form method="POST" class="align-middle">
                         <input type="hidden" name="boleta" value="<?= htmlspecialchars($fila['boleta']) ?>">
 
                         <?php foreach ($camposTabla as $campo): ?>
@@ -382,7 +432,7 @@ $resultado = mysqli_query($conexion, $sql);
                           <?php else: ?>
                             <td>
                               <input type="text" name="<?= $campo ?>" class="form-control form-control-sm bg-dark text-white"
-                                value="<?= htmlspecialchars($fila[$campo]) ?>">  
+                                value="<?= htmlspecialchars($fila[$campo]) ?>">
                             </td>
                           <?php endif; ?>
 
@@ -739,16 +789,7 @@ $resultado = mysqli_query($conexion, $sql);
   <script src="../js/selectorDeUA.js"></script>
   <script src="../js/validacionesRegistro.js"></script>
   <script src="../js/selectorDeUA_tabla.js"></script>
-  <script>
-    function confirmarActualizacion(formulario) {
-      const boton = document.activeElement;
-      if (boton && boton.name === "actualizar") {
-        return confirm("¿Estás seguro de realizar los cambios?");
-      }
-      return true; // Para otros botones como eliminar
-    }
-</script>
-
+  <script src="../js/validacionesModTabla.js"></script>
 </body>
 
 </html>
