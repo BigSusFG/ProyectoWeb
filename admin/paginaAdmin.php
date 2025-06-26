@@ -45,7 +45,7 @@ $camposTabla = [
   'salon',
   'fecha_expo',
   'hora_expo',
-  'puede_descargar_acuse',
+
   'ganador'
 ];
 
@@ -76,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         boleta, nombre, ap_paterno, ap_materno, genero, curp, telefono,
         semestre, carrera, correo, contrasena, academia, unidad_aprendizaje,
         horario, nombre_proyecto, nombre_equipo, fecha_registro, salon,
-        fecha_expo, hora_expo, puede_descargar_acuse, ganador
+        fecha_expo, hora_expo, ganador
     ) VALUES (
         '{$valores['boleta']}', '{$valores['nombre']}', '{$valores['ap_paterno']}',
         '{$valores['ap_materno']}', '{$valores['genero']}', '{$valores['curp']}',
@@ -86,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         '{$valores['nombre_proyecto']}', '{$valores['nombre_equipo']}',
         '{$valores['fecha_registro']}', '{$valores['salon']}',
         '{$valores['fecha_expo']}', '{$valores['hora_expo']}',
-        '{$valores['puede_descargar_acuse']}', 0
+        0
     )";
     mysqli_query($conexion, $sqlInsert);
   }
@@ -100,7 +100,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $camposPermitidos = array_diff($camposTabla, $camposNoEditables);
 
     $updates = [];
+    $isGanador = isset($_POST['ganador']) ? 1 : 0;
+    $updates[] = "ganador = '$isGanador'";
+    $updates[] = "puede_descargar_acuse = '$isGanador'";
     foreach ($camposPermitidos as $campo) {
+      if ($campo === 'ganador') {          // ya lo asignamos antes
+        continue;
+      }
 
       /* ───── contraseña: solo si admin escribió algo ───── */
       if ($campo === 'contrasena') {
@@ -111,13 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         continue;   // saltar al siguiente campo
       }
-
-      /* ───── resto de campos ───── */
-      if (in_array($campo, ['ganador', 'puede_descargar_acuse'])) {
-        $valor = isset($_POST[$campo]) ? 1 : 0;
-      } else {
-        $valor = mysqli_real_escape_string($conexion, $_POST[$campo] ?? '');
-      }
+      $valor = mysqli_real_escape_string($conexion, $_POST[$campo] ?? '');
       $updates[] = "$campo = '$valor'";
     }
 
@@ -243,7 +243,6 @@ $resultado = mysqli_query($conexion, $sql);
                       "salon",
                       "fecha_expo",
                       "hora_expo",
-                      "puede_descargar_acuse",
                       "ganador"
                     ];
                     foreach ($camposTabla as $campo) {
@@ -269,10 +268,15 @@ $resultado = mysqli_query($conexion, $sql);
                             </td>
 
                             <?php /* ---------- casillas tipo checkbox ---------- */ ?>
-                          <?php elseif ($campo === 'ganador' || $campo === 'puede_descargar_acuse'): ?>
+                            <?php /* ---------- casilla único “Ganador” ---------- */ ?>
+                          <?php elseif ($campo === 'ganador'): ?>
                             <td class="text-center">
-                              <input type="checkbox" name="<?= $campo ?>" value="1" <?= $fila[$campo] ? 'checked' : '' ?>>
+                              <input type="checkbox" name="ganador" value="1" <?= $fila['ganador'] ? 'checked' : '' ?>>
+                              <!-- Campo oculto para que siempre viaje en el POST -->
+                              <input type="hidden" name="puede_descargar_acuse" value="">
                             </td>
+
+
 
                             <?php /* ---------- radio de género ---------- */ ?>
                           <?php elseif ($campo === 'genero'): ?>
@@ -343,6 +347,18 @@ $resultado = mysqli_query($conexion, $sql);
                               </select>
                             </td>
 
+                          <?php /* ---------- select de UNIDAD DE APRENDIZAJE ---------- */
+                          elseif ($campo === 'unidad_aprendizaje'): ?>
+                            <td>
+                              <!-- El JS rellenará las opciones según la academia; aquí sólo
+             mostramos la que ya está guardada para que se vea -->
+                              <select name="unidad_aprendizaje" class="form-select form-select-sm bg-dark text-white ua-select">
+                                <option value="<?= htmlspecialchars($fila['unidad_aprendizaje']) ?>" selected>
+                                  <?= htmlspecialchars($fila['unidad_aprendizaje']) ?>
+                                </option>
+                              </select>
+                            </td>
+
                           <?php elseif ($campo === 'horario'): ?>
                             <td>
                               <select name="horario" class="form-select form-select-sm bg-dark text-white">
@@ -354,14 +370,22 @@ $resultado = mysqli_query($conexion, $sql);
                               </select>
                             </td>
 
+
+
                             <?php /* ---------- texto / password / lo demás ---------- */ ?>
-                          <?php else: ?>
+                          <?php elseif ($campo === 'contrasena'): ?>
                             <td>
                               <input type="password" name="contrasena" class="form-control form-control-sm bg-dark text-white"
-                                value="<?= htmlspecialchars($fila['contrasena']) ?>">
-
+                                placeholder="(Sin cambios)">
+                            </td>
+                            <?php /* ←--------------------------- AÑADE ESTA RAMA */ ?>
+                          <?php else: ?>
+                            <td>
+                              <input type="text" name="<?= $campo ?>" class="form-control form-control-sm bg-dark text-white"
+                                value="<?= htmlspecialchars($fila[$campo]) ?>">
                             </td>
                           <?php endif; ?>
+
 
                         <?php endforeach; ?>
 
@@ -714,6 +738,7 @@ $resultado = mysqli_query($conexion, $sql);
     crossorigin="anonymous"></script>
   <script src="../js/selectorDeUA.js"></script>
   <script src="../js/validacionesRegistro.js"></script>
+  <script src="../js/selectorDeUA_tabla.js"></script>
 </body>
 
 </html>

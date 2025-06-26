@@ -70,3 +70,26 @@
 .tabla-hi5 td {
   border: none !important; /* Fuerza que no haya líneas blancas */
 }
+
+
+ /* ancho mínimo para los controles dentro de la tabla */
+  .tabla-hi5 td input[type="text"],
+  .tabla-hi5 td input[type="password"],
+  .tabla-hi5 td select {
+    min-width: 170px;           /* ajusta el número a tu gusto */
+  }
+
+  /* si quieres más ancho para proyectos/equipo         */
+  .tabla-hi5 td input[name="nombre_proyecto"],
+  .tabla-hi5 td input[name="nombre_equipo"]{
+    min-width: 220px;
+  }
+
+  table.tabla-hi5 .form-select-sm {
+  max-width: 220px;      /* ajusta a tu gusto */
+}
+
+/* selector más específico */
+.tabla-hi5 select[name="unidad_aprendizaje"] {
+  min-width: 260px;   /* o 18rem ≈ 288 px */
+}

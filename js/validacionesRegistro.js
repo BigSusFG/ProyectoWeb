@@ -56,32 +56,32 @@ const lista = document.getElementById("listaDatosConfirmacion");
 lista.innerHTML = `
   <li class="bg-hi5-light box-seccion">
     <strong class="d-block mb-2">Datos personales</strong>
-    <ul class="mb-0 list-unstyled">
+
       <li><strong>No. de Boleta:</strong> ${boleta}</li>
       <li><strong>CURP:</strong> ${curp}</li>
       <li><strong>Género:</strong> ${genero.value}</li>
       <li><strong>Teléfono:</strong> ${telefono}</li>
       <li><strong>Semestre:</strong> ${semestre}</li>
       <li><strong>Carrera:</strong> ${carrera}</li>
-    </ul>
+
   </li>
 
   <li class="bg-hi5-light box-seccion">
     <strong class="d-block mb-2">Datos de cuenta</strong>
-    <ul class="mb-0 list-unstyled">
+
       <li><strong>Correo:</strong> ${correo}</li>
-    </ul>
+
   </li>
 
   <li class="bg-hi5-light box-seccion">
     <strong class="d-block mb-2">Datos del concurso</strong>
-    <ul class="mb-0 list-unstyled">
+ 
       <li><strong>Academia:</strong> ${academia}</li>
       <li><strong>Unidad de Aprendizaje:</strong> ${unidadAprendizaje}</li>
       <li><strong>Horario:</strong> ${horario}</li>
       <li><strong>Nombre del Proyecto:</strong> ${nombreProyecto}</li>
       <li><strong>Nombre del Equipo:</strong> ${nombreEquipo}</li>
-    </ul>
+
   </li>
 `;
 
