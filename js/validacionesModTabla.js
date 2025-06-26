@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
   /* ---------- Expresiones RegEx reutilizadas ---------- */
   /*  \p{L} => cualquier letra;  \p{M} => marca diacrítica   */
